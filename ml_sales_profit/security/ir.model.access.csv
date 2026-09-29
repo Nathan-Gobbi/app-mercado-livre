@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ml_listing_manager,ml.listing manager,model_ml_listing,group_ml_manager,1,1,1,1
+access_ml_sale_import_manager,ml.sale.import manager,model_ml_sale_import,group_ml_manager,1,1,1,1
+access_ml_sale_line_manager,ml.sale.line manager,model_ml_sale_line,group_ml_manager,1,1,1,1
+access_ml_statement_import_manager,ml.statement.import manager,model_ml_statement_import,group_ml_manager,1,1,1,1
+access_ml_statement_line_manager,ml.statement.line manager,model_ml_statement_line,group_ml_manager,1,1,1,1
+access_ml_statement_excluded_type_manager,ml.statement.excluded.type manager,model_ml_statement_excluded_type,group_ml_manager,1,1,1,1
+access_ml_stock_import_wizard_manager,ml.stock.import.wizard manager,model_ml_stock_import_wizard,group_ml_manager,1,1,1,1
+access_product_template_ml_manager,product.template ml manager,product.model_product_template,group_ml_manager,1,1,1,1
+access_product_product_ml_manager,product.product ml manager,product.model_product_product,group_ml_manager,1,1,1,1

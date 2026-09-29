@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Nathan Gobbi
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.form.ml_sales_profit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app
+                    data-string="ML Sales Profit"
+                    string="ML Sales Profit"
+                    name="ml_sales_profit"
+                    groups="ml_sales_profit.group_ml_manager"
+                >
+                    <block title="Profit" name="ml_sales_profit_profit">
+                        <setting
+                            string="Tax Rate (%)"
+                            help="Percentage of the sale price paid as tax. Used to compute the tax and the profit of every listing."
+                        >
+                            <field name="ml_tax_rate" />
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_config_settings_action" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module': 'ml_sales_profit', 'bin_size': False}</field>
+    </record>
+</odoo>

@@ -1,0 +1,1366 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ml_sales_profit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-24 11:04+0000\n"
+"PO-Revision-Date: 2026-09-24 11:04+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_statement_import.py:0
+msgid "%(count)s outflows imported."
+msgstr "%(count)s saídas importadas."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+msgid ""
+"%(count)s sales imported before were removed because they were cancelled."
+msgstr "%(count)s vendas importadas antes foram removidas porque foram canceladas."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+msgid "%(count)s sales imported."
+msgstr "%(count)s vendas importadas."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/wizards/ml_stock_import_wizard.py:0
+msgid "%(products)s products and %(listings)s listings imported."
+msgstr "%(products)s produtos e %(listings)s anúncios importados."
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_sale_line__revenue_ml
+msgid "'Receita por produtos' column of the Mercado Livre report."
+msgstr "Coluna 'Receita por produtos' do relatório do Mercado Livre."
+
+#. module: ml_sales_profit
+#: model_terms:ir.actions.act_window,help:ml_sales_profit.ml_listing_action
+msgid ""
+"A listing holds the sale price and the amount you receive for\n"
+"                each listing type (Premium or Classic) of a product."
+msgstr "O anúncio guarda o preço de venda e o valor que você recebe em cada\n                tipo de anúncio (Premium ou Clássico) de um produto."
+
+#. module: ml_sales_profit
+#: model:ir.model.constraint,message:ml_sales_profit.constraint_ml_listing_product_type_uniq
+msgid "A product can only have one listing of each type."
+msgstr "Um produto só pode ter um anúncio de cada tipo."
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_needaction
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_needaction
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_needaction
+msgid "Action Needed"
+msgstr "Ação necessária"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__active
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_excluded_type__active
+msgid "Active"
+msgstr "Ativo"
+
+#. module: ml_sales_profit
+#: model:res.groups,name:ml_sales_profit.group_ml_manager
+msgid "Administrator"
+msgstr "Administrador"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__amount
+msgid "Amount"
+msgstr "Valor"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_statement_line__outflow_amount
+msgid "Amount as a positive value, handy for charts."
+msgstr "Valor positivo, usado nos gráficos."
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_listing__net_amount
+msgid "Amount you receive from Mercado Livre after fees and shipping."
+msgstr "Valor que você recebe do Mercado Livre depois das tarifas e do frete."
+
+#. module: ml_sales_profit
+#: model:ir.ui.menu,name:ml_sales_profit.menu_analysis
+msgid "Analysis"
+msgstr "Análise"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_listing_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_listing_view_search
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_search
+msgid "Archived"
+msgstr "Arquivado"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_attachment_count
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_attachment_count
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_attachment_count
+msgid "Attachment Count"
+msgstr "Contagem de anexos"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_search
+msgid "Below Minimum Stock"
+msgstr "Abaixo do estoque mínimo"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_stock_import_wizard_view_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_listing__listing_type__classic
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_sale_line__listing_type__classic
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_listing_view_search
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_search
+msgid "Classic"
+msgstr "Clássico"
+
+#. module: ml_sales_profit
+#: model:ir.model,name:ml_sales_profit.model_res_company
+msgid "Companies"
+msgstr "Empresas"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__company_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__company_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__company_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__company_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__company_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__company_id
+msgid "Company"
+msgstr "Empresa"
+
+#. module: ml_sales_profit
+#: model:ir.model,name:ml_sales_profit.model_res_config_settings
+msgid "Config Settings"
+msgstr "Configurações"
+
+#. module: ml_sales_profit
+#: model:ir.ui.menu,name:ml_sales_profit.menu_configuration
+msgid "Configuration"
+msgstr "Configuração"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__standard_price
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_list
+msgid "Cost"
+msgstr "Custo"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+msgid "Cost and Stock"
+msgstr "Custo e estoque"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_listing__standard_price
+msgid "Cost of the product."
+msgstr "Custo do produto."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_import_mixin.py:0
+#: code:addons/ml_sales_profit/wizards/ml_stock_import_wizard.py:0
+msgid ""
+"Could not read the spreadsheet. Is it a .xlsx file?\n"
+"%s"
+msgstr "Não foi possível ler a planilha. O arquivo é .xlsx?\n%s"
+
+#. module: ml_sales_profit
+#: model_terms:ir.actions.act_window,help:ml_sales_profit.product_template_action
+msgid ""
+"Create the products one by one or load them all at once with\n"
+"                <b>Records &gt; Import Stock Spreadsheet</b>."
+msgstr "Cadastre os produtos um a um ou carregue todos de uma vez em\n                <b>Cadastros &gt; Importar planilha de estoque</b>."
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__create_uid
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__create_uid
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__create_uid
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_excluded_type__create_uid
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__create_uid
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__create_uid
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_stock_import_wizard__create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__create_date
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__create_date
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__create_date
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_excluded_type__create_date
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__create_date
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__create_date
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_stock_import_wizard__create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__credits
+msgid "Credits"
+msgstr "Créditos"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__currency_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__currency_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__currency_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__currency_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__currency_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__currency_id
+msgid "Currency"
+msgstr "Moeda"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__date
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_line_view_search
+msgid "Date"
+msgstr "Data"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__date_from
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__date_from
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__date_from
+msgid "Date From"
+msgstr "Data inicial"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__date_to
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__date_to
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__date_to
+msgid "Date To"
+msgstr "Data final"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__debits
+msgid "Debits"
+msgstr "Débitos"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_sale_line__revenue_origin__direct
+msgid "Direct"
+msgstr "Direta"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_sale_line__revenue_origin
+msgid ""
+"Direct: revenue read from the report. Rebuilt: units multiplied by the "
+"listing price, because the report had no revenue."
+msgstr "Direta: receita lida do relatório. Reconstruída: unidades multiplicadas pelo preço do anúncio, porque o relatório não tinha a receita."
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__display_name
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__display_name
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__display_name
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_excluded_type__display_name
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__display_name
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__display_name
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_stock_import_wizard__display_name
+msgid "Display Name"
+msgstr "Nome exibido"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_import_view_form
+msgid "Download Excel Report"
+msgstr "Baixar relatório Excel"
+
+#. module: ml_sales_profit
+#: model_terms:ir.actions.act_window,help:ml_sales_profit.ml_statement_import_action
+msgid ""
+"Download the account statement from Mercado Pago, upload it here\n"
+"                and click <b>Process</b> to list the money that went out."
+msgstr "Baixe o extrato da conta no Mercado Pago, envie aqui e clique em\n                <b>Processar</b> para listar o dinheiro que saiu."
+
+#. module: ml_sales_profit
+#: model_terms:ir.actions.act_window,help:ml_sales_profit.ml_sale_import_action
+msgid ""
+"Download the sales report from Mercado Livre, upload it here and\n"
+"                click <b>Process</b> to see how much you sold and how much you\n"
+"                earned with each product."
+msgstr "Baixe o relatório de vendas do Mercado Livre, envie aqui e clique\n                em <b>Processar</b> para ver quanto você vendeu e quanto lucrou\n                com cada produto."
+
+#. module: ml_sales_profit
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_import_mixin__state__draft
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_sale_import__state__draft
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_statement_import__state__draft
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_search
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_import_view_search
+msgid "Draft"
+msgstr "Rascunho"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__barcode
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_list
+msgid "EAN"
+msgstr "EAN"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/wizards/ml_stock_import_wizard.py:0
+msgid ""
+"EAN %(barcode)s of %(product)s is already used by %(other)s and was not set."
+msgstr "O EAN %(barcode)s de %(product)s já é usado por %(other)s e não foi preenchido."
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_import_view_form
+msgid "File"
+msgstr "Arquivo"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__file_name
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__file_name
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__file_name
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_stock_import_wizard__file_name
+msgid "File Name"
+msgstr "Nome do arquivo"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__final_balance
+msgid "Final Balance"
+msgstr "Saldo final"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_follower_ids
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_follower_ids
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_partner_ids
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_partner_ids
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (parceiros)"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__gross_margin
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__gross_margin
+msgid "Gross Margin (%)"
+msgstr "Margem bruta (%)"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__total_gross_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__gross_profit
+msgid "Gross Profit"
+msgstr "Lucro bruto"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__has_message
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__has_message
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__has_message
+msgid "Has Message"
+msgstr "Tem mensagem"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_excluded_type__id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_stock_import_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+msgid "Identification"
+msgstr "Identificação"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_import_mixin__message_needaction
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_sale_import__message_needaction
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_statement_import__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Se marcado, novas mensagens exigem sua atenção."
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_import_mixin__message_has_error
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_sale_import__message_has_error
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_statement_import__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Se marcado, algumas mensagens têm erro de entrega."
+
+#. module: ml_sales_profit
+#: model:ir.actions.act_window,name:ml_sales_profit.ml_statement_excluded_type_action
+#: model:ir.ui.menu,name:ml_sales_profit.menu_excluded_types
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_excluded_type_view_list
+msgid "Ignored Transaction Types"
+msgstr "Tipos ignorados no extrato"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_stock_import_wizard_view_form
+msgid "Import"
+msgstr "Importar"
+
+#. module: ml_sales_profit
+#: model:ir.model,name:ml_sales_profit.model_ml_stock_import_wizard
+msgid "Import Mercado Livre Stock Spreadsheet"
+msgstr "Importar planilha de estoque do Mercado Livre"
+
+#. module: ml_sales_profit
+#: model:ir.actions.act_window,name:ml_sales_profit.ml_stock_import_wizard_action
+#: model:ir.ui.menu,name:ml_sales_profit.menu_stock_import
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_stock_import_wizard_view_form
+msgid "Import Stock Spreadsheet"
+msgstr "Importar planilha de estoque"
+
+#. module: ml_sales_profit
+#: model_terms:ir.actions.act_window,help:ml_sales_profit.ml_sale_import_action
+msgid "Import a sales report"
+msgstr "Importe um relatório de vendas"
+
+#. module: ml_sales_profit
+#: model_terms:ir.actions.act_window,help:ml_sales_profit.ml_statement_import_action
+msgid "Import an account statement"
+msgstr "Importe um extrato"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__import_ids
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__import_ids
+#: model:ir.ui.menu,name:ml_sales_profit.menu_imports
+msgid "Imports"
+msgstr "Importações"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__initial_balance
+msgid "Initial Balance"
+msgstr "Saldo inicial"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_is_follower
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_is_follower
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_is_follower
+msgid "Is Follower"
+msgstr "É seguidor"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__write_uid
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__write_uid
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__write_uid
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_excluded_type__write_uid
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__write_uid
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__write_uid
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_stock_import_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Última atualização por"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__write_date
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__write_date
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__write_date
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_excluded_type__write_date
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__write_date
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__write_date
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_stock_import_wizard__write_date
+msgid "Last Updated on"
+msgstr "Última atualização em"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__line_count
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__line_count
+msgid "Line Count"
+msgstr "Quantidade"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__listing_id
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_listing_view_form
+msgid "Listing"
+msgstr "Anúncio"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_sale_line__profit_status__not_found
+msgid "Listing Not Found"
+msgstr "Anúncio não encontrado"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__title
+msgid "Listing Title"
+msgstr "Título do anúncio"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__listing_type
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_search
+msgid "Listing Type"
+msgstr "Tipo de anúncio"
+
+#. module: ml_sales_profit
+#: model:ir.actions.act_window,name:ml_sales_profit.ml_listing_action
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_listing_ids
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_listing_ids
+#: model:ir.ui.menu,name:ml_sales_profit.menu_listings
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_listing_view_list
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_listing_view_search
+msgid "Listings"
+msgstr "Anúncios"
+
+#. module: ml_sales_profit
+#: model:ir.ui.menu,name:ml_sales_profit.menu_root
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.res_config_settings_view_form
+msgid "ML Sales Profit"
+msgstr "Lucro de Vendas ML"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__manufacturer_code
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_manufacturer_code
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_manufacturer_code
+msgid "Manufacturer Code"
+msgstr "Código"
+
+#. module: ml_sales_profit
+#: model:ir.model,name:ml_sales_profit.model_ml_statement_import
+msgid "Mercado Livre Account Statement Import"
+msgstr "Importação de extrato do Mercado Livre"
+
+#. module: ml_sales_profit
+#: model:ir.model,name:ml_sales_profit.model_ml_listing
+msgid "Mercado Livre Listing"
+msgstr "Anúncio do Mercado Livre"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+msgid "Mercado Livre Listings"
+msgstr "Anúncios no Mercado Livre"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__revenue_ml
+msgid "Mercado Livre Revenue"
+msgstr "Receita do Mercado Livre"
+
+#. module: ml_sales_profit
+#: model:ir.model,name:ml_sales_profit.model_ml_sale_line
+msgid "Mercado Livre Sale"
+msgstr "Venda do Mercado Livre"
+
+#. module: ml_sales_profit
+#: model:ir.model,name:ml_sales_profit.model_ml_sale_import
+msgid "Mercado Livre Sales Import"
+msgstr "Importação de vendas do Mercado Livre"
+
+#. module: ml_sales_profit
+#: model:ir.module.category,name:ml_sales_profit.module_category_ml_sales_profit
+msgid "Mercado Livre Sales Profit"
+msgstr "Lucro de Vendas ML"
+
+#. module: ml_sales_profit
+#: model:ir.model,name:ml_sales_profit.model_ml_import_mixin
+msgid "Mercado Livre Spreadsheet Import"
+msgstr "Importação de planilha do Mercado Livre"
+
+#. module: ml_sales_profit
+#: model:ir.model,name:ml_sales_profit.model_ml_import_line_mixin
+msgid "Mercado Livre Spreadsheet Import Line"
+msgstr "Linha de importação de planilha do Mercado Livre"
+
+#. module: ml_sales_profit
+#: model:ir.model,name:ml_sales_profit.model_ml_statement_excluded_type
+msgid "Mercado Livre Statement Ignored Transaction Type"
+msgstr "Tipo de transação ignorado no extrato do Mercado Livre"
+
+#. module: ml_sales_profit
+#: model:ir.model,name:ml_sales_profit.model_ml_statement_line
+msgid "Mercado Livre Statement Outflow"
+msgstr "Saída do extrato do Mercado Livre"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__ml_status
+msgid "Mercado Livre Status"
+msgstr "Estado no Mercado Livre"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_company__ml_tax_rate
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_config_settings__ml_tax_rate
+msgid "Mercado Livre Tax Rate (%)"
+msgstr "Alíquota de imposto Mercado Livre (%)"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_listing__ncm
+#: model:ir.model.fields,help:ml_sales_profit.field_product_product__ml_ncm
+#: model:ir.model.fields,help:ml_sales_profit.field_product_template__ml_ncm
+msgid "Mercosur Common Nomenclature code."
+msgstr "Código da Nomenclatura Comum do Mercosul."
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_has_error
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_has_error
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_has_error
+msgid "Message Delivery error"
+msgstr "Erro na entrega da mensagem"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_ids
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_ids
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_ids
+msgid "Messages"
+msgstr "Mensagens"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_min_stock_qty
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_min_stock_qty
+msgid "Minimum Stock"
+msgstr "Estoque mínimo"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_search
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_line_view_search
+msgid "Month"
+msgstr "Mês"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__ncm
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_ncm
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_ncm
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_search
+msgid "NCM"
+msgstr "NCM"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__name
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__name
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_listing_view_search
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_search
+msgid "Negative Profit"
+msgstr "Lucro negativo"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__net_amount
+msgid "Net Amount"
+msgstr "V. Líquido"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__net_margin
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__net_margin
+msgid "Net Margin (%)"
+msgstr "Margem líquida (%)"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__net_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__total_net_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__net_profit
+msgid "Net Profit"
+msgstr "Lucro Líquido"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_listing__net_profit
+msgid "Net amount minus cost, tax and packaging."
+msgstr "V. Líquido menos custo, imposto e embalagem."
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_listing__profit_percent
+msgid "Net profit over the sale price."
+msgstr "Lucro líquido sobre o preço de venda."
+
+#. module: ml_sales_profit
+#: model_terms:ir.actions.act_window,help:ml_sales_profit.ml_statement_excluded_type_action
+msgid "No ignored types"
+msgstr "Nenhum tipo ignorado"
+
+#. module: ml_sales_profit
+#: model_terms:ir.actions.act_window,help:ml_sales_profit.ml_statement_line_action
+msgid "No outflows yet"
+msgstr "Nenhuma saída ainda"
+
+#. module: ml_sales_profit
+#: model_terms:ir.actions.act_window,help:ml_sales_profit.ml_sale_line_action
+msgid "No sales yet"
+msgstr "Nenhuma venda ainda"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+msgid "No valid sale was found in the spreadsheet."
+msgstr "Nenhuma venda válida foi encontrada na planilha."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_statement_import.py:0
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__note
+msgid "Note"
+msgstr "Observação"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_needaction_counter
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_needaction_counter
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de ações"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_has_error_counter
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_has_error_counter
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_has_error_counter
+msgid "Number of errors"
+msgstr "Número de erros"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_import_mixin__message_needaction_counter
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_sale_import__message_needaction_counter
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_statement_import__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Número de mensagens que exigem ação"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_import_mixin__message_has_error_counter
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_sale_import__message_has_error_counter
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_statement_import__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensagens com erro de entrega"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_sale_line__profit_status__ok
+msgid "OK"
+msgstr "OK"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_search
+msgid "Out of Stock"
+msgstr "Sem estoque"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__outflow_amount
+msgid "Outflow"
+msgstr "Saída"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_statement_import.py:0
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__line_ids
+#: model:ir.ui.menu,name:ml_sales_profit.menu_statement_analysis
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_import_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_line_view_list
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_line_view_search
+msgid "Outflows"
+msgstr "Saídas"
+
+#. module: ml_sales_profit
+#: model:ir.actions.act_window,name:ml_sales_profit.ml_statement_line_action
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_line_view_graph
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_line_view_pivot
+msgid "Outflows Analysis"
+msgstr "Análise de saídas"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_statement_excluded_type__name
+msgid ""
+"Outflows with exactly this transaction type are left out of the statement "
+"import."
+msgstr "Saídas com exatamente este tipo de transação ficam fora da importação do extrato."
+
+#. module: ml_sales_profit
+#: model_terms:ir.actions.act_window,help:ml_sales_profit.ml_statement_excluded_type_action
+msgid ""
+"Outflows with these transaction types are left out when a\n"
+"                statement is processed."
+msgstr "Saídas com estes tipos de transação ficam de fora quando um\n                extrato é processado."
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__packaging_cost
+msgid "Packaging"
+msgstr "Embalagem"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_res_company__ml_tax_rate
+#: model:ir.model.fields,help:ml_sales_profit.field_res_config_settings__ml_tax_rate
+msgid "Percentage of the listing sale price paid as tax."
+msgstr "Percentual do preço de venda do anúncio pago como imposto."
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.res_config_settings_view_form
+msgid ""
+"Percentage of the sale price paid as tax. Used to compute the tax and the "
+"profit of every listing."
+msgstr "Percentual do preço de venda pago como imposto. Usado para calcular o imposto e o lucro de todos os anúncios."
+
+#. module: ml_sales_profit
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_listing__listing_type__premium
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_sale_line__listing_type__premium
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_listing_view_search
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_search
+msgid "Premium"
+msgstr "Premium"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_sale_line__revenue_origin__not_found
+msgid "Price Not Found"
+msgstr "Preço não encontrado"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_import_view_form
+msgid "Process"
+msgstr "Processar"
+
+#. module: ml_sales_profit
+#: model_terms:ir.actions.act_window,help:ml_sales_profit.ml_sale_line_action
+msgid ""
+"Process a sales report in <b>Imports &gt; Sales</b> to analyze\n"
+"                revenue and profit by product, listing type and month."
+msgstr "Processe um relatório de vendas em <b>Importações &gt; Vendas</b>\n                para analisar receita e lucro por produto, tipo de anúncio e mês."
+
+#. module: ml_sales_profit
+#: model_terms:ir.actions.act_window,help:ml_sales_profit.ml_statement_line_action
+msgid ""
+"Process an account statement in <b>Imports &gt; Statements</b> to\n"
+"                analyze where your money went."
+msgstr "Processe um extrato em <b>Importações &gt; Extratos</b> para\n                analisar para onde foi o seu dinheiro."
+
+#. module: ml_sales_profit
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_import_mixin__state__done
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_sale_import__state__done
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_statement_import__state__done
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_search
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_import_view_search
+msgid "Processed"
+msgstr "Processado"
+
+#. module: ml_sales_profit
+#: model:ir.model,name:ml_sales_profit.model_product_template
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__product_tmpl_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__product_tmpl_id
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_listing_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_listing_view_search
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_search
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_list
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_search
+msgid "Product"
+msgstr "Produto"
+
+#. module: ml_sales_profit
+#: model:ir.actions.act_window,name:ml_sales_profit.product_template_action
+#: model:ir.ui.menu,name:ml_sales_profit.menu_products
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_list
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_search
+msgid "Products"
+msgstr "Produtos"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_stock_import_wizard_view_form
+msgid ""
+"Products are matched by SKU and listings by SKU and type:\n"
+"                    existing records are updated and new ones are created. Tax and\n"
+"                    profit are computed by Odoo."
+msgstr "Os produtos são encontrados pelo SKU e os anúncios pelo SKU e tipo:\n                    os existentes são atualizados e os novos são criados. Imposto e\n                    lucro são calculados pelo Odoo."
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.res_config_settings_view_form
+msgid "Profit"
+msgstr "Lucro"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__profit_percent
+msgid "Profit %"
+msgstr "Lucro %"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__profit_status
+msgid "Profit Status"
+msgstr "Status do lucro"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_product_product__ml_min_stock_qty
+#: model:ir.model.fields,help:ml_sales_profit.field_product_template__ml_min_stock_qty
+msgid ""
+"Quantity you want to keep in stock. It is used to compute the stock "
+"difference."
+msgstr "Quantidade que você quer manter em estoque. É usada para calcular a diferença de estoque."
+
+#. module: ml_sales_profit
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_sale_line__revenue_origin__rebuilt
+msgid "Rebuilt"
+msgstr "Reconstruída"
+
+#. module: ml_sales_profit
+#: model:ir.ui.menu,name:ml_sales_profit.menu_records
+msgid "Records"
+msgstr "Cadastros"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__reference_id
+msgid "Reference"
+msgstr "Referência"
+
+#. module: ml_sales_profit
+#: model_terms:ir.actions.act_window,help:ml_sales_profit.ml_listing_action
+msgid "Register your first listing"
+msgstr "Cadastre o seu primeiro anúncio"
+
+#. module: ml_sales_profit
+#: model_terms:ir.actions.act_window,help:ml_sales_profit.product_template_action
+msgid "Register your first product"
+msgstr "Cadastre o seu primeiro produto"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__report_file
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__report_file
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__report_file
+msgid "Report File"
+msgstr "Arquivo do relatório"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__report_file_name
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__report_file_name
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__report_file_name
+msgid "Report File Name"
+msgstr "Nome do arquivo do relatório"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+msgid "Required columns not found in the spreadsheet: %s"
+msgstr "Colunas obrigatórias não encontradas na planilha: %s"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_import_view_form
+msgid "Reset to Draft"
+msgstr "Voltar para rascunho"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__total_revenue
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__revenue
+msgid "Revenue"
+msgstr "Receita"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+msgid "Revenue (R$)"
+msgstr "Receita total (R$)"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__revenue_origin
+msgid "Revenue Origin"
+msgstr "Origem da receita"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__default_code
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__sku
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_search
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_list
+msgid "SKU"
+msgstr "SKU"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_form
+msgid "Sale"
+msgstr "Venda"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__sale_date
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_search
+msgid "Sale Date"
+msgstr "Data da venda"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__sale_number
+msgid "Sale Number"
+msgstr "N.º de venda"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__price
+msgid "Sale Price"
+msgstr "Venda"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_listing__tax_amount
+msgid "Sale price multiplied by the tax rate set in the settings."
+msgstr "Preço de venda multiplicado pela alíquota definida nas configurações."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__line_ids
+#: model:ir.ui.menu,name:ml_sales_profit.menu_sale_analysis
+#: model:ir.ui.menu,name:ml_sales_profit.menu_sale_imports
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_list
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_search
+msgid "Sales"
+msgstr "Vendas"
+
+#. module: ml_sales_profit
+#: model:ir.actions.act_window,name:ml_sales_profit.ml_sale_line_action
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_graph
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_pivot
+msgid "Sales Analysis"
+msgstr "Análise de vendas"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_form
+msgid "Sales Import"
+msgstr "Importação de vendas"
+
+#. module: ml_sales_profit
+#: model:ir.actions.act_window,name:ml_sales_profit.ml_sale_import_action
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_list
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_search
+msgid "Sales Imports"
+msgstr "Importações de vendas"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__not_found_count
+msgid "Sales Without Listing"
+msgstr "Vendas sem anúncio"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+msgid "Sales summary %s.xlsx"
+msgstr "Resumo de vendas %s.xlsx"
+
+#. module: ml_sales_profit
+#: model:ir.actions.act_window,name:ml_sales_profit.res_config_settings_action
+#: model:ir.ui.menu,name:ml_sales_profit.menu_settings
+msgid "Settings"
+msgstr "Configurações"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__file
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__file
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__file
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_stock_import_wizard__file
+msgid "Spreadsheet"
+msgstr "Planilha"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__state
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__state
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__state
+msgid "State"
+msgstr "Situação"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_statement_import.py:0
+msgid "Statement"
+msgstr "Extrato"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_import_view_form
+msgid "Statement Import"
+msgstr "Importação de extrato"
+
+#. module: ml_sales_profit
+#: model:ir.actions.act_window,name:ml_sales_profit.ml_statement_import_action
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_import_view_list
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_import_view_search
+msgid "Statement Imports"
+msgstr "Importações de extrato"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_import_view_form
+msgid "Statement Summary"
+msgstr "Resumo do extrato"
+
+#. module: ml_sales_profit
+#: model:ir.ui.menu,name:ml_sales_profit.menu_statement_imports
+msgid "Statements"
+msgstr "Extratos"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_stock_qty
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_stock_qty
+msgid "Stock"
+msgstr "Estoque"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_stock_difference
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_stock_difference
+msgid "Stock Difference"
+msgstr "Diferença Estoque"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_stock_value
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_stock_value
+msgid "Stock Value"
+msgstr "Valor"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_product_product__ml_stock_difference
+#: model:ir.model.fields,help:ml_sales_profit.field_product_template__ml_stock_difference
+msgid "Stock minus minimum stock. Negative values mean you should buy more."
+msgstr "Estoque menos estoque mínimo. Valores negativos indicam que é preciso comprar mais."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/wizards/ml_stock_import_wizard.py:0
+msgid "Stock spreadsheet imported"
+msgstr "Planilha de estoque importada"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_form
+msgid "Summary"
+msgstr "Resumo"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+msgid "TOTAL"
+msgstr "TOTAL"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__tax_amount
+msgid "Tax"
+msgstr "Imposto"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.res_config_settings_view_form
+msgid "Tax Rate (%)"
+msgstr "Alíquota de imposto (%)"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/wizards/ml_stock_import_wizard.py:0
+msgid ""
+"The columns 'SKU', 'Produto', 'Tipo' and 'Venda' were not found in the "
+"spreadsheet."
+msgstr "As colunas 'SKU', 'Produto', 'Tipo' e 'Venda' não foram encontradas na planilha."
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_import_view_form
+msgid "The outflows of this import and their notes will be removed. Continue?"
+msgstr "As saídas desta importação e as observações delas serão removidas. Continuar?"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_form
+msgid "The sales of this import will be removed. Continue?"
+msgstr "As vendas desta importação serão removidas. Continuar?"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_statement_import.py:0
+msgid ""
+"This does not look like a Mercado Livre account statement: the columns %s "
+"were not found."
+msgstr "Este arquivo não parece um extrato do Mercado Livre: as colunas %s não foram encontradas."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+msgid ""
+"This does not look like a Mercado Livre sales report: the columns 'Data da "
+"venda', 'SKU' and 'Unidades' were not found."
+msgstr "Este arquivo não parece um relatório de vendas do Mercado Livre: as colunas 'Data da venda', 'SKU' e 'Unidades' não foram encontradas."
+
+#. module: ml_sales_profit
+#: model:ir.model.constraint,message:ml_sales_profit.constraint_ml_statement_excluded_type_name_uniq
+msgid "This transaction type is already ignored."
+msgstr "Este tipo de transação já é ignorado."
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_list
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_list
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_import_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_import_view_list
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_line_view_list
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_list
+msgid "Total"
+msgstr "Total"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+msgid "Total Gross Profit (R$)"
+msgstr "Lucro total bruto (R$)"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+msgid "Total Net Profit (R$)"
+msgstr "Lucro total líquido (R$)"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__total_outflow
+msgid "Total Outflows"
+msgstr "Total de saídas"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_statement_import.py:0
+msgid "Transaction Amount"
+msgstr "Valor da transação"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_statement_import.py:0
+msgid "Transaction Date"
+msgstr "Data da transação"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_statement_import.py:0
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_excluded_type__name
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__transaction_type
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_line_view_search
+msgid "Transaction Type"
+msgstr "Tipo da transação"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__listing_type
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_listing_view_search
+msgid "Type"
+msgstr "Tipo"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__unit_gross_profit
+msgid "Unit Gross Profit"
+msgstr "Lucro bruto unitário"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+msgid "Unit Gross Profit (R$)"
+msgstr "Lucro bruto unitário (R$)"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__unit_net_profit
+msgid "Unit Net Profit"
+msgstr "Lucro líquido unitário"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+msgid "Unit Net Profit (R$)"
+msgstr "Lucro líquido unitário (R$)"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__unit_tax
+msgid "Unit Tax"
+msgstr "Imposto unitário"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+msgid "Unit Tax (R$)"
+msgstr "Imposto unitário (R$)"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_sale_line__unit_gross_profit
+msgid "Unit net profit plus unit tax."
+msgstr "Lucro líquido unitário mais imposto unitário."
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__units
+msgid "Units"
+msgstr "Unidades"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__total_units
+msgid "Units Sold"
+msgstr "Quantidade vendida"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_import_mixin.py:0
+msgid "Upload the spreadsheet before processing it."
+msgstr "Envie a planilha antes de processar."
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_stock_import_wizard_view_form
+msgid ""
+"Upload your stock spreadsheet (.xlsx). The sheet named\n"
+"                    <b>Estoque</b> is read with the columns SKU, Produto, Código,\n"
+"                    EAN, NCM, Custo, Tipo, Venda, V. Liquido, Embalagem, Estoque and\n"
+"                    Diferença Estoque."
+msgstr "Envie a sua planilha de estoque (.xlsx). A aba <b>Estoque</b> é\n                    lida com as colunas SKU, Produto, Código, EAN, NCM, Custo, Tipo,\n                    Venda, V. Liquido, Embalagem, Estoque e Diferença Estoque."
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_listing_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_form
+msgid "Values"
+msgstr "Valores"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__variation
+msgid "Variation"
+msgstr "Variação"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_sale_import.py:0
+msgid "Variations"
+msgstr "Variações"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_line_view_search
+msgid "With Note"
+msgstr "Com observação"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_search
+msgid "With Sales Without Listing"
+msgstr "Com vendas sem anúncio"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_search
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_search
+msgid "Without Listing"
+msgstr "Sem anúncio"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_line_view_search
+msgid "Without Note"
+msgstr "Sem observação"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+msgid "e.g. Fox Float shock kit"
+msgstr "ex.: Kit reparo shock Fox Float"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_statement_import.py:0
+msgid "outflows_report_%s.xlsx"
+msgstr "relatorio_saidas_%s.xlsx"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_form
+msgid ""
+"sales have\n"
+"                        no listing registered for their SKU and type, so their profit\n"
+"                        is zero. Register the listings and process the import again."
+msgstr "vendas não têm\n                        anúncio cadastrado para o SKU e o tipo, por isso o lucro delas\n                        é zero. Cadastre os anúncios e processe a importação novamente."
+

@@ -1,0 +1,30 @@
+# Copyright 2026 Nathan Gobbi
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+{
+    "name": "Mercado Livre Sales Profit",
+    "summary": "Import Mercado Livre sales and statements to analyze profit",
+    "version": "18.0.1.0.0",
+    "category": "Sales",
+    "website": "https://github.com/Nathan-Gobbi/app-mercado-livre",
+    "author": "Nathan Gobbi",
+    "maintainers": ["Nathan-Gobbi"],
+    "license": "AGPL-3",
+    "development_status": "Beta",
+    "application": True,
+    "installable": True,
+    "depends": ["product"],
+    "external_dependencies": {"python": ["openpyxl"]},
+    "data": [
+        "security/ml_sales_profit_security.xml",
+        "security/ir.model.access.csv",
+        "data/ml_statement_excluded_type_data.xml",
+        "views/product_template_views.xml",
+        "views/ml_listing_views.xml",
+        "views/ml_sale_line_views.xml",
+        "views/ml_sale_import_views.xml",
+        "views/ml_statement_views.xml",
+        "views/res_config_settings_views.xml",
+        "wizards/ml_stock_import_wizard_views.xml",
+        "views/menus.xml",
+    ],
+}

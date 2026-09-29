@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Nathan Gobbi
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Dedicated product views with only the columns of the stock spreadsheet.
+         They are used by this module's menu only, so the native product
+         screens used by other apps are not changed. -->
+    <record id="product_template_view_list" model="ir.ui.view">
+        <field name="name">product.template.list.ml_sales_profit</field>
+        <field name="model">product.template</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list string="Products" default_order="default_code">
+                <field name="currency_id" column_invisible="True" />
+                <field name="cost_currency_id" column_invisible="True" />
+                <field name="default_code" string="SKU" />
+                <field name="name" string="Product" />
+                <field name="ml_manufacturer_code" optional="show" />
+                <field name="barcode" string="EAN" optional="show" />
+                <field name="ml_ncm" optional="show" />
+                <field
+                    name="standard_price"
+                    string="Cost"
+                    widget="monetary"
+                    options="{'currency_field': 'cost_currency_id'}"
+                />
+                <field name="ml_stock_qty" sum="Total" />
+                <field name="ml_min_stock_qty" optional="hide" />
+                <field
+                    name="ml_stock_difference"
+                    decoration-danger="ml_stock_difference &lt; 0"
+                    decoration-success="ml_stock_difference &gt; 0"
+                />
+                <field name="ml_stock_value" sum="Total" />
+            </list>
+        </field>
+    </record>
+
+    <record id="product_template_view_form" model="ir.ui.view">
+        <field name="name">product.template.form.ml_sales_profit</field>
+        <field name="model">product.template</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <form string="Product">
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <field name="active" invisible="True" />
+                    <field name="currency_id" invisible="True" />
+                    <field name="cost_currency_id" invisible="True" />
+                    <div class="oe_title">
+                        <label for="name" string="Product" />
+                        <h1>
+                            <field name="name" placeholder="e.g. Fox Float shock kit" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="identification" string="Identification">
+                            <field name="default_code" string="SKU" />
+                            <field name="ml_manufacturer_code" />
+                            <field name="barcode" string="EAN" />
+                            <field name="ml_ncm" />
+                        </group>
+                        <group name="stock" string="Cost and Stock">
+                            <field
+                                name="standard_price"
+                                string="Cost"
+                                widget="monetary"
+                                options="{'currency_field': 'cost_currency_id'}"
+                            />
+                            <field name="ml_stock_qty" />
+                            <field name="ml_min_stock_qty" />
+                            <field
+                                name="ml_stock_difference"
+                                decoration-danger="ml_stock_difference &lt; 0"
+                            />
+                            <field name="ml_stock_value" />
+                        </group>
+                    </group>
+                    <separator string="Mercado Livre Listings" />
+                    <field
+                        name="ml_listing_ids"
+                        context="{'default_product_tmpl_id': id}"
+                    >
+                        <list editable="bottom">
+                            <field name="company_id" column_invisible="True" />
+                            <field name="currency_id" column_invisible="True" />
+                            <field name="listing_type" />
+                            <field name="price" />
+                            <field name="net_amount" />
+                            <field name="tax_amount" />
+                            <field name="packaging_cost" />
+                            <field
+                                name="net_profit"
+                                decoration-danger="net_profit &lt; 0"
+                            />
+                            <field name="profit_percent" />
+                        </list>
+                    </field>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="product_template_view_search" model="ir.ui.view">
+        <field name="name">product.template.search.ml_sales_profit</field>
+        <field name="model">product.template</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <search string="Products">
+                <field
+                    name="name"
+                    string="Product"
+                    filter_domain="['|', '|', ('default_code', 'ilike', self), ('name', 'ilike', self), ('barcode', 'ilike', self)]"
+                />
+                <field name="ml_manufacturer_code" />
+                <field name="ml_ncm" />
+                <filter
+                    name="below_minimum"
+                    string="Below Minimum Stock"
+                    domain="[('ml_stock_difference', '&lt;', 0)]"
+                />
+                <filter
+                    name="out_of_stock"
+                    string="Out of Stock"
+                    domain="[('ml_stock_qty', '&lt;=', 0)]"
+                />
+                <filter
+                    name="without_listing"
+                    string="Without Listing"
+                    domain="[('ml_listing_ids', '=', False)]"
+                />
+                <separator />
+                <filter
+                    name="archived"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
+                <group>
+                    <filter
+                        name="group_ncm"
+                        string="NCM"
+                        context="{'group_by': 'ml_ncm'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="product_template_action" model="ir.actions.act_window">
+        <field name="name">Products</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="product_template_view_search" />
+        <field
+            name="view_ids"
+            eval="[
+                Command.clear(),
+                Command.create({'view_mode': 'list', 'view_id': ref('product_template_view_list')}),
+                Command.create({'view_mode': 'form', 'view_id': ref('product_template_view_form')}),
+            ]"
+        />
+        <field name="context">{'default_type': 'consu'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Register your first product</p>
+            <p>
+                Create the products one by one or load them all at once with
+                <b>Records &gt; Import Stock Spreadsheet</b>.
+            </p>
+        </field>
+    </record>
+</odoo>

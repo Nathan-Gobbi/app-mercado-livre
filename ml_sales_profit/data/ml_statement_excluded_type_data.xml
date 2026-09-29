@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Nathan Gobbi
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="excluded_type_claims_debt" model="ml.statement.excluded.type">
+        <field name="name">Débito por dívida Reclamações no Mercado Livre</field>
+    </record>
+    <record id="excluded_type_returns_debt" model="ml.statement.excluded.type">
+        <field
+            name="name"
+        >Débito por dívida Devoluções e reclamações no Mercado Livre</field>
+    </record>
+    <record id="excluded_type_shipping_debt" model="ml.statement.excluded.type">
+        <field name="name">Débito por dívida Envio do Mercado Livre</field>
+    </record>
+    <record id="excluded_type_retained_money" model="ml.statement.excluded.type">
+        <field name="name">Dinheiro retido Reclamações e devoluções</field>
+    </record>
+</odoo>

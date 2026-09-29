@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Nathan Gobbi
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="ml_stock_import_wizard_view_form" model="ir.ui.view">
+        <field name="name">ml.stock.import.wizard.form</field>
+        <field name="model">ml.stock.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import Stock Spreadsheet">
+                <p>
+                    Upload your stock spreadsheet (.xlsx). The sheet named
+                    <b>Estoque</b> is read with the columns SKU, Produto, Código,
+                    EAN, NCM, Custo, Tipo, Venda, V. Liquido, Embalagem, Estoque and
+                    Diferença Estoque.
+                </p>
+                <p class="text-muted">
+                    Products are matched by SKU and listings by SKU and type:
+                    existing records are updated and new ones are created. Tax and
+                    profit are computed by Odoo.
+                </p>
+                <group>
+                    <field name="file" filename="file_name" />
+                    <field name="file_name" invisible="True" />
+                </group>
+                <footer>
+                    <button
+                        name="action_import"
+                        string="Import"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" special="cancel" class="btn-secondary" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="ml_stock_import_wizard_action" model="ir.actions.act_window">
+        <field name="name">Import Stock Spreadsheet</field>
+        <field name="res_model">ml.stock.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

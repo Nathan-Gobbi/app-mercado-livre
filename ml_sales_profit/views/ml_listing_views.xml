@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Nathan Gobbi
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Same columns and order as the stock spreadsheet -->
+    <record id="ml_listing_view_list" model="ir.ui.view">
+        <field name="name">ml.listing.list</field>
+        <field name="model">ml.listing</field>
+        <field name="arch" type="xml">
+            <list string="Listings" editable="bottom" multi_edit="1">
+                <field name="company_id" column_invisible="True" />
+                <field name="currency_id" column_invisible="True" />
+                <field name="default_code" />
+                <field name="product_tmpl_id" />
+                <field name="manufacturer_code" optional="hide" />
+                <field name="barcode" optional="hide" />
+                <field name="ncm" optional="hide" />
+                <field name="standard_price" widget="monetary" />
+                <field name="listing_type" />
+                <field name="price" />
+                <field name="net_amount" />
+                <field name="tax_amount" />
+                <field name="packaging_cost" />
+                <field name="net_profit" decoration-danger="net_profit &lt; 0" />
+                <field
+                    name="profit_percent"
+                    decoration-danger="profit_percent &lt; 0"
+                />
+            </list>
+        </field>
+    </record>
+
+    <record id="ml_listing_view_form" model="ir.ui.view">
+        <field name="name">ml.listing.form</field>
+        <field name="model">ml.listing</field>
+        <field name="arch" type="xml">
+            <form string="Listing">
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <field name="active" invisible="True" />
+                    <field name="currency_id" invisible="True" />
+                    <group>
+                        <group name="product" string="Product">
+                            <field name="product_tmpl_id" />
+                            <field name="default_code" />
+                            <field name="standard_price" widget="monetary" />
+                            <field name="listing_type" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                        <group name="values" string="Values">
+                            <field name="price" />
+                            <field name="net_amount" />
+                            <field name="tax_amount" />
+                            <field name="packaging_cost" />
+                            <field name="net_profit" />
+                            <field name="profit_percent" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="ml_listing_view_search" model="ir.ui.view">
+        <field name="name">ml.listing.search</field>
+        <field name="model">ml.listing</field>
+        <field name="arch" type="xml">
+            <search string="Listings">
+                <field name="product_tmpl_id" />
+                <field name="default_code" />
+                <filter
+                    name="premium"
+                    string="Premium"
+                    domain="[('listing_type', '=', 'premium')]"
+                />
+                <filter
+                    name="classic"
+                    string="Classic"
+                    domain="[('listing_type', '=', 'classic')]"
+                />
+                <separator />
+                <filter
+                    name="loss"
+                    string="Negative Profit"
+                    domain="[('net_profit', '&lt;', 0)]"
+                />
+                <separator />
+                <filter
+                    name="archived"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
+                <group>
+                    <filter
+                        name="group_type"
+                        string="Type"
+                        context="{'group_by': 'listing_type'}"
+                    />
+                    <filter
+                        name="group_product"
+                        string="Product"
+                        context="{'group_by': 'product_tmpl_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="ml_listing_action" model="ir.actions.act_window">
+        <field name="name">Listings</field>
+        <field name="res_model">ml.listing</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'display_default_code': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Register your first listing</p>
+            <p>
+                A listing holds the sale price and the amount you receive for
+                each listing type (Premium or Classic) of a product.
+            </p>
+        </field>
+    </record>
+</odoo>

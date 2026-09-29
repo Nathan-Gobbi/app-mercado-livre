@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Nathan Gobbi
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <menuitem
+        id="menu_root"
+        name="ML Sales Profit"
+        web_icon="ml_sales_profit,static/description/icon.png"
+        groups="group_ml_manager"
+        sequence="30"
+    />
+
+    <menuitem id="menu_records" name="Records" parent="menu_root" sequence="10" />
+    <menuitem
+        id="menu_products"
+        name="Products"
+        parent="menu_records"
+        action="product_template_action"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_listings"
+        name="Listings"
+        parent="menu_records"
+        action="ml_listing_action"
+        sequence="20"
+    />
+    <menuitem
+        id="menu_stock_import"
+        name="Import Stock Spreadsheet"
+        parent="menu_records"
+        action="ml_stock_import_wizard_action"
+        sequence="30"
+    />
+
+    <menuitem id="menu_imports" name="Imports" parent="menu_root" sequence="20" />
+    <menuitem
+        id="menu_sale_imports"
+        name="Sales"
+        parent="menu_imports"
+        action="ml_sale_import_action"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_statement_imports"
+        name="Statements"
+        parent="menu_imports"
+        action="ml_statement_import_action"
+        sequence="20"
+    />
+
+    <menuitem id="menu_analysis" name="Analysis" parent="menu_root" sequence="30" />
+    <menuitem
+        id="menu_sale_analysis"
+        name="Sales"
+        parent="menu_analysis"
+        action="ml_sale_line_action"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_statement_analysis"
+        name="Outflows"
+        parent="menu_analysis"
+        action="ml_statement_line_action"
+        sequence="20"
+    />
+
+    <menuitem
+        id="menu_configuration"
+        name="Configuration"
+        parent="menu_root"
+        sequence="40"
+    />
+    <menuitem
+        id="menu_settings"
+        name="Settings"
+        parent="menu_configuration"
+        action="res_config_settings_action"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_excluded_types"
+        name="Ignored Transaction Types"
+        parent="menu_configuration"
+        action="ml_statement_excluded_type_action"
+        sequence="20"
+    />
+</odoo>
