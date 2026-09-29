@@ -83,6 +83,12 @@ Usage
 4. Use *Analysis > Sales* to compare products and months in the graph
    and pivot views.
 
+When a sale has a registered listing, processing the report
+automatically deducts its units from the product stock. Reimporting the
+same sale does not deduct it again. If the sale is later imported as
+cancelled, its units are restored. Sales without a registered listing do
+not change stock.
+
 **Close the statement**
 
 1. In Mercado Pago, export the account statement.
@@ -93,7 +99,6 @@ Usage
 Known issues / Roadmap
 ======================
 
-- Update the stock quantity automatically from the imported sales.
 - Import the Mercado Livre billing report to use the real fees of each
   sale instead of the listing net amount.
 - Read the reports directly from the Mercado Livre API.

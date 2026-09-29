@@ -163,8 +163,43 @@ class TestSaleImport(MlSalesProfitCase):
         month.unlink()
         self.assertEqual(Line.search_count(domain), 0)
 
-    def test_sale_cancelled_later_is_removed(self):
+    def test_sales_update_stock_only_once(self):
+        self.product.ml_stock_qty = 10
         week = self._import(self._week())
+        self.assertEqual(self.product.ml_stock_qty, 7)
+        self.assertTrue(
+            all(
+                week.line_ids.filtered(lambda line: line.sku == "TST001").mapped(
+                    "stock_deducted"
+                )
+            )
+        )
+        unknown = week.line_ids.filtered(lambda line: line.sku == "XYZ999")
+        self.assertFalse(unknown.stock_deducted)
+
+        month = self._import(self._week())
+        self.assertEqual(self.product.ml_stock_qty, 7)
+
+        week.action_reset_draft()
+        self.assertEqual(self.product.ml_stock_qty, 7)
+        month.unlink()
+        self.assertEqual(self.product.ml_stock_qty, 10)
+
+    def test_reimport_changed_units_adjusts_stock_by_difference(self):
+        self.product.ml_stock_qty = 10
+        first = self._week()[:1]
+        self._import(first)
+        self.assertEqual(self.product.ml_stock_qty, 9)
+
+        changed = list(first[0])
+        changed[4] = 3
+        self._import([changed])
+        self.assertEqual(self.product.ml_stock_qty, 7)
+
+    def test_sale_cancelled_later_is_removed(self):
+        self.product.ml_stock_qty = 10
+        week = self._import(self._week())
+        self.assertEqual(self.product.ml_stock_qty, 7)
         self._import(
             [
                 sale_row(
@@ -183,6 +218,7 @@ class TestSaleImport(MlSalesProfitCase):
         )
         self.assertEqual(week.line_count, 2)
         self.assertNotIn("1001", week.line_ids.mapped("sale_number"))
+        self.assertEqual(self.product.ml_stock_qty, 8)
 
     def test_revenue_rebuilt_from_listing(self):
         sale_import = self._import(

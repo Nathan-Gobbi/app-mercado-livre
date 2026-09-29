@@ -91,6 +91,13 @@ class MlSaleLine(models.Model):
         selection=[("ok", "OK"), ("not_found", "Listing Not Found")],
         readonly=True,
     )
+    stock_deducted = fields.Boolean(
+        readonly=True,
+        copy=False,
+        help=(
+            "The units of this sale have already been deducted from the product stock."
+        ),
+    )
 
     @api.depends("units", "revenue", "unit_net_profit", "unit_gross_profit")
     def _compute_profit(self):
@@ -103,3 +110,50 @@ class MlSaleLine(models.Model):
             line.gross_margin = (
                 100 * line.gross_profit / line.revenue if line.revenue else 0.0
             )
+
+    def _adjust_product_stock(self, multiplier):
+        """Apply this sale quantity to the module's stock field."""
+        for line in self.filtered(lambda record: record.product_tmpl_id):
+            line.product_tmpl_id.ml_stock_qty += multiplier * line.units
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        lines = super().create(vals_list)
+        stock_lines = lines.filtered(
+            lambda line: line.product_tmpl_id and line.units > 0
+        )
+        stock_lines._adjust_product_stock(-1)
+        stock_lines.with_context(skip_ml_stock_adjustment=True).write(
+            {"stock_deducted": True}
+        )
+        return lines
+
+    def write(self, vals):
+        if self.env.context.get("skip_ml_stock_adjustment"):
+            return super().write(vals)
+        stock_fields = {"product_tmpl_id", "units"}
+        if not stock_fields.intersection(vals):
+            return super().write(vals)
+        previous = [
+            (line.product_tmpl_id, line.units)
+            for line in self
+            if line.stock_deducted and line.product_tmpl_id
+        ]
+        result = super().write(vals)
+        for product, units in previous:
+            product.ml_stock_qty += units
+        stock_lines = self.filtered(
+            lambda line: line.product_tmpl_id and line.units > 0
+        )
+        stock_lines._adjust_product_stock(-1)
+        self.with_context(skip_ml_stock_adjustment=True).write(
+            {"stock_deducted": False}
+        )
+        stock_lines.with_context(skip_ml_stock_adjustment=True).write(
+            {"stock_deducted": True}
+        )
+        return result
+
+    def unlink(self):
+        self.filtered("stock_deducted")._adjust_product_stock(1)
+        return super().unlink()

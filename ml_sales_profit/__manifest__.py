@@ -3,7 +3,7 @@
 {
     "name": "Mercado Livre Sales Profit",
     "summary": "Import Mercado Livre sales and statements to analyze profit",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.1.0",
     "category": "Sales",
     "website": "https://github.com/Nathan-Gobbi/app-mercado-livre",
     "author": "Nathan Gobbi",

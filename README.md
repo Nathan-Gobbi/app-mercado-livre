@@ -29,7 +29,8 @@ geravam.
 - **Importação de vendas**: cruza cada venda do relatório do Mercado Livre com o anúncio
   (SKU + tipo) e calcula receita, lucro bruto, lucro líquido e margens. Vendas
   canceladas são ignoradas, e importar períodos sobrepostos (a semana e depois o mês)
-  não duplica vendas.
+  não duplica vendas. O estoque é baixado automaticamente uma única vez e restaurado
+  quando uma venda é cancelada.
 - **Importação do extrato**: lista as saídas do extrato do Mercado Pago, ignorando os
   tipos de transação configurados, com um campo de observação para cada saída.
 - **Análises**: gráfico, pivô e lista por SKU, produto, tipo de anúncio e mês.

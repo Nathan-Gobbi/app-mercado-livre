@@ -21,6 +21,7 @@
                 <field name="listing_type" />
                 <field name="ml_status" optional="hide" />
                 <field name="units" sum="Total" />
+                <field name="stock_deducted" optional="hide" />
                 <field name="revenue" sum="Total" />
                 <field name="unit_tax" optional="hide" />
                 <field name="unit_gross_profit" optional="hide" />
@@ -66,6 +67,7 @@
                         </group>
                         <group name="values" string="Values">
                             <field name="units" />
+                            <field name="stock_deducted" />
                             <field name="revenue" />
                             <field name="revenue_origin" />
                             <field name="unit_tax" />
