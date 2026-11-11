@@ -22,6 +22,93 @@
                             <field name="ml_tax_rate" />
                         </setting>
                     </block>
+                    <block title="Mercado Livre API" name="ml_sales_profit_api">
+                        <setting
+                            string="API synchronization"
+                            help="Synchronize paid and cancelled Mercado Livre orders every 15 minutes."
+                        >
+                            <field name="ml_api_enabled" />
+                        </setting>
+                        <setting string="Application credentials">
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label
+                                        for="ml_api_client_id"
+                                        class="col-lg-4 o_light_label"
+                                    />
+                                    <field name="ml_api_client_id" />
+                                </div>
+                                <div class="row mt16">
+                                    <label
+                                        for="ml_api_client_secret"
+                                        class="col-lg-4 o_light_label"
+                                    />
+                                    <field
+                                        name="ml_api_client_secret"
+                                        password="True"
+                                    />
+                                </div>
+                                <div class="row mt16">
+                                    <label
+                                        for="ml_api_redirect_uri"
+                                        class="col-lg-4 o_light_label"
+                                    />
+                                    <field
+                                        name="ml_api_redirect_uri"
+                                        placeholder="http://localhost:18069/ml/oauth/callback"
+                                    />
+                                </div>
+                                <div class="mt16">
+                                    <button
+                                        name="action_ml_authorize"
+                                        type="object"
+                                        string="Connect Mercado Livre"
+                                        class="btn-primary"
+                                    />
+                                </div>
+                            </div>
+                        </setting>
+                        <setting string="Connected seller">
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label
+                                        for="ml_api_nickname"
+                                        class="col-lg-4 o_light_label"
+                                    />
+                                    <field name="ml_api_nickname" />
+                                </div>
+                                <div class="row mt16">
+                                    <label
+                                        for="ml_api_seller_id"
+                                        class="col-lg-4 o_light_label"
+                                    />
+                                    <field name="ml_api_seller_id" />
+                                </div>
+                                <div class="row mt16">
+                                    <label
+                                        for="ml_api_last_sync_at"
+                                        class="col-lg-4 o_light_label"
+                                    />
+                                    <field name="ml_api_last_sync_at" />
+                                </div>
+                            </div>
+                        </setting>
+                        <setting
+                            string="Initial synchronization period"
+                            help="Number of days imported on the first synchronization. Mercado Livre keeps searchable orders for up to 12 months."
+                        >
+                            <field name="ml_api_initial_sync_days" />
+                        </setting>
+                        <setting string="Synchronize now">
+                            <button
+                                name="action_ml_sync_orders"
+                                type="object"
+                                string="Synchronize Orders"
+                                class="btn-secondary"
+                                invisible="not ml_api_seller_id"
+                            />
+                        </setting>
+                    </block>
                 </app>
             </xpath>
         </field>

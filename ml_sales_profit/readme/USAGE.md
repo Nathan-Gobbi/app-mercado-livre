@@ -22,6 +22,11 @@ deducts its units from the product stock. Reimporting the same sale does not
 deduct it again. If the sale is later imported as cancelled, its units are
 restored. Sales without a registered listing do not change stock.
 
+When the Mercado Livre API is connected, paid orders are imported automatically
+and update the same sales and stock records. The synchronization is incremental
+and idempotent: processing an order again only applies quantity differences.
+Cancelled orders restore the stock. Spreadsheet imports remain available.
+
 **Close the statement**
 
 1. In Mercado Pago, export the account statement.

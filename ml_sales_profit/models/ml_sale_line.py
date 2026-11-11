@@ -26,6 +26,21 @@ class MlSaleLine(models.Model):
         string="Imports",
         readonly=True,
     )
+    source = fields.Selection(
+        selection=[("spreadsheet", "Spreadsheet"), ("api", "API")],
+        default="spreadsheet",
+        required=True,
+        readonly=True,
+    )
+    api_order_item_key = fields.Char(readonly=True, index=True, copy=False)
+
+    _sql_constraints = [
+        (
+            "api_order_item_company_uniq",
+            "unique(company_id, api_order_item_key)",
+            "A Mercado Livre API order item can only be synchronized once.",
+        )
+    ]
     company_id = fields.Many2one(
         comodel_name="res.company",
         required=True,

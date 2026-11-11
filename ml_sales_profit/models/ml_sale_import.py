@@ -37,6 +37,13 @@ class MlSaleImport(models.Model):
     _description = "Mercado Livre Sales Import"
     _order = "date_from desc, id desc"
 
+    source = fields.Selection(
+        selection=[("spreadsheet", "Spreadsheet"), ("api", "API")],
+        default="spreadsheet",
+        required=True,
+        readonly=True,
+    )
+
     line_ids = fields.Many2many(
         comodel_name="ml.sale.line",
         relation="ml_sale_import_line_rel",

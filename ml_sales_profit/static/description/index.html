@@ -418,6 +418,23 @@ rate applied over the sale price (6% by default).</li>
 Sales Profit &gt; Configuration &gt; Ignored Transaction Types</em>.</li>
 <li>Make sure the company currency is the Brazilian Real (BRL).</li>
 </ol>
+<p><strong>Mercado Livre API</strong></p>
+<ol class="arabic simple">
+<li>Create an application in Mercado Livre Developers and register the
+exact callback URL shown in Odoo, for example
+<tt class="docutils literal"><span class="pre">http://localhost:18069/ml/oauth/callback</span></tt> for a local
+installation.</li>
+<li>In <em>ML Sales Profit &gt; Configuration &gt; Settings</em>, enter the
+Application ID, Secret Key and the same Redirect URI registered in
+Mercado Livre.</li>
+<li>Click <em>Connect Mercado Livre</em> and authorize the seller administrator
+account.</li>
+<li>Keep <em>API synchronization</em> enabled. Paid and cancelled orders are
+synchronized every 15 minutes. Use <em>Synchronize Orders</em> to run it
+immediately.</li>
+</ol>
+<p>Tokens and the Secret Key are restricted to system administrators. Never
+paste them in source code, logs or support requests.</p>
 </div>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#toc-entry-2">Usage</a></h1>
@@ -446,6 +463,11 @@ automatically deducts its units from the product stock. Reimporting the
 same sale does not deduct it again. If the sale is later imported as
 cancelled, its units are restored. Sales without a registered listing do
 not change stock.</p>
+<p>When the Mercado Livre API is connected, paid orders are imported
+automatically and update the same sales and stock records. The
+synchronization is incremental and idempotent: processing an order again
+only applies quantity differences. Cancelled orders restore the stock.
+Spreadsheet imports remain available.</p>
 <p><strong>Close the statement</strong></p>
 <ol class="arabic simple">
 <li>In Mercado Pago, export the account statement.</li>
@@ -459,7 +481,6 @@ not change stock.</p>
 <ul class="simple">
 <li>Import the Mercado Livre billing report to use the real fees of each
 sale instead of the listing net amount.</li>
-<li>Read the reports directly from the Mercado Livre API.</li>
 </ul>
 </div>
 <div class="section" id="bug-tracker">

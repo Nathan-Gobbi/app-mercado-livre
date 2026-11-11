@@ -60,6 +60,24 @@ Configuration
    Sales Profit > Configuration > Ignored Transaction Types*.
 4. Make sure the company currency is the Brazilian Real (BRL).
 
+**Mercado Livre API**
+
+1. Create an application in Mercado Livre Developers and register the
+   exact callback URL shown in Odoo, for example
+   ``http://localhost:18069/ml/oauth/callback`` for a local
+   installation.
+2. In *ML Sales Profit > Configuration > Settings*, enter the
+   Application ID, Secret Key and the same Redirect URI registered in
+   Mercado Livre.
+3. Click *Connect Mercado Livre* and authorize the seller administrator
+   account.
+4. Keep *API synchronization* enabled. Paid and cancelled orders are
+   synchronized every 15 minutes. Use *Synchronize Orders* to run it
+   immediately.
+
+Tokens and the Secret Key are restricted to system administrators. Never
+paste them in source code, logs or support requests.
+
 Usage
 =====
 
@@ -89,6 +107,12 @@ same sale does not deduct it again. If the sale is later imported as
 cancelled, its units are restored. Sales without a registered listing do
 not change stock.
 
+When the Mercado Livre API is connected, paid orders are imported
+automatically and update the same sales and stock records. The
+synchronization is incremental and idempotent: processing an order again
+only applies quantity differences. Cancelled orders restore the stock.
+Spreadsheet imports remain available.
+
 **Close the statement**
 
 1. In Mercado Pago, export the account statement.
@@ -101,7 +125,6 @@ Known issues / Roadmap
 
 - Import the Mercado Livre billing report to use the real fees of each
   sale instead of the listing net amount.
-- Read the reports directly from the Mercado Livre API.
 
 Bug Tracker
 ===========
