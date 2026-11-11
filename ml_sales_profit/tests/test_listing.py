@@ -18,7 +18,8 @@ class TestListing(MlSalesProfitCase):
     def test_profit_follows_cost_and_tax_rate(self):
         self.product.standard_price = 120
         self.assertAlmostEqual(self.premium.net_profit, 17.9)
-        self.company.ml_tax_rate = 10.0
+        self.product.ml_tax_rate = 10.0
+        self.assertEqual(self.company.ml_tax_rate, 10.0)
         self.assertAlmostEqual(self.premium.tax_amount, 20.0)
         self.assertAlmostEqual(self.premium.net_profit, 9.9)
 

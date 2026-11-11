@@ -72,6 +72,7 @@
                                 widget="monetary"
                                 options="{'currency_field': 'cost_currency_id'}"
                             />
+                            <field name="ml_tax_rate" />
                             <field name="ml_stock_qty" />
                             <field name="ml_min_stock_qty" />
                             <field
