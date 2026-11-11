@@ -8,6 +8,13 @@ class ProductTemplate(models.Model):
 
     ml_manufacturer_code = fields.Char(string="Manufacturer Code")
     ml_ncm = fields.Char(string="NCM", help="Mercosur Common Nomenclature code.")
+    ml_tax_rate = fields.Float(
+        string="Tax Rate (%)",
+        compute="_compute_ml_tax_rate",
+        inverse="_inverse_ml_tax_rate",
+        help="Percentage of the sale price deducted as tax from all listings "
+        "of this company.",
+    )
     ml_stock_qty = fields.Float(string="Stock", digits=(16, 0))
     ml_min_stock_qty = fields.Float(
         string="Minimum Stock",
@@ -33,6 +40,15 @@ class ProductTemplate(models.Model):
         inverse_name="product_tmpl_id",
         string="Listings",
     )
+
+    @api.depends_context("company")
+    def _compute_ml_tax_rate(self):
+        for product in self:
+            product.ml_tax_rate = product.env.company.ml_tax_rate
+
+    def _inverse_ml_tax_rate(self):
+        for product in self:
+            product.env.company.ml_tax_rate = product.ml_tax_rate
 
     @api.depends("ml_stock_qty", "ml_min_stock_qty")
     def _compute_ml_stock_difference(self):
