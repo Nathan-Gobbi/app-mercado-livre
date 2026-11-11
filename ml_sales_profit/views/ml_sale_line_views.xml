@@ -15,6 +15,7 @@
                 <field name="currency_id" column_invisible="True" />
                 <field name="sale_date" />
                 <field name="sale_number" optional="hide" />
+                <field name="source" optional="hide" />
                 <field name="sku" />
                 <field name="title" />
                 <field name="variation" optional="show" />
@@ -52,6 +53,7 @@
                         <label for="sale_number" />
                         <h1>
                             <field name="sale_number" />
+                            <field name="source" />
                         </h1>
                     </div>
                     <group>

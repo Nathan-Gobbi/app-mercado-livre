@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 11:04+0000\n"
-"PO-Revision-Date: 2026-09-24 11:04+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -58,6 +56,17 @@ msgid "A product can only have one listing of each type."
 msgstr ""
 
 #. module: ml_sales_profit
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_sale_import__source__api
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_sale_line__source__api
+msgid "API"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.res_config_settings_view_form
+msgid "API synchronization"
+msgstr ""
+
+#. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_needaction
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_needaction
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_needaction
@@ -93,6 +102,22 @@ msgstr ""
 #. module: ml_sales_profit
 #: model:ir.ui.menu,name:ml_sales_profit.menu_analysis
 msgid "Analysis"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__api_order_item_key
+msgid "Api Order Item Key"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_company__ml_api_client_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_config_settings__ml_api_client_id
+msgid "Application ID"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.res_config_settings_view_form
+msgid "Application credentials"
 msgstr ""
 
 #. module: ml_sales_profit
@@ -151,6 +176,22 @@ msgstr ""
 #. module: ml_sales_profit
 #: model:ir.ui.menu,name:ml_sales_profit.menu_configuration
 msgid "Configuration"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.res_config_settings_view_form
+msgid "Connect Mercado Livre"
+msgstr ""
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/res_company.py:0
+msgid "Connect the Mercado Livre account first."
+msgstr ""
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.res_config_settings_view_form
+msgid "Connected seller"
 msgstr ""
 
 #. module: ml_sales_profit
@@ -316,6 +357,12 @@ msgid ""
 msgstr ""
 
 #. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_company__ml_api_enabled
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_config_settings__ml_api_enabled
+msgid "Enable Mercado Livre API"
+msgstr ""
+
+#. module: ml_sales_profit
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_form
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_import_view_form
 msgid "File"
@@ -446,6 +493,17 @@ msgid "Initial Balance"
 msgstr ""
 
 #. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_company__ml_api_initial_sync_days
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_config_settings__ml_api_initial_sync_days
+msgid "Initial Sync (Days)"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.res_config_settings_view_form
+msgid "Initial synchronization period"
+msgstr ""
+
+#. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_is_follower
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_is_follower
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_is_follower
@@ -530,6 +588,23 @@ msgid "Manufacturer Code"
 msgstr ""
 
 #. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/res_config_settings.py:0
+msgid "Mercado Livre"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.res_config_settings_view_form
+msgid "Mercado Livre API"
+msgstr ""
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/res_company.py:0
+msgid "Mercado Livre API request failed for %(path)s."
+msgstr ""
+
+#. module: ml_sales_profit
 #: model:ir.model,name:ml_sales_profit.model_ml_statement_import
 msgid "Mercado Livre Account Statement Import"
 msgstr ""
@@ -596,6 +671,23 @@ msgid "Mercado Livre Tax Rate (%)"
 msgstr ""
 
 #. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/res_company.py:0
+msgid "Mercado Livre authorization failed. Try again."
+msgstr ""
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/res_company.py:0
+msgid "Mercado Livre did not return the required tokens."
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.actions.server,name:ml_sales_profit.ir_cron_ml_sync_orders_ir_actions_server
+msgid "Mercado Livre: synchronize orders"
+msgstr ""
+
+#. module: ml_sales_profit
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_listing__ncm
 #: model:ir.model.fields,help:ml_sales_profit.field_product_product__ml_ncm
 #: model:ir.model.fields,help:ml_sales_profit.field_product_template__ml_ncm
@@ -620,6 +712,37 @@ msgstr ""
 #: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_min_stock_qty
 #: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_min_stock_qty
 msgid "Minimum Stock"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_company__ml_api_access_token
+msgid "Ml Api Access Token"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_company__ml_api_last_sync_at
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_config_settings__ml_api_last_sync_at
+msgid "Ml Api Last Sync At"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_company__ml_api_oauth_state
+msgid "Ml Api Oauth State"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_company__ml_api_oauth_state_expires_at
+msgid "Ml Api Oauth State Expires At"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_company__ml_api_refresh_token
+msgid "Ml Api Refresh Token"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_company__ml_api_token_expires_at
+msgid "Ml Api Token Expires At"
 msgstr ""
 
 #. module: ml_sales_profit
@@ -715,6 +838,13 @@ msgid "Number of Actions"
 msgstr ""
 
 #. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.res_config_settings_view_form
+msgid ""
+"Number of days imported on the first synchronization. Mercado Livre keeps "
+"searchable orders for up to 12 months."
+msgstr ""
+
+#. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_has_error_counter
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_has_error_counter
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_has_error_counter
@@ -738,6 +868,12 @@ msgstr ""
 #. module: ml_sales_profit
 #: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_sale_line__profit_status__ok
 msgid "OK"
+msgstr ""
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/res_config_settings.py:0
+msgid "Orders synchronized successfully."
 msgstr ""
 
 #. module: ml_sales_profit
@@ -907,6 +1043,12 @@ msgid "Records"
 msgstr ""
 
 #. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_company__ml_api_redirect_uri
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_config_settings__ml_api_redirect_uri
+msgid "Redirect URI"
+msgstr ""
+
+#. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__reference_id
 msgid "Reference"
 msgstr ""
@@ -1046,9 +1188,39 @@ msgid "Sales summary %s.xlsx"
 msgstr ""
 
 #. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_company__ml_api_client_secret
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_config_settings__ml_api_client_secret
+msgid "Secret Key"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_company__ml_api_nickname
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_config_settings__ml_api_nickname
+msgid "Seller"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_company__ml_api_seller_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_res_config_settings__ml_api_seller_id
+msgid "Seller ID"
+msgstr ""
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/res_company.py:0
+msgid "Set the Mercado Livre Application ID, Secret Key and Redirect URI."
+msgstr ""
+
+#. module: ml_sales_profit
 #: model:ir.actions.act_window,name:ml_sales_profit.res_config_settings_action
 #: model:ir.ui.menu,name:ml_sales_profit.menu_settings
 msgid "Settings"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__source
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__source
+msgid "Source"
 msgstr ""
 
 #. module: ml_sales_profit
@@ -1056,6 +1228,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__file
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__file
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_stock_import_wizard__file
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_sale_import__source__spreadsheet
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_sale_line__source__spreadsheet
 msgid "Spreadsheet"
 msgstr ""
 
@@ -1101,6 +1275,11 @@ msgid "Stock"
 msgstr ""
 
 #. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__stock_deducted
+msgid "Stock Deducted"
+msgstr ""
+
+#. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_stock_difference
 #: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_stock_difference
 msgid "Stock Difference"
@@ -1127,6 +1306,21 @@ msgstr ""
 #. module: ml_sales_profit
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_form
 msgid "Summary"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.res_config_settings_view_form
+msgid "Synchronize Orders"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.res_config_settings_view_form
+msgid "Synchronize now"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.res_config_settings_view_form
+msgid "Synchronize paid and cancelled Mercado Livre orders every 15 minutes."
 msgstr ""
 
 #. module: ml_sales_profit
@@ -1161,6 +1355,12 @@ msgstr ""
 #. module: ml_sales_profit
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_form
 msgid "The sales of this import will be removed. Continue?"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_sale_line__stock_deducted
+msgid ""
+"The units of this sale have already been deducted from the product stock."
 msgstr ""
 
 #. module: ml_sales_profit
@@ -1347,6 +1547,11 @@ msgstr ""
 #. module: ml_sales_profit
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
 msgid "e.g. Fox Float shock kit"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.res_config_settings_view_form
+msgid "http://localhost:18069/ml/oauth/callback"
 msgstr ""
 
 #. module: ml_sales_profit

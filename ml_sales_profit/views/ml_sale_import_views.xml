@@ -9,6 +9,7 @@
             <list string="Sales Imports">
                 <field name="currency_id" column_invisible="True" />
                 <field name="name" />
+                <field name="source" optional="show" />
                 <field name="date_from" optional="hide" />
                 <field name="date_to" optional="hide" />
                 <field name="total_units" sum="Total" />
@@ -42,7 +43,7 @@
                         string="Process"
                         type="object"
                         class="btn-primary"
-                        invisible="state != 'draft'"
+                        invisible="state != 'draft' or source == 'api'"
                     />
                     <button
                         name="action_download_report"
@@ -50,7 +51,7 @@
                         type="object"
                         class="btn-primary"
                         icon="fa-download"
-                        invisible="state != 'done'"
+                        invisible="state != 'done' or source == 'api'"
                     />
                     <button
                         name="action_reset_draft"
@@ -74,6 +75,7 @@
                         </button>
                     </div>
                     <field name="currency_id" invisible="True" />
+                    <field name="source" invisible="True" />
                     <div class="oe_title">
                         <h1>
                             <field name="name" readonly="True" />
@@ -94,6 +96,7 @@
                                 name="file"
                                 filename="file_name"
                                 readonly="state != 'draft'"
+                                invisible="source == 'api'"
                             />
                             <field name="file_name" invisible="True" />
                             <field name="date_from" invisible="state == 'draft'" />
@@ -124,6 +127,7 @@
                                     <field name="currency_id" column_invisible="True" />
                                     <field name="sale_date" />
                                     <field name="sale_number" optional="hide" />
+                                    <field name="source" optional="hide" />
                                     <field name="sku" />
                                     <field name="title" />
                                     <field name="variation" optional="show" />
