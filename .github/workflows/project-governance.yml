@@ -1,0 +1,30 @@
+name: project governance
+
+on:
+  pull_request:
+    branches:
+      - "18.0"
+
+jobs:
+  conventions:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate branch name
+        env:
+          BRANCH_NAME: ${{ github.head_ref }}
+        run: |
+          if ! echo "$BRANCH_NAME" | grep -Eq '^18\.0-(feature|fix|refactor|docs|chore)-[a-z0-9]+(-[a-z0-9]+)*$'; then
+            echo "Invalid branch: $BRANCH_NAME"
+            echo "Expected: 18.0-(feature|fix|refactor|docs|chore)-description"
+            exit 1
+          fi
+      - name: Require changelog update
+        run: |
+          git diff --name-only "origin/${{ github.base_ref }}...HEAD" > /tmp/changed-files
+          if ! grep -qx 'CHANGELOG.md' /tmp/changed-files; then
+            echo "Every pull request must update CHANGELOG.md"
+            exit 1
+          fi
