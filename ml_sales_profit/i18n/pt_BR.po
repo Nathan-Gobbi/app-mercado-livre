@@ -1144,7 +1144,7 @@ msgstr "Imposto"
 #. module: ml_sales_profit
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.res_config_settings_view_form
 msgid "Tax Rate (%)"
-msgstr "Alíquota de imposto (%)"
+msgstr "Imposto"
 
 #. module: ml_sales_profit
 #. odoo-python
@@ -1382,7 +1382,7 @@ msgstr "Imagem"
 #. module: ml_sales_profit
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
 msgid "Image Gallery"
-msgstr "Galeria de imagens"
+msgstr "Imagens"
 
 #. module: ml_sales_profit
 #: model:ir.model,name:ml_sales_profit.model_ml_product_image
