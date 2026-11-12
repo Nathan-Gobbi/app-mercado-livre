@@ -17,7 +17,6 @@ class MlProductImage(models.Model):
     )
     sequence = fields.Integer(default=10)
     image = fields.Image(
-        string="Image",
         required=True,
         max_width=1920,
         max_height=1920,
