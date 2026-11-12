@@ -82,26 +82,69 @@
                             <field name="ml_stock_value" />
                         </group>
                     </group>
-                    <separator string="Mercado Livre Listings" />
-                    <field
-                        name="ml_listing_ids"
-                        context="{'default_product_tmpl_id': id}"
-                    >
-                        <list editable="bottom">
-                            <field name="company_id" column_invisible="True" />
-                            <field name="currency_id" column_invisible="True" />
-                            <field name="listing_type" />
-                            <field name="price" />
-                            <field name="net_amount" />
-                            <field name="tax_amount" />
-                            <field name="packaging_cost" />
+                    <notebook>
+                        <page name="mercado_livre" string="Mercado Livre">
                             <field
-                                name="net_profit"
-                                decoration-danger="net_profit &lt; 0"
+                                name="ml_listing_ids"
+                                context="{'default_product_tmpl_id': id}"
+                            >
+                                <list editable="bottom">
+                                    <field name="company_id" column_invisible="True" />
+                                    <field name="currency_id" column_invisible="True" />
+                                    <field name="listing_type" />
+                                    <field name="price" />
+                                    <field name="net_amount" />
+                                    <field name="tax_amount" />
+                                    <field name="packaging_cost" />
+                                    <field
+                                        name="net_profit"
+                                        decoration-danger="net_profit &lt; 0"
+                                    />
+                                    <field name="profit_percent" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="description" string="Description">
+                            <field
+                                name="description"
+                                widget="html"
+                                placeholder="Write the product description..."
                             />
-                            <field name="profit_percent" />
-                        </list>
-                    </field>
+                        </page>
+                        <page name="gallery" string="Image Gallery">
+                            <field
+                                name="ml_image_ids"
+                                mode="kanban"
+                                context="{'default_product_tmpl_id': id}"
+                            >
+                                <kanban>
+                                    <field name="sequence" />
+                                    <field name="image" />
+                                    <templates>
+                                        <t t-name="card">
+                                            <field
+                                                name="image"
+                                                widget="image"
+                                                class="w-100"
+                                            />
+                                        </t>
+                                    </templates>
+                                </kanban>
+                                <form string="Product Image">
+                                    <sheet>
+                                        <group>
+                                            <field name="sequence" />
+                                            <field
+                                                name="image"
+                                                widget="image"
+                                                class="oe_avatar"
+                                            />
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
                 <chatter />
             </form>

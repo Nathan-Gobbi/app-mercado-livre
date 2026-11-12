@@ -1364,3 +1364,43 @@ msgid ""
 "                        is zero. Register the listings and process the import again."
 msgstr "vendas não têm\n                        anúncio cadastrado para o SKU e o tipo, por isso o lucro delas\n                        é zero. Cadastre os anúncios e processe a importação novamente."
 
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+msgid "Description"
+msgstr "Descrição"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_image_ids
+msgid "Gallery Images"
+msgstr "Imagens da galeria"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_product_image__image
+msgid "Image"
+msgstr "Imagem"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+msgid "Image Gallery"
+msgstr "Galeria de imagens"
+
+#. module: ml_sales_profit
+#: model:ir.model,name:ml_sales_profit.model_ml_product_image
+msgid "Product Gallery Image"
+msgstr "Imagem da galeria do produto"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+msgid "Product Image"
+msgstr "Imagem do produto"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_product_image__sequence
+msgid "Sequence"
+msgstr "Sequência"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+msgid "Write the product description..."
+msgstr "Escreva a descrição do produto..."
+

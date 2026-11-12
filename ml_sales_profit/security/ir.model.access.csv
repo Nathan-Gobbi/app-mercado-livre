@@ -1,5 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_ml_listing_manager,ml.listing manager,model_ml_listing,group_ml_manager,1,1,1,1
+access_ml_product_image_manager,ml.product.image manager,model_ml_product_image,group_ml_manager,1,1,1,1
 access_ml_sale_import_manager,ml.sale.import manager,model_ml_sale_import,group_ml_manager,1,1,1,1
 access_ml_sale_line_manager,ml.sale.line manager,model_ml_sale_line,group_ml_manager,1,1,1,1
 access_ml_statement_import_manager,ml.statement.import manager,model_ml_statement_import,group_ml_manager,1,1,1,1

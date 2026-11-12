@@ -22,6 +22,46 @@ msgid "%(count)s outflows imported."
 msgstr ""
 
 #. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+msgid "Description"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_image_ids
+msgid "Gallery Images"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_product_image__image
+msgid "Image"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+msgid "Image Gallery"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model,name:ml_sales_profit.model_ml_product_image
+msgid "Product Gallery Image"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+msgid "Product Image"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_product_image__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+msgid "Write the product description..."
+msgstr ""
+
+#. module: ml_sales_profit
 #. odoo-python
 #: code:addons/ml_sales_profit/models/ml_sale_import.py:0
 msgid ""
