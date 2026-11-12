@@ -40,6 +40,11 @@ class ProductTemplate(models.Model):
         inverse_name="product_tmpl_id",
         string="Listings",
     )
+    ml_image_ids = fields.One2many(
+        comodel_name="ml.product.image",
+        inverse_name="product_tmpl_id",
+        string="Gallery Images",
+    )
 
     @api.depends_context("company")
     def _compute_ml_tax_rate(self):

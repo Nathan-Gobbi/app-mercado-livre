@@ -43,3 +43,21 @@ class TestListing(MlSalesProfitCase):
         self.assertEqual(self.product.ml_stock_value, 600)
         self.product.standard_price = 50
         self.assertEqual(self.product.ml_stock_value, 300)
+
+    def test_product_description_and_gallery(self):
+        self.product.description = "<p>Marketplace description</p>"
+        image = self.env["ml.product.image"].create(
+            {
+                "product_tmpl_id": self.product.id,
+                "image": (
+                    b"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwC"
+                    b"AAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+                ),
+            }
+        )
+
+        self.assertEqual(self.product.description, "<p>Marketplace description</p>")
+        self.assertEqual(self.product.ml_image_ids, image)
+
+        self.product.unlink()
+        self.assertFalse(image.exists())
