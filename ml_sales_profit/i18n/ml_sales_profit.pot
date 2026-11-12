@@ -1181,6 +1181,8 @@ msgid "Tax"
 msgstr ""
 
 #. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_tax_rate
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_tax_rate
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.res_config_settings_view_form
 msgid "Tax Rate (%)"
 msgstr ""
