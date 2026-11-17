@@ -21,7 +21,8 @@
         <field name="context">{'default_is_product_supplier': True}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Register your first supplier</p>
-            <p>Suppliers can be assigned to products and grouped in purchase reports.</p>
+            <p
+            >Suppliers can be assigned to products and grouped in purchase reports.</p>
         </field>
     </record>
 </odoo>

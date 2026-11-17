@@ -10,9 +10,7 @@ class PurchaseRequirementReportWizard(models.TransientModel):
     _name = "purchase.requirement.report.wizard"
     _description = "Purchase Requirement Report"
 
-    report_date = fields.Date(
-        string="Report Date", required=True, default=fields.Date.context_today
-    )
+    report_date = fields.Date(required=True, default=fields.Date.context_today)
     line_ids = fields.One2many(
         comodel_name="purchase.requirement.report.line",
         inverse_name="wizard_id",
@@ -102,12 +100,12 @@ class PurchaseRequirementReportLine(models.TransientModel):
     quantity = fields.Float(
         string="Quantity to Purchase", digits=(16, 0), required=True, readonly=True
     )
-    unit_cost = fields.Monetary(string="Unit Cost", required=True, readonly=True)
-    currency_id = fields.Many2one(
-        related="product_id.cost_currency_id", string="Currency", readonly=True
-    )
+    unit_cost = fields.Monetary(required=True, readonly=True)
+    currency_id = fields.Many2one(related="product_id.cost_currency_id", readonly=True)
     subtotal = fields.Monetary(
-        string="Estimated Total", compute="_compute_subtotal", currency_field="currency_id"
+        string="Estimated Total",
+        compute="_compute_subtotal",
+        currency_field="currency_id",
     )
 
     @api.depends("quantity", "unit_cost")
