@@ -43,6 +43,9 @@ you earned with each product.
   product, listing type and month.
 - **Excel reports**: download the same summaries the original scripts
   produced ("Resumo_Estoque", "Resumo_Financeiro" and "Saídas").
+- **Purchase requirements**: register product suppliers and generate a
+  PDF, grouped by supplier, with the quantities needed to restore
+  minimum stock.
 
 **Table of contents**
 
@@ -95,6 +98,15 @@ not change stock.
 2. Go to *ML Sales Profit > Imports > Statements*, upload it and click
    *Process*.
 3. Write a note for each outflow and download the Excel report.
+
+**Prepare purchases**
+
+1. Register contacts in *Records > Suppliers*.
+2. Select the preferred supplier and minimum stock on each product.
+3. Go to *Purchases > Purchase Requirement* to review products below
+   minimum stock. Products without a supplier are identified separately.
+4. Click *Generate PDF* to create one purchase section for each
+   supplier.
 
 Known issues / Roadmap
 ======================

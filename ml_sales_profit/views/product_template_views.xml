@@ -18,6 +18,7 @@
                 <field name="ml_manufacturer_code" optional="show" />
                 <field name="barcode" string="EAN" optional="show" />
                 <field name="ml_ncm" optional="show" />
+                <field name="preferred_supplier_id" optional="show" />
                 <field
                     name="standard_price"
                     string="Cost"
@@ -26,6 +27,7 @@
                 />
                 <field name="ml_stock_qty" sum="Total" />
                 <field name="ml_min_stock_qty" optional="hide" />
+                <field name="purchase_requirement_qty" optional="hide" />
                 <field
                     name="ml_stock_difference"
                     decoration-danger="ml_stock_difference &lt; 0"
@@ -75,6 +77,8 @@
                             <field name="ml_tax_rate" />
                             <field name="ml_stock_qty" />
                             <field name="ml_min_stock_qty" />
+                            <field name="preferred_supplier_id" />
+                            <field name="purchase_requirement_qty" />
                             <field
                                 name="ml_stock_difference"
                                 decoration-danger="ml_stock_difference &lt; 0"

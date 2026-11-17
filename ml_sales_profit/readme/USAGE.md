@@ -28,3 +28,11 @@ restored. Sales without a registered listing do not change stock.
 2. Go to *ML Sales Profit > Imports > Statements*, upload it and click
    *Process*.
 3. Write a note for each outflow and download the Excel report.
+
+**Prepare purchases**
+
+1. Register contacts in *Records > Suppliers*.
+2. Select the preferred supplier and minimum stock on each product.
+3. Go to *Purchases > Purchase Requirement* to review products below minimum
+   stock. Products without a supplier are identified separately.
+4. Click *Generate PDF* to create one purchase section for each supplier.

@@ -35,6 +35,19 @@ class ProductTemplate(models.Model):
         store=True,
         currency_field="currency_id",
     )
+    preferred_supplier_id = fields.Many2one(
+        comodel_name="res.partner",
+        string="Preferred Supplier",
+        domain="[('is_product_supplier', '=', True)]",
+        help="Supplier that should receive the purchase requirement for this product.",
+    )
+    purchase_requirement_qty = fields.Float(
+        string="Quantity to Purchase",
+        digits=(16, 0),
+        compute="_compute_purchase_requirement_qty",
+        store=True,
+        help="Quantity required to restore the minimum stock level.",
+    )
     ml_listing_ids = fields.One2many(
         comodel_name="ml.listing",
         inverse_name="product_tmpl_id",
@@ -60,6 +73,13 @@ class ProductTemplate(models.Model):
         for product in self:
             product.ml_stock_difference = (
                 product.ml_stock_qty - product.ml_min_stock_qty
+            )
+
+    @api.depends("ml_stock_qty", "ml_min_stock_qty")
+    def _compute_purchase_requirement_qty(self):
+        for product in self:
+            product.purchase_requirement_qty = max(
+                product.ml_min_stock_qty - product.ml_stock_qty, 0.0
             )
 
     @api.depends("ml_stock_qty", "product_variant_ids.standard_price")

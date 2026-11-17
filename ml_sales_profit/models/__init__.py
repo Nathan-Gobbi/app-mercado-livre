@@ -1,5 +1,6 @@
 from . import res_company
 from . import res_config_settings
+from . import res_partner
 from . import product_template
 from . import ml_product_image
 from . import ml_listing
