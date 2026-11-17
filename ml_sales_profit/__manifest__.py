@@ -3,7 +3,7 @@
 {
     "name": "Mercado Livre Sales Profit",
     "summary": "Import Mercado Livre sales and statements to analyze profit",
-    "version": "18.0.1.1.0",
+    "version": "18.0.2.0.0",
     "category": "Sales",
     "website": "https://github.com/Nathan-Gobbi/app-mercado-livre",
     "author": "Nathan Gobbi",
@@ -18,6 +18,8 @@
         "security/ml_sales_profit_security.xml",
         "security/ir.model.access.csv",
         "data/ml_statement_excluded_type_data.xml",
+        "report/purchase_requirement_report.xml",
+        "views/res_partner_views.xml",
         "views/product_template_views.xml",
         "views/ml_listing_views.xml",
         "views/ml_sale_line_views.xml",
@@ -25,6 +27,7 @@
         "views/ml_statement_views.xml",
         "views/res_config_settings_views.xml",
         "wizards/ml_stock_import_wizard_views.xml",
+        "wizards/purchase_requirement_report_wizard_views.xml",
         "views/menus.xml",
     ],
 }

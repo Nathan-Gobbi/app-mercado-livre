@@ -1404,3 +1404,127 @@ msgstr "Sequência"
 msgid "Write the product description..."
 msgstr "Escreva a descrição do produto..."
 
+#. module: ml_sales_profit
+msgid "Preferred Supplier"
+msgstr "Fornecedor preferencial"
+
+#. module: ml_sales_profit
+msgid "Product Supplier"
+msgstr "Fornecedor de produtos"
+
+#. module: ml_sales_profit
+msgid "Supplier"
+msgstr "Fornecedor"
+
+#. module: ml_sales_profit
+msgid "Suppliers"
+msgstr "Fornecedores"
+
+#. module: ml_sales_profit
+msgid "Purchases"
+msgstr "Compras"
+
+#. module: ml_sales_profit
+msgid "Purchase Requirement"
+msgstr "Necessidade de compra"
+
+#. module: ml_sales_profit
+msgid "Purchase Requirement by Supplier"
+msgstr "Necessidade de compra por fornecedor"
+
+#. module: ml_sales_profit
+msgid "Purchase Requirement Report"
+msgstr "Relatório de necessidade de compra"
+
+#. module: ml_sales_profit
+msgid "Purchase Requirement Report Line"
+msgstr "Linha do relatório de necessidade de compra"
+
+#. module: ml_sales_profit
+msgid "Products to Purchase"
+msgstr "Produtos para comprar"
+
+#. module: ml_sales_profit
+msgid "Products Without Supplier"
+msgstr "Produtos sem fornecedor"
+
+#. module: ml_sales_profit
+msgid "Quantity to Purchase"
+msgstr "Quantidade a comprar"
+
+#. module: ml_sales_profit
+msgid "Current Stock"
+msgstr "Estoque atual"
+
+#. module: ml_sales_profit
+msgid "Report Date"
+msgstr "Data do relatório"
+
+#. module: ml_sales_profit
+msgid "Unit Cost"
+msgstr "Custo unitário"
+
+#. module: ml_sales_profit
+msgid "Estimated Total"
+msgstr "Total estimado"
+
+#. module: ml_sales_profit
+msgid "Generate PDF"
+msgstr "Gerar PDF"
+
+#. module: ml_sales_profit
+msgid "Register your first supplier"
+msgstr "Cadastre seu primeiro fornecedor"
+
+#. module: ml_sales_profit
+msgid "Suppliers can be assigned to products and grouped in purchase reports."
+msgstr "Fornecedores podem ser vinculados aos produtos e agrupados nos relatórios de compra."
+
+#. module: ml_sales_profit
+msgid "Enable this option to make the contact available as a product supplier."
+msgstr "Ative esta opção para disponibilizar o contato como fornecedor de produtos."
+
+#. module: ml_sales_profit
+msgid "Supplier that should receive the purchase requirement for this product."
+msgstr "Fornecedor que deve receber a necessidade de compra deste produto."
+
+#. module: ml_sales_profit
+msgid "Quantity required to restore the minimum stock level."
+msgstr "Quantidade necessária para restabelecer o estoque mínimo."
+
+#. module: ml_sales_profit
+msgid "There are no products below minimum stock with a preferred supplier to include in the report."
+msgstr "Não há produtos abaixo do estoque mínimo com fornecedor preferencial para incluir no relatório."
+
+#. module: ml_sales_profit
+msgid "Current"
+msgstr "Atual"
+
+#. module: ml_sales_profit
+msgid "Minimum"
+msgstr "Mínimo"
+
+#. module: ml_sales_profit
+msgid "Purchase"
+msgstr "Comprar"
+
+#. module: ml_sales_profit
+msgid "<strong>Date:</strong>"
+msgstr "<strong>Data:</strong>"
+
+#. module: ml_sales_profit
+msgid "<strong>Email:</strong>"
+msgstr "<strong>E-mail:</strong>"
+
+#. module: ml_sales_profit
+msgid "<strong>Phone:</strong>"
+msgstr "<strong>Telefone:</strong>"
+
+#. module: ml_sales_profit
+msgid "<strong>Supplier:</strong>"
+msgstr "<strong>Fornecedor:</strong>"
+
+#. module: ml_sales_profit
+msgid "These products are below minimum stock but will not appear in the PDF until a preferred supplier is assigned."
+msgstr "Estes produtos estão abaixo do estoque mínimo, mas não aparecerão no PDF até que um fornecedor preferencial seja definido."
+

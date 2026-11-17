@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Nathan Gobbi
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="res_partner_view_form_supplier" model="ir.ui.view">
+        <field name="name">res.partner.form.product.supplier</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="is_product_supplier" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_partner_supplier_action" model="ir.actions.act_window">
+        <field name="name">Suppliers</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="domain">[('is_product_supplier', '=', True)]</field>
+        <field name="context">{'default_is_product_supplier': True}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Register your first supplier</p>
+            <p>Suppliers can be assigned to products and grouped in purchase reports.</p>
+        </field>
+    </record>
+</odoo>

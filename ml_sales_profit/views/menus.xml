@@ -26,6 +26,13 @@
         sequence="20"
     />
     <menuitem
+        id="menu_suppliers"
+        name="Suppliers"
+        parent="menu_records"
+        action="res_partner_supplier_action"
+        sequence="25"
+    />
+    <menuitem
         id="menu_stock_import"
         name="Import Stock Spreadsheet"
         parent="menu_records"
@@ -47,6 +54,15 @@
         parent="menu_imports"
         action="ml_statement_import_action"
         sequence="20"
+    />
+
+    <menuitem id="menu_purchases" name="Purchases" parent="menu_root" sequence="25" />
+    <menuitem
+        id="menu_purchase_requirement_report"
+        name="Purchase Requirement"
+        parent="menu_purchases"
+        action="purchase_requirement_report_wizard_action"
+        sequence="10"
     />
 
     <menuitem id="menu_analysis" name="Analysis" parent="menu_root" sequence="30" />

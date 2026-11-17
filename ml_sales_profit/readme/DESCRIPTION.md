@@ -19,3 +19,5 @@ earned with each product.
   listing type and month.
 - **Excel reports**: download the same summaries the original scripts
   produced ("Resumo_Estoque", "Resumo_Financeiro" and "Saídas").
+- **Purchase requirements**: register product suppliers and generate a PDF,
+  grouped by supplier, with the quantities needed to restore minimum stock.
