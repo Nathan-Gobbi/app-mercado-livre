@@ -60,20 +60,24 @@
                             <field name="name" placeholder="e.g. Fox Float shock kit" />
                         </h1>
                     </div>
-                    <group name="identification" string="Identification" col="4">
-                        <field name="default_code" string="SKU" />
-                        <field name="ml_manufacturer_code" />
-                        <field name="barcode" string="EAN" />
-                        <field name="ml_ncm" />
+                    <group>
+                        <group name="identification" string="Identification">
+                            <field name="default_code" string="SKU" />
+                            <field name="ml_manufacturer_code" />
+                            <field name="barcode" string="EAN" />
+                            <field name="ml_ncm" />
+                        </group>
+                        <group name="cost" string="Cost">
+                            <field
+                                name="standard_price"
+                                string="Cost"
+                                widget="monetary"
+                                options="{'currency_field': 'cost_currency_id'}"
+                            />
+                            <field name="ml_tax_rate" />
+                        </group>
                     </group>
-                    <group name="stock" string="Cost and Stock" col="4">
-                        <field
-                            name="standard_price"
-                            string="Cost"
-                            widget="monetary"
-                            options="{'currency_field': 'cost_currency_id'}"
-                        />
-                        <field name="ml_tax_rate" />
+                    <group name="stock" string="Stock">
                         <field name="ml_stock_qty" />
                         <field name="ml_min_stock_qty" />
                         <field name="preferred_supplier_id" />
