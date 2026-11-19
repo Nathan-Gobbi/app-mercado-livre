@@ -16,8 +16,6 @@
                 <field name="default_code" string="SKU" />
                 <field name="name" string="Product" />
                 <field name="ml_manufacturer_code" optional="show" />
-                <field name="barcode" string="EAN" optional="show" />
-                <field name="ml_ncm" optional="show" />
                 <field name="preferred_supplier_id" optional="show" />
                 <field
                     name="standard_price"
@@ -78,13 +76,13 @@
                         </group>
                     </group>
                     <group name="stock" string="Stock">
-                        <field name="ml_stock_qty" />
-                        <field name="ml_min_stock_qty" />
                         <field name="preferred_supplier_id" />
-                        <field name="purchase_requirement_qty" />
-                        <field
-                            name="ml_stock_difference"
-                            decoration-danger="ml_stock_difference &lt; 0"
+                        <field name="ml_stock_qty" />
+                        <field name="ml_min_stock_qty" />                        
+                        <field 
+                            name="ml_stock_difference" 
+                            decoration-danger="ml_stock_difference &lt; 0" 
+                            decoration-success="ml_stock_difference &gt; 0"
                         />
                         <field name="ml_stock_value" />
                     </group>

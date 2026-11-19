@@ -952,7 +952,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__preferred_supplier_id
 #: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__preferred_supplier_id
 msgid "Preferred Supplier"
-msgstr "Fornecedor preferencial"
+msgstr "Fornecedor"
 
 #. module: ml_sales_profit
 #: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_listing__listing_type__premium
@@ -1373,7 +1373,7 @@ msgstr "Diferença Estoque"
 #: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_stock_value
 #: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_stock_value
 msgid "Stock Value"
-msgstr "Valor"
+msgstr "Valor Total"
 
 #. module: ml_sales_profit
 #: model:ir.model.fields,help:ml_sales_profit.field_product_product__ml_stock_difference
