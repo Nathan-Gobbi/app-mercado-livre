@@ -1,6 +1,9 @@
 # Copyright 2026 Nathan Gobbi
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from psycopg2 import IntegrityError
+
 from odoo.exceptions import UserError
+from odoo.tools import mute_logger
 
 from .common import MlSalesProfitCase, stock_file, xlsx
 
@@ -131,6 +134,12 @@ class TestStockImport(MlSalesProfitCase):
             ),
             1,
         )
+
+    def test_duplicate_sku_is_rejected(self):
+        with mute_logger("odoo.sql_db"), self.assertRaises(IntegrityError):
+            self.env["product.template"].create(
+                {"name": "Duplicate product", "default_code": "TST001"}
+            )
 
     def test_cost_taken_from_formula(self):
         # Color variants leave the cost empty and use the cost of the first
