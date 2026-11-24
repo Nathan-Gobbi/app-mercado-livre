@@ -2,6 +2,7 @@ from . import res_company
 from . import res_config_settings
 from . import res_partner
 from . import product_template
+from . import purchase_requirement_order
 from . import ml_product_image
 from . import ml_listing
 from . import ml_import_mixin

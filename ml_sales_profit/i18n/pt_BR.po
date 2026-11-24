@@ -44,8 +44,8 @@ msgstr "%(products)s produtos e %(listings)s anúncios importados."
 
 #. module: ml_sales_profit
 #: model:ir.actions.report,print_report_name:ml_sales_profit.action_purchase_requirement_report
-msgid "'Purchase requirement - %s' % object.report_date"
-msgstr "'Necessidade de compra - %s' % object.report_date"
+msgid "'Purchase order - %s' % object.name"
+msgstr ""
 
 #. module: ml_sales_profit
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_sale_line__revenue_ml
@@ -87,6 +87,12 @@ msgstr ""
 "                tipo de anúncio (Premium ou Clássico) de um produto."
 
 #. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/purchase_requirement_order.py:0
+msgid "A product can only appear once in an order."
+msgstr "Um produto só pode aparecer uma vez no pedido."
+
+#. module: ml_sales_profit
 #: model:ir.model.constraint,message:ml_sales_profit.constraint_ml_listing_product_type_uniq
 msgid "A product can only have one listing of each type."
 msgstr "Um produto só pode ter um anúncio de cada tipo."
@@ -95,6 +101,7 @@ msgstr "Um produto só pode ter um anúncio de cada tipo."
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_needaction
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_needaction
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_needaction
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__message_needaction
 msgid "Action Needed"
 msgstr "Ação necessária"
 
@@ -103,6 +110,32 @@ msgstr "Ação necessária"
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_excluded_type__active
 msgid "Active"
 msgstr "Ativo"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/purchase_requirement_order.py:0
+msgid "Add at least one product before starting the order."
+msgstr "Adicione pelo menos um produto antes de iniciar o pedido."
 
 #. module: ml_sales_profit
 #: model:res.groups,name:ml_sales_profit.group_ml_manager
@@ -141,6 +174,7 @@ msgstr "Arquivado"
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_attachment_count
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_attachment_count
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_attachment_count
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__message_attachment_count
 msgid "Attachment Count"
 msgstr "Contagem de anexos"
 
@@ -151,7 +185,7 @@ msgstr "Abaixo do estoque mínimo"
 
 #. module: ml_sales_profit
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_stock_import_wizard_view_form
-#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_report_wizard_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_create_wizard_view_form
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -175,8 +209,24 @@ msgstr "Empresas"
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__company_id
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__company_id
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__company_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__company_id
 msgid "Company"
 msgstr "Empresa"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_view_form
+msgid "Complete Order"
+msgstr "Concluir pedido"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_view_form
+msgid "Completing the order will add its quantities to stock. Continue?"
+msgstr "Ao concluir o pedido, as quantidades serão adicionadas ao estoque. Continuar?"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__completion_date
+msgid "Completion Date"
+msgstr "Data de conclusão"
 
 #. module: ml_sales_profit
 #: model:ir.model,name:ml_sales_profit.model_res_config_settings
@@ -201,16 +251,6 @@ msgid "Cost"
 msgstr "Custo"
 
 #. module: ml_sales_profit
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_line__currency_id
-msgid "Cost Currency"
-msgstr "Moeda do custo"
-
-#. module: ml_sales_profit
-#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
-msgid "Cost and Stock"
-msgstr "Custo e estoque"
-
-#. module: ml_sales_profit
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_listing__standard_price
 msgid "Cost of the product."
 msgstr "Custo do produto."
@@ -225,6 +265,16 @@ msgid ""
 msgstr ""
 "Não foi possível ler a planilha. O arquivo é .xlsx?\n"
 "%s"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_create_wizard_view_form
+msgid "Create Order"
+msgstr "Criar pedido"
+
+#. module: ml_sales_profit
+#: model:ir.model,name:ml_sales_profit.model_purchase_requirement_order_create_wizard
+msgid "Create Purchase Order"
+msgstr "Criar pedido de compra"
 
 #. module: ml_sales_profit
 #: model_terms:ir.actions.act_window,help:ml_sales_profit.product_template_action
@@ -244,8 +294,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__create_uid
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__create_uid
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_stock_import_wizard__create_uid
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_line__create_uid
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_wizard__create_uid
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__create_uid
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_create_wizard__create_uid
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__create_uid
 msgid "Created by"
 msgstr "Criado por"
 
@@ -258,8 +309,9 @@ msgstr "Criado por"
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__create_date
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__create_date
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_stock_import_wizard__create_date
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_line__create_date
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_wizard__create_date
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__create_date
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_create_wizard__create_date
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__create_date
 msgid "Created on"
 msgstr "Criado em"
 
@@ -275,6 +327,8 @@ msgstr "Créditos"
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__currency_id
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__currency_id
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__currency_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__currency_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__currency_id
 msgid "Currency"
 msgstr "Moeda"
 
@@ -284,7 +338,7 @@ msgid "Current"
 msgstr "Atual"
 
 #. module: ml_sales_profit
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_line__current_stock_qty
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__current_stock_qty
 msgid "Current Stock"
 msgstr "Estoque atual"
 
@@ -341,10 +395,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__display_name
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__display_name
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_stock_import_wizard__display_name
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_line__display_name
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_wizard__display_name
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__display_name
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_create_wizard__display_name
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__display_name
 msgid "Display Name"
 msgstr "Nome exibido"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__purchase_requirement_order__state__done
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_view_search
+msgid "Done"
+msgstr "Concluído"
 
 #. module: ml_sales_profit
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_form
@@ -378,15 +439,16 @@ msgstr ""
 #: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_import_mixin__state__draft
 #: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_sale_import__state__draft
 #: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_statement_import__state__draft
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__purchase_requirement_order__state__draft
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_search
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_import_view_search
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_view_search
 msgid "Draft"
 msgstr "Rascunho"
 
 #. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__barcode
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
-#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_list
 msgid "EAN"
 msgstr "EAN"
 
@@ -407,9 +469,7 @@ msgstr ""
 "Ative esta opção para disponibilizar o contato como fornecedor de produtos."
 
 #. module: ml_sales_profit
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_line__subtotal
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_report
-#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_report_wizard_view_form
 msgid "Estimated Total"
 msgstr "Total estimado"
 
@@ -436,6 +496,7 @@ msgstr "Saldo final"
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_follower_ids
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_follower_ids
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_follower_ids
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__message_follower_ids
 msgid "Followers"
 msgstr "Seguidores"
 
@@ -443,8 +504,14 @@ msgstr "Seguidores"
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_partner_ids
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_partner_ids
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_partner_ids
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__message_partner_ids
 msgid "Followers (Partners)"
 msgstr "Seguidores (parceiros)"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_purchase_requirement_order__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
 
 #. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_image_ids
@@ -453,7 +520,7 @@ msgid "Gallery Images"
 msgstr "Imagens da galeria"
 
 #. module: ml_sales_profit
-#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_report_wizard_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_view_form
 msgid "Generate PDF"
 msgstr "Gerar PDF"
 
@@ -475,6 +542,7 @@ msgstr "Lucro bruto"
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__has_message
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__has_message
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__has_message
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__has_message
 msgid "Has Message"
 msgstr "Tem mensagem"
 
@@ -487,10 +555,21 @@ msgstr "Tem mensagem"
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__id
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__id
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_stock_import_wizard__id
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_line__id
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_wizard__id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_create_wizard__id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__id
 msgid "ID"
 msgstr "ID"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_purchase_requirement_order__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
 
 #. module: ml_sales_profit
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
@@ -501,6 +580,7 @@ msgstr "Identificação"
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_import_mixin__message_needaction
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_sale_import__message_needaction
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_statement_import__message_needaction
+#: model:ir.model.fields,help:ml_sales_profit.field_purchase_requirement_order__message_needaction
 msgid "If checked, new messages require your attention."
 msgstr "Se marcado, novas mensagens exigem sua atenção."
 
@@ -508,6 +588,7 @@ msgstr "Se marcado, novas mensagens exigem sua atenção."
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_import_mixin__message_has_error
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_sale_import__message_has_error
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_statement_import__message_has_error
+#: model:ir.model.fields,help:ml_sales_profit.field_purchase_requirement_order__message_has_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Se marcado, algumas mensagens têm erro de entrega."
 
@@ -563,6 +644,12 @@ msgid "Imports"
 msgstr "Importações"
 
 #. module: ml_sales_profit
+#: model:ir.model.fields.selection,name:ml_sales_profit.selection__purchase_requirement_order__state__progress
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_view_search
+msgid "In Progress"
+msgstr "Em andamento"
+
+#. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__initial_balance
 msgid "Initial Balance"
 msgstr "Saldo inicial"
@@ -571,6 +658,7 @@ msgstr "Saldo inicial"
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_is_follower
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_is_follower
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_is_follower
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__message_is_follower
 msgid "Is Follower"
 msgstr "É seguidor"
 
@@ -583,8 +671,9 @@ msgstr "É seguidor"
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__write_uid
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__write_uid
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_stock_import_wizard__write_uid
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_line__write_uid
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_wizard__write_uid
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__write_uid
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_create_wizard__write_uid
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__write_uid
 msgid "Last Updated by"
 msgstr "Última atualização por"
 
@@ -597,16 +686,45 @@ msgstr "Última atualização por"
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__write_date
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__write_date
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_stock_import_wizard__write_date
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_line__write_date
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_wizard__write_date
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__write_date
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_create_wizard__write_date
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__write_date
 msgid "Last Updated on"
 msgstr "Última atualização em"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_create_wizard_view_form
+msgid "Leave empty to create without a supplier"
+msgstr "Deixe vazio para criar sem fornecedor"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_purchase_requirement_order_create_wizard__supplier_id
+msgid "Leave empty to start an order without a supplier."
+msgstr "Deixe vazio para iniciar um pedido sem fornecedor."
 
 #. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__line_count
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__line_count
 msgid "Line Count"
 msgstr "Quantidade"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/purchase_requirement_order.py:0
+msgid "Lines can only be added while the order is draft."
+msgstr "As linhas só podem ser adicionadas enquanto o pedido estiver em rascunho."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/purchase_requirement_order.py:0
+msgid "Lines can only be changed while the order is draft."
+msgstr "As linhas só podem ser alteradas enquanto o pedido estiver em rascunho."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/purchase_requirement_order.py:0
+msgid "Lines can only be removed while the order is draft."
+msgstr "As linhas só podem ser removidas enquanto o pedido estiver em rascunho."
 
 #. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__listing_id
@@ -734,6 +852,7 @@ msgstr "Código da Nomenclatura Comum do Mercosul."
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_has_error
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_has_error
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_has_error
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__message_has_error
 msgid "Message Delivery error"
 msgstr "Erro na entrega da mensagem"
 
@@ -741,6 +860,7 @@ msgstr "Erro na entrega da mensagem"
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_ids
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_ids
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_ids
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__message_ids
 msgid "Messages"
 msgstr "Mensagens"
 
@@ -752,7 +872,7 @@ msgstr "Mínimo"
 #. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_min_stock_qty
 #: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_min_stock_qty
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_line__minimum_stock_qty
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__minimum_stock_qty
 msgid "Minimum Stock"
 msgstr "Estoque mínimo"
 
@@ -761,6 +881,11 @@ msgstr "Estoque mínimo"
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_line_view_search
 msgid "Month"
 msgstr "Mês"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
 
 #. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__ncm
@@ -814,6 +939,34 @@ msgid "Net profit over the sale price."
 msgstr "Lucro líquido sobre o preço de venda."
 
 #. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/purchase_requirement_order.py:0
+msgid "New"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.actions.act_window,name:ml_sales_profit.purchase_requirement_report_wizard_action
+#: model:ir.ui.menu,name:ml_sales_profit.menu_purchase_requirement_order_new
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_create_wizard_view_form
+msgid "New Purchase Order"
+msgstr "Novo pedido de compra"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: ml_sales_profit
 #: model_terms:ir.actions.act_window,help:ml_sales_profit.ml_statement_excluded_type_action
 msgid "No ignored types"
 msgstr "Nenhum tipo ignorado"
@@ -845,6 +998,7 @@ msgstr "Observação"
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_needaction_counter
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_needaction_counter
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_needaction_counter
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__message_needaction_counter
 msgid "Number of Actions"
 msgstr "Número de ações"
 
@@ -852,6 +1006,7 @@ msgstr "Número de ações"
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__message_has_error_counter
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__message_has_error_counter
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__message_has_error_counter
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__message_has_error_counter
 msgid "Number of errors"
 msgstr "Número de erros"
 
@@ -859,6 +1014,7 @@ msgstr "Número de erros"
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_import_mixin__message_needaction_counter
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_sale_import__message_needaction_counter
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_statement_import__message_needaction_counter
+#: model:ir.model.fields,help:ml_sales_profit.field_purchase_requirement_order__message_needaction_counter
 msgid "Number of messages requiring action"
 msgstr "Número de mensagens que exigem ação"
 
@@ -866,6 +1022,7 @@ msgstr "Número de mensagens que exigem ação"
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_import_mixin__message_has_error_counter
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_sale_import__message_has_error_counter
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_statement_import__message_has_error_counter
+#: model:ir.model.fields,help:ml_sales_profit.field_purchase_requirement_order__message_has_error_counter
 msgid "Number of messages with delivery error"
 msgstr "Número de mensagens com erro de entrega"
 
@@ -873,6 +1030,35 @@ msgstr "Número de mensagens com erro de entrega"
 #: model:ir.model.fields.selection,name:ml_sales_profit.selection__ml_sale_line__profit_status__ok
 msgid "OK"
 msgstr "OK"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/purchase_requirement_order.py:0
+msgid "Only draft purchase orders can be deleted."
+msgstr "Somente pedidos de compra em rascunho podem ser excluídos."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/purchase_requirement_order.py:0
+msgid "Only orders in progress can be completed."
+msgstr "Somente pedidos em andamento podem ser concluídos."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/purchase_requirement_order.py:0
+msgid "Only orders in progress can be printed."
+msgstr "Somente pedidos em andamento podem ser impressos."
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__order_id
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_view_form
+msgid "Order"
+msgstr "Pedido"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__order_date
+msgid "Order Date"
+msgstr "Data do pedido"
 
 #. module: ml_sales_profit
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_search
@@ -1006,7 +1192,7 @@ msgstr "Processado"
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__product_tmpl_id
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_product_image__product_tmpl_id
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__product_tmpl_id
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_line__product_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__product_id
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_listing_view_form
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_listing_view_search
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_search
@@ -1035,17 +1221,12 @@ msgstr "Fornecedor de produtos"
 
 #. module: ml_sales_profit
 #: model:ir.actions.act_window,name:ml_sales_profit.product_template_action
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__line_ids
 #: model:ir.ui.menu,name:ml_sales_profit.menu_products
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_list
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_search
 msgid "Products"
 msgstr "Produtos"
-
-#. module: ml_sales_profit
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_wizard__missing_supplier_product_ids
-#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_report_wizard_view_form
-msgid "Products Without Supplier"
-msgstr "Produtos sem fornecedor"
 
 #. module: ml_sales_profit
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_stock_import_wizard_view_form
@@ -1059,11 +1240,6 @@ msgstr ""
 "                    os existentes são atualizados e os novos são criados. "
 "Imposto e\n"
 "                    lucro são calculados pelo Odoo."
-
-#. module: ml_sales_profit
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_wizard__line_ids
-msgid "Products to Purchase"
-msgstr "Produtos para comprar"
 
 #. module: ml_sales_profit
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.res_config_settings_view_form
@@ -1088,32 +1264,54 @@ msgid "Purchase"
 msgstr "Comprar"
 
 #. module: ml_sales_profit
-#: model:ir.actions.act_window,name:ml_sales_profit.purchase_requirement_report_wizard_action
-#: model:ir.ui.menu,name:ml_sales_profit.menu_purchase_requirement_report
-#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_report
-#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_report_wizard_view_form
-msgid "Purchase Requirement"
-msgstr "Necessidade de compra"
-
-#. module: ml_sales_profit
-#: model:ir.model,name:ml_sales_profit.model_purchase_requirement_report_wizard
-msgid "Purchase Requirement Report"
-msgstr "Relatório de necessidade de compra"
-
-#. module: ml_sales_profit
-#: model:ir.model,name:ml_sales_profit.model_purchase_requirement_report_line
-msgid "Purchase Requirement Report Line"
-msgstr "Linha do relatório de necessidade de compra"
-
-#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/wizards/purchase_requirement_order_create_wizard.py:0
 #: model:ir.actions.report,name:ml_sales_profit.action_purchase_requirement_report
-msgid "Purchase Requirement by Supplier"
-msgstr "Necessidade de compra por fornecedor"
+#: model:ir.model,name:ml_sales_profit.model_purchase_requirement_order
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_report
+msgid "Purchase Order"
+msgstr "Pedido de compra"
+
+#. module: ml_sales_profit
+#: model:ir.model,name:ml_sales_profit.model_purchase_requirement_order_line
+msgid "Purchase Order Line"
+msgstr "Linha do pedido de compra"
+
+#. module: ml_sales_profit
+#: model:ir.actions.act_window,name:ml_sales_profit.purchase_requirement_order_action
+#: model:ir.ui.menu,name:ml_sales_profit.menu_purchase_requirement_report
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_view_list
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_view_search
+msgid "Purchase Orders"
+msgstr "Pedidos de compra"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_view_form
+msgid "Purchase Suggestions"
+msgstr "Sugestões de compra"
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/purchase_requirement_order.py:0
+msgid "Purchase quantities must be greater than zero."
+msgstr "As quantidades de compra devem ser maiores que zero."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/purchase_requirement_order.py:0
+msgid "Purchase quantity must be greater than zero."
+msgstr "A quantidade de compra deve ser maior que zero."
 
 #. module: ml_sales_profit
 #: model:ir.ui.menu,name:ml_sales_profit.menu_purchases
 msgid "Purchases"
 msgstr "Compras"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__quantity
+msgid "Quantity"
+msgstr "Quantidade"
 
 #. module: ml_sales_profit
 #: model:ir.model.fields,help:ml_sales_profit.field_product_product__purchase_requirement_qty
@@ -1124,7 +1322,6 @@ msgstr "Quantidade necessária para restabelecer o estoque mínimo."
 #. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__purchase_requirement_qty
 #: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__purchase_requirement_qty
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_line__quantity
 msgid "Quantity to Purchase"
 msgstr "Quantidade a comprar"
 
@@ -1150,6 +1347,7 @@ msgstr "Cadastros"
 
 #. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_line__reference_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__name
 msgid "Reference"
 msgstr "Referência"
 
@@ -1167,11 +1365,6 @@ msgstr "Cadastre o seu primeiro produto"
 #: model_terms:ir.actions.act_window,help:ml_sales_profit.res_partner_supplier_action
 msgid "Register your first supplier"
 msgstr "Cadastre seu primeiro fornecedor"
-
-#. module: ml_sales_profit
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_wizard__report_date
-msgid "Report Date"
-msgstr "Data do relatório"
 
 #. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__report_file
@@ -1200,6 +1393,11 @@ msgid "Reset to Draft"
 msgstr "Voltar para rascunho"
 
 #. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__total_revenue
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__revenue
 msgid "Revenue"
@@ -1223,6 +1421,7 @@ msgstr "Origem da receita"
 #: code:addons/ml_sales_profit/models/ml_sale_import.py:0
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__default_code
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__sku
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__sku
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_search
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_list
@@ -1300,6 +1499,7 @@ msgstr "Resumo de vendas %s.xlsx"
 
 #. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_product_image__sequence
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__sequence
 msgid "Sequence"
 msgstr "Sequência"
 
@@ -1318,9 +1518,16 @@ msgid "Spreadsheet"
 msgstr "Planilha"
 
 #. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_view_form
+msgid "Start Order"
+msgstr "Iniciar pedido"
+
+#. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_import_mixin__state
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__state
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_statement_import__state
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__state
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__order_state
 msgid "State"
 msgstr "Situação"
 
@@ -1353,8 +1560,23 @@ msgid "Statements"
 msgstr "Extratos"
 
 #. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_view_search
+msgid "Status"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_purchase_requirement_order__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_stock_qty
 #: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_stock_qty
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
 msgid "Stock"
 msgstr "Estoque"
 
@@ -1390,12 +1612,20 @@ msgid "Stock spreadsheet imported"
 msgstr "Planilha de estoque importada"
 
 #. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__subtotal
+msgid "Subtotal"
+msgstr ""
+
+#. module: ml_sales_profit
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_form
 msgid "Summary"
 msgstr "Resumo"
 
 #. module: ml_sales_profit
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_line__supplier_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__supplier_id
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_create_wizard__supplier_id
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_view_search
 msgid "Supplier"
 msgstr "Fornecedor"
 
@@ -1465,25 +1695,6 @@ msgstr ""
 
 #. module: ml_sales_profit
 #. odoo-python
-#: code:addons/ml_sales_profit/wizards/purchase_requirement_report_wizard.py:0
-msgid ""
-"There are no products below minimum stock with a preferred supplier to "
-"include in the report."
-msgstr ""
-"Não há produtos abaixo do estoque mínimo com fornecedor preferencial para "
-"incluir no relatório."
-
-#. module: ml_sales_profit
-#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_report_wizard_view_form
-msgid ""
-"These products are below minimum stock but will not appear in\n"
-"                        the PDF until a preferred supplier is assigned."
-msgstr ""
-"Estes produtos estão abaixo do estoque mínimo, mas não aparecerão no PDF\n"
-"                        até que um fornecedor preferencial seja definido."
-
-#. module: ml_sales_profit
-#. odoo-python
 #: code:addons/ml_sales_profit/models/ml_statement_import.py:0
 msgid ""
 "This does not look like a Mercado Livre account statement: the columns %s "
@@ -1508,6 +1719,7 @@ msgid "This transaction type is already ignored."
 msgstr "Este tipo de transação já é ignorado."
 
 #. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order__amount_total
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_form
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_list
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_list
@@ -1515,6 +1727,8 @@ msgstr "Este tipo de transação já é ignorado."
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_import_view_list
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_statement_line_view_list
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_list
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_view_form
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_order_view_list
 msgid "Total"
 msgstr "Total"
 
@@ -1563,7 +1777,12 @@ msgid "Type"
 msgstr "Tipo"
 
 #. module: ml_sales_profit
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_line__unit_cost
+#: model:ir.model.fields,help:ml_sales_profit.field_purchase_requirement_order__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__unit_cost
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_report
 msgid "Unit Cost"
 msgstr "Custo unitário"
@@ -1681,9 +1900,9 @@ msgid "Without Note"
 msgstr "Sem observação"
 
 #. module: ml_sales_profit
-#: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_report_line__wizard_id
-msgid "Wizard"
-msgstr "Assistente"
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_report
+msgid "Without supplier"
+msgstr "Sem fornecedor"
 
 #. module: ml_sales_profit
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form

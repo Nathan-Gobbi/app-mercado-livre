@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Nathan Gobbi
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="purchase_requirement_order_view_list" model="ir.ui.view">
+        <field name="name">purchase.requirement.order.list</field>
+        <field name="model">purchase.requirement.order</field>
+        <field name="arch" type="xml">
+            <list string="Purchase Orders" create="0" default_order="id desc">
+                <field name="currency_id" column_invisible="True" />
+                <field name="name" />
+                <field name="order_date" />
+                <field name="supplier_id" />
+                <field name="amount_total" sum="Total" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-warning="state == 'progress'"
+                    decoration-success="state == 'done'"
+                />
+            </list>
+        </field>
+    </record>
+
+    <record id="purchase_requirement_order_view_form" model="ir.ui.view">
+        <field name="name">purchase.requirement.order.form</field>
+        <field name="model">purchase.requirement.order</field>
+        <field name="arch" type="xml">
+            <form string="Purchase Order">
+                <header>
+                    <button
+                        name="action_start"
+                        string="Start Order"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state != 'draft'"
+                    />
+                    <button
+                        name="action_print"
+                        string="Generate PDF"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state != 'progress'"
+                    />
+                    <button
+                        name="action_done"
+                        string="Complete Order"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state != 'progress'"
+                        confirm="Completing the order will add its quantities to stock. Continue?"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,progress,done"
+                    />
+                </header>
+                <sheet>
+                    <field name="company_id" invisible="True" />
+                    <field name="currency_id" invisible="True" />
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Supplier">
+                            <field name="supplier_id" readonly="state != 'draft'" />
+                        </group>
+                        <group string="Order">
+                            <field name="order_date" readonly="state != 'draft'" />
+                            <field name="completion_date" invisible="state != 'done'" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Purchase Suggestions" name="products">
+                            <field
+                                name="line_ids"
+                                nolabel="1"
+                                readonly="state != 'draft'"
+                            >
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle" />
+                                    <field name="order_state" column_invisible="True" />
+                                    <field name="currency_id" column_invisible="True" />
+                                    <field name="product_id" readonly="product_id" />
+                                    <field name="sku" readonly="True" optional="show" />
+                                    <field name="current_stock_qty" readonly="True" />
+                                    <field name="minimum_stock_qty" readonly="True" />
+                                    <field name="quantity" />
+                                    <field name="unit_cost" readonly="True" />
+                                    <field
+                                        name="subtotal"
+                                        readonly="True"
+                                        sum="Total"
+                                    />
+                                </list>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="amount_total" widget="monetary" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="purchase_requirement_order_view_search" model="ir.ui.view">
+        <field name="name">purchase.requirement.order.search</field>
+        <field name="model">purchase.requirement.order</field>
+        <field name="arch" type="xml">
+            <search string="Purchase Orders">
+                <field name="name" />
+                <field name="supplier_id" />
+                <filter
+                    name="draft"
+                    string="Draft"
+                    domain="[('state', '=', 'draft')]"
+                />
+                <filter
+                    name="progress"
+                    string="In Progress"
+                    domain="[('state', '=', 'progress')]"
+                />
+                <filter name="done" string="Done" domain="[('state', '=', 'done')]" />
+                <group>
+                    <filter
+                        name="group_supplier"
+                        string="Supplier"
+                        context="{'group_by': 'supplier_id'}"
+                    />
+                    <filter
+                        name="group_state"
+                        string="Status"
+                        context="{'group_by': 'state'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="purchase_requirement_order_action" model="ir.actions.act_window">
+        <field name="name">Purchase Orders</field>
+        <field name="res_model">purchase.requirement.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="purchase_requirement_order_view_search" />
+    </record>
+</odoo>
