@@ -1197,6 +1197,12 @@ msgid "Products"
 msgstr ""
 
 #. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/purchase_requirement_order.py:0
+msgid "Products must belong to the order supplier or have no supplier."
+msgstr ""
+
+#. module: ml_sales_profit
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_stock_import_wizard_view_form
 msgid ""
 "Products are matched by SKU and listings by SKU and type:\n"

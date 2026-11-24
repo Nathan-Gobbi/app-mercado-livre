@@ -1,6 +1,6 @@
 # Copyright 2026 Nathan Gobbi
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 from .common import MlSalesProfitCase
 
@@ -53,15 +53,44 @@ class TestPurchaseRequirementOrder(MlSalesProfitCase):
         order = self._create_order()
         self.assertFalse(order.supplier_id)
         self.assertFalse(order.line_ids)
-        line = self.env["purchase.requirement.order.line"].create(
-            {"order_id": order.id, "product_id": self.product.id, "quantity": 2}
+        unassigned_product = self.env["product.template"].create(
+            {"name": "Unassigned Product", "standard_price": 12}
         )
-        self.assertEqual(line.current_stock_qty, 3)
+        line = self.env["purchase.requirement.order.line"].create(
+            {
+                "order_id": order.id,
+                "product_id": unassigned_product.id,
+                "quantity": 2,
+            }
+        )
+        self.assertEqual(line.current_stock_qty, 0)
         self.assertEqual(line.unit_cost, 12)
         line.quantity = 3
         self.assertEqual(order.amount_total, 36)
         line.unlink()
         self.assertFalse(order.line_ids)
+
+    def test_product_must_match_order_supplier_or_be_unassigned(self):
+        other_supplier = self.env["res.partner"].create(
+            {"name": "Supplier B", "is_product_supplier": True}
+        )
+        other_product = self.env["product.template"].create(
+            {
+                "name": "Other Supplier Product",
+                "preferred_supplier_id": other_supplier.id,
+            }
+        )
+        unassigned_product = self.env["product.template"].create(
+            {"name": "Unassigned Product"}
+        )
+        order = self._create_order(self.supplier)
+        self.env["purchase.requirement.order.line"].create(
+            {"order_id": order.id, "product_id": unassigned_product.id}
+        )
+        with self.assertRaises(ValidationError):
+            self.env["purchase.requirement.order.line"].create(
+                {"order_id": order.id, "product_id": other_product.id}
+            )
 
     def test_progress_pdf_and_completion_update_stock_once(self):
         order = self._create_order(self.supplier)

@@ -63,6 +63,17 @@ class PurchaseRequirementOrder(models.Model):
         for order in self:
             order.amount_total = sum(order.line_ids.mapped("subtotal"))
 
+    @api.constrains("supplier_id", "line_ids")
+    def _check_line_suppliers(self):
+        if any(
+            not line._matches_order_supplier()
+            for order in self
+            for line in order.line_ids
+        ):
+            raise ValidationError(
+                _("Products must belong to the order supplier or have no supplier.")
+            )
+
     @api.model_create_multi
     def create(self, vals_list):
         for values in vals_list:
@@ -189,6 +200,19 @@ class PurchaseRequirementOrderLine(models.Model):
             )
             if duplicate:
                 raise ValidationError(_("A product can only appear once in an order."))
+
+    @api.constrains("product_id", "order_id")
+    def _check_product_supplier(self):
+        if any(not line._matches_order_supplier() for line in self):
+            raise ValidationError(
+                _("Products must belong to the order supplier or have no supplier.")
+            )
+
+    def _matches_order_supplier(self):
+        self.ensure_one()
+        product_supplier = self.product_id.preferred_supplier_id
+        order_supplier = self.order_id.supplier_id
+        return not product_supplier or product_supplier == order_supplier
 
     def write(self, values):
         if any(line.order_id.state != "draft" for line in self):

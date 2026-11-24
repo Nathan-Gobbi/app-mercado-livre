@@ -86,7 +86,11 @@
                                     <field name="sequence" widget="handle" />
                                     <field name="order_state" column_invisible="True" />
                                     <field name="currency_id" column_invisible="True" />
-                                    <field name="product_id" readonly="product_id" />
+                                    <field
+                                        name="product_id"
+                                        readonly="product_id"
+                                        domain="['|', ('preferred_supplier_id', '=', parent.supplier_id), ('preferred_supplier_id', '=', False)]"
+                                    />
                                     <field name="sku" readonly="True" optional="show" />
                                     <field name="current_stock_qty" readonly="True" />
                                     <field name="minimum_stock_qty" readonly="True" />
