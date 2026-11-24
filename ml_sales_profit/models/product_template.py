@@ -6,6 +6,14 @@ from odoo import api, fields, models
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
+    _sql_constraints = [
+        (
+            "default_code_uniq",
+            "unique(default_code)",
+            "The SKU must be unique. Another product already uses this SKU.",
+        )
+    ]
+
     ml_manufacturer_code = fields.Char(string="Manufacturer Code")
     ml_ncm = fields.Char(string="NCM", help="Mercosur Common Nomenclature code.")
     ml_tax_rate = fields.Float(
