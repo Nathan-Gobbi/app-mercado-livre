@@ -78,10 +78,10 @@
                     <group name="stock" string="Stock">
                         <field name="preferred_supplier_id" />
                         <field name="ml_stock_qty" />
-                        <field name="ml_min_stock_qty" />                        
-                        <field 
-                            name="ml_stock_difference" 
-                            decoration-danger="ml_stock_difference &lt; 0" 
+                        <field name="ml_min_stock_qty" />
+                        <field
+                            name="ml_stock_difference"
+                            decoration-danger="ml_stock_difference &lt; 0"
                             decoration-success="ml_stock_difference &gt; 0"
                         />
                         <field name="ml_stock_value" />
