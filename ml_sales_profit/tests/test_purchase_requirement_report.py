@@ -5,74 +5,87 @@ from odoo.exceptions import UserError
 from .common import MlSalesProfitCase
 
 
-class TestPurchaseRequirementReport(MlSalesProfitCase):
+class TestPurchaseRequirementOrder(MlSalesProfitCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.supplier_a = cls.env["res.partner"].create(
+        cls.supplier = cls.env["res.partner"].create(
             {"name": "Supplier A", "is_product_supplier": True}
         )
-        cls.supplier_b = cls.env["res.partner"].create(
-            {"name": "Supplier B", "is_product_supplier": True}
+        cls.product.write(
+            {
+                "ml_stock_qty": 3,
+                "ml_min_stock_qty": 8,
+                "preferred_supplier_id": cls.supplier.id,
+                "standard_price": 12,
+            }
         )
 
-    def _wizard(self):
-        return self.env["purchase.requirement.report.wizard"].create({})
+    def _create_order(self, supplier=None):
+        wizard = self.env["purchase.requirement.order.create.wizard"].create(
+            {"supplier_id": supplier.id if supplier else False}
+        )
+        action = wizard.action_create_order()
+        return self.env["purchase.requirement.order"].browse(action["res_id"])
 
     def test_quantity_to_purchase(self):
-        self.product.write({"ml_stock_qty": 3, "ml_min_stock_qty": 8})
         self.assertEqual(self.product.purchase_requirement_qty, 5)
         self.product.ml_stock_qty = 10
         self.assertEqual(self.product.purchase_requirement_qty, 0)
 
-    def test_products_are_grouped_by_supplier(self):
-        self.product.write(
+    def test_supplier_order_loads_only_required_products(self):
+        ignored = self.env["product.template"].create(
             {
-                "ml_stock_qty": 3,
-                "ml_min_stock_qty": 8,
-                "preferred_supplier_id": self.supplier_a.id,
+                "name": "Enough Stock",
+                "ml_stock_qty": 5,
+                "ml_min_stock_qty": 5,
+                "preferred_supplier_id": self.supplier.id,
             }
         )
-        second = self.env["product.template"].create(
-            {
-                "name": "Second Product",
-                "default_code": "TST002",
-                "standard_price": 20,
-                "ml_stock_qty": 1,
-                "ml_min_stock_qty": 4,
-                "preferred_supplier_id": self.supplier_b.id,
-            }
+        order = self._create_order(self.supplier)
+        self.assertEqual(order.supplier_id, self.supplier)
+        self.assertEqual(order.line_ids.product_id, self.product)
+        self.assertNotIn(ignored, order.line_ids.product_id)
+        self.assertEqual(order.line_ids.quantity, 5)
+        self.assertEqual(order.amount_total, 60)
+
+    def test_order_without_supplier_starts_empty_and_is_editable(self):
+        order = self._create_order()
+        self.assertFalse(order.supplier_id)
+        self.assertFalse(order.line_ids)
+        line = self.env["purchase.requirement.order.line"].create(
+            {"order_id": order.id, "product_id": self.product.id, "quantity": 2}
         )
-        wizard = self._wizard()
-        self.assertEqual(wizard.line_ids.mapped("product_id"), self.product | second)
-        groups = dict(wizard._supplier_groups())
-        self.assertEqual(groups[self.supplier_a].product_id, self.product)
-        self.assertEqual(groups[self.supplier_b].product_id, second)
-        action = wizard.action_print_report()
+        self.assertEqual(line.current_stock_qty, 3)
+        self.assertEqual(line.unit_cost, 12)
+        line.quantity = 3
+        self.assertEqual(order.amount_total, 36)
+        line.unlink()
+        self.assertFalse(order.line_ids)
+
+    def test_progress_pdf_and_completion_update_stock_once(self):
+        order = self._create_order(self.supplier)
+        order.line_ids.quantity = 2
+        order.action_start()
+        self.assertEqual(order.state, "progress")
+        action = order.action_print()
         self.assertTrue(action)
         report = self.env.ref("ml_sales_profit.action_purchase_requirement_report")
-        self.assertEqual(report.model, wizard._name)
-        html, _report_type = report._render_qweb_html(report.report_name, wizard.ids)
+        html, _report_type = report._render_qweb_html(report.report_name, order.ids)
         self.assertIn(b"Supplier A", html)
         self.assertIn(b"Fake Shock Kit", html)
-        self.assertIn(b"Supplier B", html)
-        self.assertIn(b"Second Product", html)
-
-    def test_product_without_supplier_is_reported(self):
-        self.product.write({"ml_stock_qty": 1, "ml_min_stock_qty": 2})
-        wizard = self._wizard()
-        self.assertIn(self.product, wizard.missing_supplier_product_ids)
-        self.assertNotIn(self.product, wizard.line_ids.product_id)
         with self.assertRaises(UserError):
-            wizard.action_print_report()
+            order.line_ids.quantity = 3
+        with self.assertRaises(UserError):
+            order.line_ids.unlink()
+        order.action_done()
+        self.assertEqual(order.state, "done")
+        self.assertEqual(self.product.ml_stock_qty, 5)
+        with self.assertRaises(UserError):
+            order.action_done()
+        self.assertEqual(self.product.ml_stock_qty, 5)
 
-    def test_product_at_minimum_is_ignored(self):
-        self.product.write(
-            {
-                "ml_stock_qty": 2,
-                "ml_min_stock_qty": 2,
-                "preferred_supplier_id": self.supplier_a.id,
-            }
-        )
-        wizard = self._wizard()
-        self.assertNotIn(self.product, wizard.line_ids.product_id)
+    def test_empty_order_cannot_start(self):
+        order = self._create_order()
+        with self.assertRaises(UserError):
+            order.action_start()

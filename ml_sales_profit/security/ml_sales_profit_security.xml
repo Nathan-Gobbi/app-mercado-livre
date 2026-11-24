@@ -42,4 +42,16 @@
         <field name="model_id" ref="model_ml_statement_line" />
         <field name="domain_force">[('company_id', 'in', company_ids)]</field>
     </record>
+    <record id="purchase_requirement_order_company_rule" model="ir.rule">
+        <field name="name">Purchase order: multi-company</field>
+        <field name="model_id" ref="model_purchase_requirement_order" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="purchase_requirement_order_line_company_rule" model="ir.rule">
+        <field name="name">Purchase order line: multi-company</field>
+        <field name="model_id" ref="model_purchase_requirement_order_line" />
+        <field name="domain_force">
+            [('order_id.company_id', 'in', company_ids)]
+        </field>
+    </record>
 </odoo>
