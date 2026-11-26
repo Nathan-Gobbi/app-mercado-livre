@@ -88,7 +88,7 @@ msgstr ""
 
 #. module: ml_sales_profit
 #: model:ir.model.constraint,message:ml_sales_profit.constraint_ml_listing_product_type_uniq
-msgid "A product can only have one listing of each type."
+msgid "A listing SKU can only have one listing of each type."
 msgstr ""
 
 #. module: ml_sales_profit
@@ -238,7 +238,6 @@ msgid "Contact"
 msgstr ""
 
 #. module: ml_sales_profit
-#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__standard_price
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_list
 msgid "Cost"
@@ -246,7 +245,7 @@ msgstr ""
 
 #. module: ml_sales_profit
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_listing__standard_price
-msgid "Cost of the product."
+msgid "Cost of one physical product unit."
 msgstr ""
 
 #. module: ml_sales_profit
@@ -1380,7 +1379,6 @@ msgstr ""
 #. module: ml_sales_profit
 #. odoo-python
 #: code:addons/ml_sales_profit/models/ml_sale_import.py:0
-#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__default_code
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__sku
 #: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__sku
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_search
@@ -1644,8 +1642,7 @@ msgstr ""
 
 #. module: ml_sales_profit
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_sale_line__stock_deducted
-msgid ""
-"The units of this sale have already been deducted from the product stock."
+msgid "The stock consumption of this sale has already been deducted."
 msgstr ""
 
 #. module: ml_sales_profit
@@ -1734,6 +1731,7 @@ msgstr ""
 
 #. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__unit_cost
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__standard_price
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_report
 msgid "Unit Cost"
 msgstr ""
@@ -1865,9 +1863,125 @@ msgid "outflows_report_%s.xlsx"
 msgstr ""
 
 #. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__default_code
+msgid "Listing SKU"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__listing_cost
+msgid "Listing Cost"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__total_stock_units
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__stock_units
+msgid "Physical Units"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__units_per_sale
+msgid "Units per Sale"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_listing__listing_cost
+msgid "Unit cost multiplied by the physical units in the listing."
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_listing__default_code
+msgid "SKU sent by Mercado Livre for this listing."
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_listing__units_per_sale
+msgid "Physical product units consumed when one listing unit is sold."
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_sale_line__stock_units
+msgid "Physical product units consumed by this sale."
+msgstr ""
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_listing.py:0
+msgid "The listing SKU is required."
+msgstr ""
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_listing.py:0
+msgid "Units per sale must be greater than zero."
+msgstr ""
+
+#. module: ml_sales_profit
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_import_view_form
 msgid ""
 "sales have\n"
 "                        no listing registered for their SKU and type, so their profit\n"
 "                        is zero. Register the listings and process the import again."
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.constraint,message:ml_sales_profit.constraint_ml_product_component_product_component_uniq
+msgid "A component can only appear once in a kit."
+msgstr ""
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_product_component.py:0
+msgid "A kit cannot be used as a component."
+msgstr ""
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_product_component.py:0
+msgid "A product cannot be a component of itself."
+msgstr ""
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_product_component.py:0
+msgid "A product used as a component cannot become a kit."
+msgstr ""
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_product_component.py:0
+msgid "Component quantity must be greater than zero."
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_product_component__component_product_tmpl_id
+msgid "Component"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_product_component__product_tmpl_id
+msgid "Kit"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_component_ids
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_component_ids
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+msgid "Kit Components"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__stock_line_ids
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_form
+msgid "Stock Consumption"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_parent_component_ids
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_parent_component_ids
+msgid "Used in Kits"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+msgid "Sales of this kit deduct the quantities above from the component stocks. The kit's own stock is not changed."
 msgstr ""

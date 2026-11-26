@@ -49,6 +49,22 @@ class TestPurchaseRequirementOrder(MlSalesProfitCase):
         self.assertEqual(order.line_ids.quantity, 5)
         self.assertEqual(order.amount_total, 60)
 
+    def test_pair_sale_increases_purchase_need_on_base_product(self):
+        self.env["ml.sale.line"].create(
+            {
+                "company_id": self.company.id,
+                "product_tmpl_id": self.product.id,
+                "units": 1,
+                "stock_units": 2,
+            }
+        )
+        self.assertEqual(self.product.ml_stock_qty, 1)
+        self.assertEqual(self.product.purchase_requirement_qty, 7)
+        order = self._create_order(self.supplier)
+        self.assertEqual(len(order.line_ids), 1)
+        self.assertEqual(order.line_ids.product_id, self.product)
+        self.assertEqual(order.line_ids.quantity, 7)
+
     def test_order_without_supplier_starts_empty_and_is_editable(self):
         order = self._create_order()
         self.assertFalse(order.supplier_id)

@@ -4,8 +4,16 @@
    stock spreadsheet. The sheet `Estoque` is read: the first row of each
    product holds its data and the Premium listing, and the next row with the
    same SKU holds the Classic listing.
+   A listing that sells multiple units stays below the physical product with
+   an empty `Produto` cell, its own SKU (for example `NG0020_2`), and the
+   optional `Qtd. por Venda` column set to `2`.
 2. Review the products in *Records > Products* and the listings in
    *Records > Listings*. Both can also be edited directly in Odoo.
+
+For a kit made from different products, open the kit product and add each
+physical product and quantity in the **Kit Components** tab. Registering or
+editing this composition does not change stock. New kit sales deduct the
+components and keep the kit's own stock unchanged.
 
 **Analyze your sales**
 
@@ -18,9 +26,12 @@
    pivot views.
 
 When a sale has a registered listing, processing the report automatically
-deducts its units from the product stock. Reimporting the same sale does not
-deduct it again. If the sale is later imported as cancelled, its units are
-restored. Sales without a registered listing do not change stock.
+deducts the listing units multiplied by its **Units per Sale** from the physical
+product stock. For kits, the components and quantities actually deducted are
+saved on the sale, so later composition changes do not rewrite history.
+Reimporting the same sale does not deduct it again. If the sale is later
+imported as cancelled, its original physical units are restored. Sales without
+a registered listing do not change stock.
 
 **Close the statement**
 

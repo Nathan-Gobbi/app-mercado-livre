@@ -61,6 +61,16 @@ class ProductTemplate(models.Model):
         inverse_name="product_tmpl_id",
         string="Listings",
     )
+    ml_component_ids = fields.One2many(
+        comodel_name="ml.product.component",
+        inverse_name="product_tmpl_id",
+        string="Kit Components",
+    )
+    ml_parent_component_ids = fields.One2many(
+        comodel_name="ml.product.component",
+        inverse_name="component_product_tmpl_id",
+        string="Used in Kits",
+    )
     ml_image_ids = fields.One2many(
         comodel_name="ml.product.image",
         inverse_name="product_tmpl_id",

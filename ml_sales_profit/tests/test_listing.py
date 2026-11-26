@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from psycopg2 import IntegrityError
 
+from odoo.exceptions import ValidationError
 from odoo.tools import mute_logger
 
 from .common import MlSalesProfitCase
@@ -32,6 +33,94 @@ class TestListing(MlSalesProfitCase):
         with mute_logger("odoo.sql_db"), self.assertRaises(IntegrityError):
             self.env["ml.listing"].create(
                 {"product_tmpl_id": self.product.id, "listing_type": "premium"}
+            )
+
+    def test_same_product_can_have_unit_and_pair_listings(self):
+        pair = self.env["ml.listing"].create(
+            {
+                "product_tmpl_id": self.product.id,
+                "default_code": "TST001_2",
+                "units_per_sale": 2,
+                "listing_type": "premium",
+                "price": 350,
+                "net_amount": 290,
+                "packaging_cost": 0.2,
+            }
+        )
+        self.assertEqual(pair.listing_cost, 200)
+        self.assertAlmostEqual(pair.net_profit, 68.8)
+        self.assertIn("TST001_2", pair.display_name)
+
+    def test_units_per_sale_must_be_positive(self):
+        with self.assertRaises(ValidationError):
+            self.env["ml.listing"].create(
+                {
+                    "product_tmpl_id": self.product.id,
+                    "default_code": "TST001_INVALID",
+                    "units_per_sale": 0,
+                }
+            )
+
+    def test_kit_cost_comes_from_components_without_changing_stock(self):
+        component_a = self.env["product.template"].create(
+            {"name": "Component A", "default_code": "COMP-A", "standard_price": 30}
+        )
+        component_b = self.env["product.template"].create(
+            {"name": "Component B", "default_code": "COMP-B", "standard_price": 20}
+        )
+        kit = self.env["product.template"].create(
+            {
+                "name": "Component Kit",
+                "default_code": "KIT-AB",
+                "standard_price": 999,
+                "ml_stock_qty": -3,
+            }
+        )
+        listing = self.env["ml.listing"].create(
+            {
+                "product_tmpl_id": kit.id,
+                "listing_type": "premium",
+                "price": 130,
+                "net_amount": 100,
+            }
+        )
+        self.env["ml.product.component"].create(
+            [
+                {
+                    "product_tmpl_id": kit.id,
+                    "component_product_tmpl_id": component_a.id,
+                    "quantity": 1,
+                },
+                {
+                    "product_tmpl_id": kit.id,
+                    "component_product_tmpl_id": component_b.id,
+                    "quantity": 2,
+                },
+            ]
+        )
+        self.assertEqual(kit.ml_stock_qty, -3)
+        self.assertEqual(listing.listing_cost, 70)
+        self.assertAlmostEqual(listing.net_profit, 22.2)
+
+    def test_kit_component_rules(self):
+        component = self.env["product.template"].create(
+            {"name": "Component", "default_code": "COMP-RULE"}
+        )
+        with self.assertRaises(ValidationError):
+            self.env["ml.product.component"].create(
+                {
+                    "product_tmpl_id": component.id,
+                    "component_product_tmpl_id": component.id,
+                    "quantity": 1,
+                }
+            )
+        with self.assertRaises(ValidationError):
+            self.env["ml.product.component"].create(
+                {
+                    "product_tmpl_id": self.product.id,
+                    "component_product_tmpl_id": component.id,
+                    "quantity": 0,
+                }
             )
 
     def test_display_name(self):

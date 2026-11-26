@@ -96,6 +96,9 @@
                                     <field name="company_id" column_invisible="True" />
                                     <field name="currency_id" column_invisible="True" />
                                     <field name="listing_type" />
+                                    <field name="default_code" />
+                                    <field name="units_per_sale" />
+                                    <field name="listing_cost" />
                                     <field name="price" />
                                     <field name="net_amount" />
                                     <field name="tax_amount" />
@@ -107,6 +110,23 @@
                                     <field name="profit_percent" />
                                 </list>
                             </field>
+                        </page>
+                        <page name="kit_components" string="Kit Components">
+                            <field
+                                name="ml_component_ids"
+                                context="{'default_product_tmpl_id': id}"
+                            >
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle" />
+                                    <field name="component_product_tmpl_id" />
+                                    <field name="quantity" />
+                                </list>
+                            </field>
+                            <div class="text-muted mt-2">
+                                Sales of this kit deduct the quantities above from
+                                the component stocks. The kit's own stock is not
+                                changed.
+                            </div>
                         </page>
                         <page name="description" string="Description">
                             <field

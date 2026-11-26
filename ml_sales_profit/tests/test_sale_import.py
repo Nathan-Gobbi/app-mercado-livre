@@ -196,6 +196,130 @@ class TestSaleImport(MlSalesProfitCase):
         self._import([changed])
         self.assertEqual(self.product.ml_stock_qty, 7)
 
+    def test_pair_listing_consumes_two_physical_units_per_sale(self):
+        pair = self.env["ml.listing"].create(
+            {
+                "product_tmpl_id": self.product.id,
+                "default_code": "TST001_2",
+                "units_per_sale": 2,
+                "listing_type": "premium",
+                "price": 350,
+                "net_amount": 290,
+                "packaging_cost": 0.2,
+            }
+        )
+        self.product.ml_stock_qty = 10
+        sale_import = self._import(
+            [
+                sale_row(
+                    "PAIR-1",
+                    "20 de setembro de 2026",
+                    "Entregue",
+                    2,
+                    700,
+                    "TST001_2",
+                    "Fake Shock Pair",
+                    " ",
+                    "Premium",
+                )
+            ]
+        )
+        line = sale_import.line_ids
+        self.assertEqual(line.listing_id, pair)
+        self.assertEqual(line.units, 2)
+        self.assertEqual(line.stock_units, 4)
+        self.assertEqual(sale_import.total_units, 2)
+        self.assertEqual(sale_import.total_stock_units, 4)
+        self.assertEqual(self.product.ml_stock_qty, 6)
+        self.assertAlmostEqual(line.net_profit, 2 * pair.net_profit)
+
+        sale_import.unlink()
+        self.assertEqual(self.product.ml_stock_qty, 10)
+
+    def test_kit_sale_consumes_components_and_preserves_snapshot(self):
+        component_a = self.env["product.template"].create(
+            {
+                "name": "Component A",
+                "default_code": "KIT-COMP-A",
+                "standard_price": 30,
+                "ml_stock_qty": 10,
+            }
+        )
+        component_b = self.env["product.template"].create(
+            {
+                "name": "Component B",
+                "default_code": "KIT-COMP-B",
+                "standard_price": 20,
+                "ml_stock_qty": 20,
+            }
+        )
+        kit = self.env["product.template"].create(
+            {"name": "Kit AB", "default_code": "KIT-AB", "ml_stock_qty": 0}
+        )
+        components = self.env["ml.product.component"].create(
+            [
+                {
+                    "product_tmpl_id": kit.id,
+                    "component_product_tmpl_id": component_a.id,
+                    "quantity": 1,
+                },
+                {
+                    "product_tmpl_id": kit.id,
+                    "component_product_tmpl_id": component_b.id,
+                    "quantity": 1,
+                },
+            ]
+        )
+        listing = self.env["ml.listing"].create(
+            {
+                "product_tmpl_id": kit.id,
+                "listing_type": "premium",
+                "price": 130,
+                "net_amount": 100,
+            }
+        )
+        row = sale_row(
+            "KIT-SALE-1",
+            "20 de setembro de 2026",
+            "Entregue",
+            1,
+            130,
+            "KIT-AB",
+            "Kit AB",
+            " ",
+            "Premium",
+        )
+        first_import = self._import([row])
+        sale = first_import.line_ids
+        self.assertEqual(sale.product_tmpl_id, kit)
+        self.assertEqual(sale.listing_id, listing)
+        self.assertEqual(sale.stock_units, 2)
+        self.assertEqual(component_a.ml_stock_qty, 9)
+        self.assertEqual(component_b.ml_stock_qty, 19)
+        self.assertEqual(kit.ml_stock_qty, 0)
+        self.assertRecordValues(
+            sale.stock_line_ids.sorted(lambda stock: stock.product_tmpl_id.id),
+            [
+                {"product_tmpl_id": component_a.id, "quantity": 1},
+                {"product_tmpl_id": component_b.id, "quantity": 1},
+            ],
+        )
+
+        components.filtered(
+            lambda component: component.component_product_tmpl_id == component_a
+        ).quantity = 2
+        second_import = self._import([row])
+        self.assertEqual(component_a.ml_stock_qty, 9)
+        self.assertEqual(component_b.ml_stock_qty, 19)
+        self.assertEqual(sale.stock_line_ids.mapped("quantity"), [1, 1])
+
+        first_import.unlink()
+        self.assertEqual(component_a.ml_stock_qty, 9)
+        self.assertEqual(component_b.ml_stock_qty, 19)
+        second_import.unlink()
+        self.assertEqual(component_a.ml_stock_qty, 10)
+        self.assertEqual(component_b.ml_stock_qty, 20)
+
     def test_sale_cancelled_later_is_removed(self):
         self.product.ml_stock_qty = 10
         week = self._import(self._week())

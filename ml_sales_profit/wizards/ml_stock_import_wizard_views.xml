@@ -11,12 +11,15 @@
                     Upload your stock spreadsheet (.xlsx). The sheet named
                     <b>Estoque</b> is read with the columns SKU, Produto, Código,
                     EAN, NCM, Custo, Tipo, Venda, V. Liquido, Embalagem, Estoque and
-                    Diferença Estoque.
+                    Diferença Estoque. The optional Qtd. por Venda column defines how
+                    many physical units each listing unit consumes.
                 </p>
                 <p class="text-muted">
                     Products are matched by SKU and listings by SKU and type:
                     existing records are updated and new ones are created. Tax and
-                    profit are computed by Odoo.
+                    profit are computed by Odoo. A row without Produto is treated as
+                    another listing of the physical product above, even when its SKU
+                    is different.
                 </p>
                 <group>
                     <field name="file" filename="file_name" />

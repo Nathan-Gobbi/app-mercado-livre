@@ -41,6 +41,7 @@ STOCK_COLUMNS = {
     "stock_difference": ["Diferença Estoque"],
     "net_profit": ["Lucro Liquido", "Lucro Líquido"],
     "stock_value": ["Valor"],
+    "units_per_sale": ["Qtd. por Venda", "Quantidade por Venda"],
 }
 
 
@@ -178,16 +179,25 @@ class MlStockImportWizard(models.TransientModel):
                 if sku:
                     products_by_sku[sku] = product
             elif sku:
-                current = products_by_sku.get(sku) or Product.search(
-                    [("default_code", "=", sku)], limit=1
-                )
+                # A row without a product name is another listing of the
+                # current physical product. Its SKU may differ (for example,
+                # NG0020_2 consumes two units of NG0020).
+                if not current:
+                    current = products_by_sku.get(sku) or Product.search(
+                        [("default_code", "=", sku)], limit=1
+                    )
             if not current:
                 continue
             listing_type = listing_type_from_text(cell(row, columns["listing_type"]))
             price = parse_float(cell(row, columns["price"]))
-            if not listing_type or price is None:
+            listing_sku = sku or current.default_code
+            if not listing_sku or not listing_type or price is None:
                 continue
+            units_per_sale = parse_float(cell(row, columns["units_per_sale"])) or 1
             listing_values = {
+                "product_tmpl_id": current.id,
+                "default_code": listing_sku,
+                "units_per_sale": units_per_sale,
                 "price": price,
                 "net_amount": parse_float(cell(row, columns["net_amount"])) or 0.0,
                 "packaging_cost": parse_float(cell(row, columns["packaging_cost"]))
@@ -195,7 +205,7 @@ class MlStockImportWizard(models.TransientModel):
             }
             listing = Listing.search(
                 [
-                    ("product_tmpl_id", "=", current.id),
+                    ("default_code", "=", listing_sku),
                     ("listing_type", "=", listing_type),
                     ("company_id", "=", company.id),
                 ],
@@ -207,7 +217,6 @@ class MlStockImportWizard(models.TransientModel):
                 listing = Listing.create(
                     dict(
                         listing_values,
-                        product_tmpl_id=current.id,
                         listing_type=listing_type,
                         company_id=company.id,
                     )

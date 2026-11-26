@@ -12,6 +12,7 @@
                 <field name="date_from" optional="hide" />
                 <field name="date_to" optional="hide" />
                 <field name="total_units" sum="Total" />
+                <field name="total_stock_units" sum="Total" optional="show" />
                 <field name="total_revenue" sum="Total" />
                 <field name="total_gross_profit" sum="Total" optional="hide" />
                 <field name="total_net_profit" sum="Total" />
@@ -110,6 +111,7 @@
                             invisible="state == 'draft'"
                         >
                             <field name="total_units" />
+                            <field name="total_stock_units" />
                             <field name="total_revenue" />
                             <field name="total_gross_profit" />
                             <field name="gross_margin" />
@@ -130,6 +132,7 @@
                                     <field name="listing_type" />
                                     <field name="ml_status" optional="hide" />
                                     <field name="units" sum="Total" />
+                                    <field name="stock_units" sum="Total" />
                                     <field name="revenue" sum="Total" />
                                     <field name="net_profit" sum="Total" />
                                     <field name="net_margin" />
