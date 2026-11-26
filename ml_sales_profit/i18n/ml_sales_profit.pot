@@ -88,7 +88,7 @@ msgstr ""
 
 #. module: ml_sales_profit
 #: model:ir.model.constraint,message:ml_sales_profit.constraint_ml_listing_product_type_uniq
-msgid "A product can only have one listing of each type."
+msgid "A listing SKU can only have one listing of each type."
 msgstr ""
 
 #. module: ml_sales_profit
@@ -238,7 +238,6 @@ msgid "Contact"
 msgstr ""
 
 #. module: ml_sales_profit
-#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__standard_price
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_list
 msgid "Cost"
@@ -246,7 +245,7 @@ msgstr ""
 
 #. module: ml_sales_profit
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_listing__standard_price
-msgid "Cost of the product."
+msgid "Cost of one physical product unit."
 msgstr ""
 
 #. module: ml_sales_profit
@@ -1380,7 +1379,6 @@ msgstr ""
 #. module: ml_sales_profit
 #. odoo-python
 #: code:addons/ml_sales_profit/models/ml_sale_import.py:0
-#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__default_code
 #: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__sku
 #: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__sku
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_search
@@ -1734,6 +1732,7 @@ msgstr ""
 
 #. module: ml_sales_profit
 #: model:ir.model.fields,field_description:ml_sales_profit.field_purchase_requirement_order_line__unit_cost
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__standard_price
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.purchase_requirement_report
 msgid "Unit Cost"
 msgstr ""
@@ -1862,6 +1861,59 @@ msgstr ""
 #. odoo-python
 #: code:addons/ml_sales_profit/models/ml_statement_import.py:0
 msgid "outflows_report_%s.xlsx"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__default_code
+msgid "Listing SKU"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__listing_cost
+msgid "Listing Cost"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_import__total_stock_units
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__stock_units
+msgid "Physical Units"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_listing__units_per_sale
+msgid "Units per Sale"
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_listing__listing_cost
+msgid "Unit cost multiplied by the physical units in the listing."
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_listing__default_code
+msgid "SKU sent by Mercado Livre for this listing."
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_listing__units_per_sale
+msgid "Physical product units consumed when one listing unit is sold."
+msgstr ""
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_ml_sale_line__stock_units
+msgid "Physical product units consumed by this sale."
+msgstr ""
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_listing.py:0
+msgid "The listing SKU is required."
+msgstr ""
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_listing.py:0
+msgid "Units per sale must be greater than zero."
 msgstr ""
 
 #. module: ml_sales_profit

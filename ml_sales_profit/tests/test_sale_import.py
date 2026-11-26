@@ -196,6 +196,46 @@ class TestSaleImport(MlSalesProfitCase):
         self._import([changed])
         self.assertEqual(self.product.ml_stock_qty, 7)
 
+    def test_pair_listing_consumes_two_physical_units_per_sale(self):
+        pair = self.env["ml.listing"].create(
+            {
+                "product_tmpl_id": self.product.id,
+                "default_code": "TST001_2",
+                "units_per_sale": 2,
+                "listing_type": "premium",
+                "price": 350,
+                "net_amount": 290,
+                "packaging_cost": 0.2,
+            }
+        )
+        self.product.ml_stock_qty = 10
+        sale_import = self._import(
+            [
+                sale_row(
+                    "PAIR-1",
+                    "20 de setembro de 2026",
+                    "Entregue",
+                    2,
+                    700,
+                    "TST001_2",
+                    "Fake Shock Pair",
+                    " ",
+                    "Premium",
+                )
+            ]
+        )
+        line = sale_import.line_ids
+        self.assertEqual(line.listing_id, pair)
+        self.assertEqual(line.units, 2)
+        self.assertEqual(line.stock_units, 4)
+        self.assertEqual(sale_import.total_units, 2)
+        self.assertEqual(sale_import.total_stock_units, 4)
+        self.assertEqual(self.product.ml_stock_qty, 6)
+        self.assertAlmostEqual(line.net_profit, 2 * pair.net_profit)
+
+        sale_import.unlink()
+        self.assertEqual(self.product.ml_stock_qty, 10)
+
     def test_sale_cancelled_later_is_removed(self):
         self.product.ml_stock_qty = 10
         week = self._import(self._week())

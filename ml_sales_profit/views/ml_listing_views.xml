@@ -12,10 +12,12 @@
                 <field name="currency_id" column_invisible="True" />
                 <field name="default_code" />
                 <field name="product_tmpl_id" />
+                <field name="units_per_sale" />
                 <field name="manufacturer_code" optional="hide" />
                 <field name="barcode" optional="hide" />
                 <field name="ncm" optional="hide" />
-                <field name="standard_price" widget="monetary" />
+                <field name="standard_price" widget="monetary" optional="hide" />
+                <field name="listing_cost" widget="monetary" />
                 <field name="listing_type" />
                 <field name="price" />
                 <field name="net_amount" />
@@ -48,7 +50,9 @@
                         <group name="product" string="Product">
                             <field name="product_tmpl_id" />
                             <field name="default_code" />
+                            <field name="units_per_sale" />
                             <field name="standard_price" widget="monetary" />
+                            <field name="listing_cost" widget="monetary" />
                             <field name="listing_type" />
                             <field
                                 name="company_id"

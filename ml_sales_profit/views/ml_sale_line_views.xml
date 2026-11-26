@@ -21,6 +21,7 @@
                 <field name="listing_type" />
                 <field name="ml_status" optional="hide" />
                 <field name="units" sum="Total" />
+                <field name="stock_units" sum="Total" optional="show" />
                 <field name="stock_deducted" optional="hide" />
                 <field name="revenue" sum="Total" />
                 <field name="unit_tax" optional="hide" />
@@ -67,6 +68,7 @@
                         </group>
                         <group name="values" string="Values">
                             <field name="units" />
+                            <field name="stock_units" />
                             <field name="stock_deducted" />
                             <field name="revenue" />
                             <field name="revenue_origin" />
@@ -93,6 +95,7 @@
                 <field name="sku" type="row" />
                 <field name="sale_date" interval="month" type="col" />
                 <field name="units" type="measure" />
+                <field name="stock_units" type="measure" />
                 <field name="revenue" type="measure" />
                 <field name="net_profit" type="measure" />
             </pivot>

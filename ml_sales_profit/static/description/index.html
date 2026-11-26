@@ -429,7 +429,10 @@ Sales Profit &gt; Configuration &gt; Ignored Transaction Types</em>.</li>
 <li>Go to <em>ML Sales Profit &gt; Records &gt; Import Stock Spreadsheet</em> and
 upload the stock spreadsheet. The sheet <tt class="docutils literal">Estoque</tt> is read: the
 first row of each product holds its data and the Premium listing, and
-the next row with the same SKU holds the Classic listing.</li>
+the next row with the same SKU holds the Classic listing. A listing
+that sells multiple units stays below the physical product with an
+empty <tt class="docutils literal">Produto</tt> cell, its own SKU (for example <tt class="docutils literal">NG0020_2</tt>), and
+the optional <tt class="docutils literal">Qtd. por Venda</tt> column set to <tt class="docutils literal">2</tt>.</li>
 <li>Review the products in <em>Records &gt; Products</em> and the listings in
 <em>Records &gt; Listings</em>. Both can also be edited directly in Odoo.</li>
 </ol>
@@ -445,10 +448,11 @@ spreadsheet.</li>
 and pivot views.</li>
 </ol>
 <p>When a sale has a registered listing, processing the report
-automatically deducts its units from the product stock. Reimporting the
-same sale does not deduct it again. If the sale is later imported as
-cancelled, its units are restored. Sales without a registered listing do
-not change stock.</p>
+automatically deducts the listing units multiplied by its <strong>Units per
+Sale</strong> from the physical product stock. Reimporting the same sale does
+not deduct it again. If the sale is later imported as cancelled, its
+physical units are restored. Sales without a registered listing do not
+change stock.</p>
 <p><strong>Close the statement</strong></p>
 <ol class="arabic simple">
 <li>In Mercado Pago, export the account statement.</li>

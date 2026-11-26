@@ -5,7 +5,7 @@ from psycopg2 import IntegrityError
 from odoo.exceptions import UserError
 from odoo.tools import mute_logger
 
-from .common import MlSalesProfitCase, stock_file, xlsx
+from .common import STOCK_HEADER, MlSalesProfitCase, stock_file, xlsx
 
 
 class TestStockImport(MlSalesProfitCase):
@@ -248,6 +248,66 @@ class TestStockImport(MlSalesProfitCase):
         self.assertEqual(tape.name, "Fake Tape")
         self.assertEqual(tape.standard_price, 30)
         self.assertEqual(len(tape.ml_listing_ids), 2)
+
+    def test_pair_sku_is_listing_of_current_physical_product(self):
+        rows = [
+            [
+                "TST500",
+                "Fake Cleat",
+                None,
+                None,
+                None,
+                40,
+                "Premium",
+                100,
+                80,
+                None,
+                0.1,
+                None,
+                None,
+                10,
+                0,
+                1,
+            ],
+            [
+                "TST500_2",
+                None,
+                None,
+                None,
+                None,
+                None,
+                "Premium",
+                190,
+                155,
+                None,
+                0.2,
+                None,
+                None,
+                None,
+                None,
+                2,
+            ],
+        ]
+        wizard = self.env["ml.stock.import.wizard"].create(
+            {
+                "file": xlsx(
+                    [STOCK_HEADER + ["Qtd. por Venda"]] + rows,
+                    "Estoque",
+                ),
+                "file_name": "Estoque.xlsx",
+            }
+        )
+        wizard.action_import()
+        product = self.env["product.template"].search([("default_code", "=", "TST500")])
+        self.assertEqual(product.ml_stock_qty, 10)
+        self.assertFalse(
+            self.env["product.template"].search([("default_code", "=", "TST500_2")])
+        )
+        pair = product.ml_listing_ids.filtered(
+            lambda listing: listing.default_code == "TST500_2"
+        )
+        self.assertEqual(pair.units_per_sale, 2)
+        self.assertEqual(pair.product_tmpl_id, product)
 
     def test_duplicate_barcode_is_reported(self):
         self.product.barcode = "7890000000024"

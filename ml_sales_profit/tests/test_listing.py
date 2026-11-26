@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from psycopg2 import IntegrityError
 
+from odoo.exceptions import ValidationError
 from odoo.tools import mute_logger
 
 from .common import MlSalesProfitCase
@@ -32,6 +33,32 @@ class TestListing(MlSalesProfitCase):
         with mute_logger("odoo.sql_db"), self.assertRaises(IntegrityError):
             self.env["ml.listing"].create(
                 {"product_tmpl_id": self.product.id, "listing_type": "premium"}
+            )
+
+    def test_same_product_can_have_unit_and_pair_listings(self):
+        pair = self.env["ml.listing"].create(
+            {
+                "product_tmpl_id": self.product.id,
+                "default_code": "TST001_2",
+                "units_per_sale": 2,
+                "listing_type": "premium",
+                "price": 350,
+                "net_amount": 290,
+                "packaging_cost": 0.2,
+            }
+        )
+        self.assertEqual(pair.listing_cost, 200)
+        self.assertAlmostEqual(pair.net_profit, 68.8)
+        self.assertIn("TST001_2", pair.display_name)
+
+    def test_units_per_sale_must_be_positive(self):
+        with self.assertRaises(ValidationError):
+            self.env["ml.listing"].create(
+                {
+                    "product_tmpl_id": self.product.id,
+                    "default_code": "TST001_INVALID",
+                    "units_per_sale": 0,
+                }
             )
 
     def test_display_name(self):

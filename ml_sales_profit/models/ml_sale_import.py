@@ -56,6 +56,12 @@ class MlSaleImport(models.Model):
         store=True,
         digits=(16, 0),
     )
+    total_stock_units = fields.Float(
+        string="Physical Units",
+        compute="_compute_totals",
+        store=True,
+        digits=(16, 0),
+    )
     total_revenue = fields.Monetary(
         string="Revenue", compute="_compute_totals", store=True
     )
@@ -88,6 +94,7 @@ class MlSaleImport(models.Model):
 
     @api.depends(
         "line_ids.units",
+        "line_ids.stock_units",
         "line_ids.revenue",
         "line_ids.gross_profit",
         "line_ids.net_profit",
@@ -104,6 +111,7 @@ class MlSaleImport(models.Model):
                 lines.filtered(lambda line: line.profit_status == "not_found")
             )
             record.total_units = sum(lines.mapped("units"))
+            record.total_stock_units = sum(lines.mapped("stock_units"))
             record.total_revenue = revenue
             record.total_gross_profit = gross
             record.total_net_profit = net
@@ -189,6 +197,7 @@ class MlSaleImport(models.Model):
             "listing_id": listing.id if listing else False,
             "product_tmpl_id": listing.product_tmpl_id.id if listing else False,
             "units": units,
+            "stock_units": units * listing.units_per_sale if listing else 0.0,
             "revenue_ml": revenue_ml or 0.0,
             "revenue": revenue,
             "revenue_origin": origin,

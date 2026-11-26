@@ -50,6 +50,12 @@ class MlSaleLine(models.Model):
         ondelete="set null",
     )
     units = fields.Float(readonly=True, digits=(16, 0))
+    stock_units = fields.Float(
+        string="Physical Units",
+        readonly=True,
+        digits=(16, 0),
+        help="Physical product units consumed by this sale.",
+    )
     revenue_ml = fields.Monetary(
         string="Mercado Livre Revenue",
         readonly=True,
@@ -114,7 +120,7 @@ class MlSaleLine(models.Model):
     def _adjust_product_stock(self, multiplier):
         """Apply this sale quantity to the module's stock field."""
         for line in self.filtered(lambda record: record.product_tmpl_id):
-            line.product_tmpl_id.ml_stock_qty += multiplier * line.units
+            line.product_tmpl_id.ml_stock_qty += multiplier * line.stock_units
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -131,11 +137,11 @@ class MlSaleLine(models.Model):
     def write(self, vals):
         if self.env.context.get("skip_ml_stock_adjustment"):
             return super().write(vals)
-        stock_fields = {"product_tmpl_id", "units"}
+        stock_fields = {"product_tmpl_id", "stock_units"}
         if not stock_fields.intersection(vals):
             return super().write(vals)
         previous = [
-            (line.product_tmpl_id, line.units)
+            (line.product_tmpl_id, line.stock_units)
             for line in self
             if line.stock_deducted and line.product_tmpl_id
         ]

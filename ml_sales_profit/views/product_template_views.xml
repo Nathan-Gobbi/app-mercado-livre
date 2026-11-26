@@ -96,6 +96,9 @@
                                     <field name="company_id" column_invisible="True" />
                                     <field name="currency_id" column_invisible="True" />
                                     <field name="listing_type" />
+                                    <field name="default_code" />
+                                    <field name="units_per_sale" />
+                                    <field name="listing_cost" />
                                     <field name="price" />
                                     <field name="net_amount" />
                                     <field name="tax_amount" />
