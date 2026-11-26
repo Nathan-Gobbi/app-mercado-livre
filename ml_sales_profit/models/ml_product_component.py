@@ -38,10 +38,14 @@ class MlProductComponent(models.Model):
     def _check_component(self):
         for line in self:
             if line.quantity <= 0:
-                raise ValidationError(_("Component quantity must be greater than zero."))
+                raise ValidationError(
+                    _("Component quantity must be greater than zero.")
+                )
             if line.product_tmpl_id == line.component_product_tmpl_id:
                 raise ValidationError(_("A product cannot be a component of itself."))
             if line.component_product_tmpl_id.ml_component_ids:
                 raise ValidationError(_("A kit cannot be used as a component."))
             if line.product_tmpl_id.ml_parent_component_ids:
-                raise ValidationError(_("A product used as a component cannot become a kit."))
+                raise ValidationError(
+                    _("A product used as a component cannot become a kit.")
+                )
