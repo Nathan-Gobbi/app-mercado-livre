@@ -131,13 +131,24 @@ class MlListing(models.Model):
     @api.depends(
         "company_id",
         "units_per_sale",
+        "product_tmpl_id.ml_component_ids.quantity",
+        "product_tmpl_id.ml_component_ids.component_product_tmpl_id.product_variant_ids.standard_price",
         "product_tmpl_id.product_variant_ids.standard_price",
     )
     def _compute_listing_cost(self):
         for listing in self:
-            unit_cost = listing.product_tmpl_id.with_company(
-                listing.company_id
-            ).standard_price
+            product = listing.product_tmpl_id.with_company(listing.company_id)
+            unit_cost = (
+                sum(
+                    component.quantity
+                    * component.component_product_tmpl_id.with_company(
+                        listing.company_id
+                    ).standard_price
+                    for component in product.ml_component_ids
+                )
+                if product.ml_component_ids
+                else product.standard_price
+            )
             listing.listing_cost = unit_cost * listing.units_per_sale
 
     @api.depends(
@@ -146,6 +157,8 @@ class MlListing(models.Model):
         "packaging_cost",
         "units_per_sale",
         "company_id.ml_tax_rate",
+        "product_tmpl_id.ml_component_ids.quantity",
+        "product_tmpl_id.ml_component_ids.component_product_tmpl_id.product_variant_ids.standard_price",
         "product_tmpl_id.product_variant_ids.standard_price",
     )
     def _compute_profit(self):

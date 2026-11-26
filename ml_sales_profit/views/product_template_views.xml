@@ -111,6 +111,23 @@
                                 </list>
                             </field>
                         </page>
+                        <page name="kit_components" string="Kit Components">
+                            <field
+                                name="ml_component_ids"
+                                context="{'default_product_tmpl_id': id}"
+                            >
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle" />
+                                    <field name="component_product_tmpl_id" />
+                                    <field name="quantity" />
+                                </list>
+                            </field>
+                            <div class="text-muted mt-2">
+                                Sales of this kit deduct the quantities above from
+                                the component stocks. The kit's own stock is not
+                                changed.
+                            </div>
+                        </page>
                         <page name="description" string="Description">
                             <field
                                 name="description"

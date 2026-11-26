@@ -82,6 +82,14 @@
                             <field name="profit_status" />
                         </group>
                     </group>
+                    <group name="stock_consumption" string="Stock Consumption">
+                        <field name="stock_line_ids" nolabel="1">
+                            <list create="0" delete="0" edit="0">
+                                <field name="product_tmpl_id" />
+                                <field name="quantity" sum="Total" />
+                            </list>
+                        </field>
+                    </group>
                 </sheet>
             </form>
         </field>

@@ -1,5 +1,7 @@
 # Copyright 2026 Nathan Gobbi
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from collections import defaultdict
+
 from odoo import api, fields, models
 
 from .ml_listing import LISTING_TYPES
@@ -56,6 +58,13 @@ class MlSaleLine(models.Model):
         digits=(16, 0),
         help="Physical product units consumed by this sale.",
     )
+    stock_line_ids = fields.One2many(
+        comodel_name="ml.sale.stock.line",
+        inverse_name="sale_line_id",
+        string="Stock Consumption",
+        readonly=True,
+        copy=False,
+    )
     revenue_ml = fields.Monetary(
         string="Mercado Livre Revenue",
         readonly=True,
@@ -100,9 +109,7 @@ class MlSaleLine(models.Model):
     stock_deducted = fields.Boolean(
         readonly=True,
         copy=False,
-        help=(
-            "The units of this sale have already been deducted from the product stock."
-        ),
+        help=("The stock consumption of this sale has already been deducted."),
     )
 
     @api.depends("units", "revenue", "unit_net_profit", "unit_gross_profit")
@@ -118,15 +125,25 @@ class MlSaleLine(models.Model):
             )
 
     def _adjust_product_stock(self, multiplier):
-        """Apply this sale quantity to the module's stock field."""
-        for line in self.filtered(lambda record: record.product_tmpl_id):
-            line.product_tmpl_id.ml_stock_qty += multiplier * line.stock_units
+        """Apply the stock-consumption snapshot of these sales."""
+        quantities = defaultdict(float)
+        for line in self:
+            if line.stock_line_ids:
+                for stock_line in line.stock_line_ids:
+                    quantities[stock_line.product_tmpl_id.id] += stock_line.quantity
+            elif line.product_tmpl_id and line.stock_units:
+                # Compatibility fallback for sales created before snapshots.
+                quantities[line.product_tmpl_id.id] += line.stock_units
+        for product_id, quantity in quantities.items():
+            product = self.env["product.template"].browse(product_id)
+            product.ml_stock_qty += multiplier * quantity
 
     @api.model_create_multi
     def create(self, vals_list):
         lines = super().create(vals_list)
         stock_lines = lines.filtered(
-            lambda line: line.product_tmpl_id and line.units > 0
+            lambda line: line.units > 0
+            and (line.stock_line_ids or line.product_tmpl_id and line.stock_units)
         )
         stock_lines._adjust_product_stock(-1)
         stock_lines.with_context(skip_ml_stock_adjustment=True).write(
@@ -137,19 +154,15 @@ class MlSaleLine(models.Model):
     def write(self, vals):
         if self.env.context.get("skip_ml_stock_adjustment"):
             return super().write(vals)
-        stock_fields = {"product_tmpl_id", "stock_units"}
+        stock_fields = {"product_tmpl_id", "stock_units", "stock_line_ids"}
         if not stock_fields.intersection(vals):
             return super().write(vals)
-        previous = [
-            (line.product_tmpl_id, line.stock_units)
-            for line in self
-            if line.stock_deducted and line.product_tmpl_id
-        ]
+        previously_deducted = self.filtered("stock_deducted")
+        previously_deducted._adjust_product_stock(1)
         result = super().write(vals)
-        for product, units in previous:
-            product.ml_stock_qty += units
         stock_lines = self.filtered(
-            lambda line: line.product_tmpl_id and line.units > 0
+            lambda line: line.units > 0
+            and (line.stock_line_ids or line.product_tmpl_id and line.stock_units)
         )
         stock_lines._adjust_product_stock(-1)
         self.with_context(skip_ml_stock_adjustment=True).write(
@@ -163,3 +176,27 @@ class MlSaleLine(models.Model):
     def unlink(self):
         self.filtered("stock_deducted")._adjust_product_stock(1)
         return super().unlink()
+
+
+class MlSaleStockLine(models.Model):
+    _name = "ml.sale.stock.line"
+    _description = "Mercado Livre Sale Stock Consumption"
+    _order = "sale_line_id, id"
+
+    sale_line_id = fields.Many2one(
+        comodel_name="ml.sale.line",
+        string="Sale",
+        required=True,
+        ondelete="cascade",
+        index=True,
+        readonly=True,
+    )
+    product_tmpl_id = fields.Many2one(
+        comodel_name="product.template",
+        string="Product",
+        required=True,
+        ondelete="restrict",
+        index=True,
+        readonly=True,
+    )
+    quantity = fields.Float(required=True, digits=(16, 2), readonly=True)

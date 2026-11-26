@@ -186,6 +186,30 @@ class MlSaleImport(models.Model):
             revenue, origin = 0.0, "not_found"
         unit_net_profit = listing.net_profit if listing else 0.0
         unit_tax = listing.tax_amount if listing else 0.0
+        stock_lines = []
+        stock_units = 0.0
+        if listing:
+            product = listing.product_tmpl_id
+            quantity_factor = units * listing.units_per_sale
+            components = product.ml_component_ids
+            consumption = (
+                [
+                    (
+                        component.component_product_tmpl_id,
+                        quantity_factor * component.quantity,
+                    )
+                    for component in components
+                ]
+                if components
+                else [(product, quantity_factor)]
+            )
+            stock_lines = [fields.Command.clear()] + [
+                fields.Command.create(
+                    {"product_tmpl_id": product.id, "quantity": quantity}
+                )
+                for product, quantity in consumption
+            ]
+            stock_units = sum(quantity for _product, quantity in consumption)
         return {
             "sale_number": sale["sale_number"],
             "sale_date": sale["sale_date"],
@@ -197,7 +221,8 @@ class MlSaleImport(models.Model):
             "listing_id": listing.id if listing else False,
             "product_tmpl_id": listing.product_tmpl_id.id if listing else False,
             "units": units,
-            "stock_units": units * listing.units_per_sale if listing else 0.0,
+            "stock_units": stock_units,
+            "stock_line_ids": stock_lines,
             "revenue_ml": revenue_ml or 0.0,
             "revenue": revenue,
             "revenue_origin": origin,
@@ -243,6 +268,18 @@ class MlSaleImport(models.Model):
             values = self._prepare_line_values(sale, listings)
             line = existing.get((sale["sale_number"], sale["sku"]))
             if line and line not in lines:
+                same_stock_event = (
+                    line.stock_deducted
+                    and line.units == values["units"]
+                    and line.listing_id.id == values["listing_id"]
+                    and line.product_tmpl_id.id == values["product_tmpl_id"]
+                )
+                if same_stock_event:
+                    # Reimporting the same sale must preserve the original
+                    # stock snapshot, even if the kit was edited afterwards.
+                    values.pop("product_tmpl_id")
+                    values.pop("stock_units")
+                    values.pop("stock_line_ids")
                 line.write(values)
                 lines |= line
             else:

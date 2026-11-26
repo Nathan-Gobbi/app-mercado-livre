@@ -61,6 +61,68 @@ class TestListing(MlSalesProfitCase):
                 }
             )
 
+    def test_kit_cost_comes_from_components_without_changing_stock(self):
+        component_a = self.env["product.template"].create(
+            {"name": "Component A", "default_code": "COMP-A", "standard_price": 30}
+        )
+        component_b = self.env["product.template"].create(
+            {"name": "Component B", "default_code": "COMP-B", "standard_price": 20}
+        )
+        kit = self.env["product.template"].create(
+            {
+                "name": "Component Kit",
+                "default_code": "KIT-AB",
+                "standard_price": 999,
+                "ml_stock_qty": -3,
+            }
+        )
+        listing = self.env["ml.listing"].create(
+            {
+                "product_tmpl_id": kit.id,
+                "listing_type": "premium",
+                "price": 130,
+                "net_amount": 100,
+            }
+        )
+        self.env["ml.product.component"].create(
+            [
+                {
+                    "product_tmpl_id": kit.id,
+                    "component_product_tmpl_id": component_a.id,
+                    "quantity": 1,
+                },
+                {
+                    "product_tmpl_id": kit.id,
+                    "component_product_tmpl_id": component_b.id,
+                    "quantity": 2,
+                },
+            ]
+        )
+        self.assertEqual(kit.ml_stock_qty, -3)
+        self.assertEqual(listing.listing_cost, 70)
+        self.assertAlmostEqual(listing.net_profit, 22.2)
+
+    def test_kit_component_rules(self):
+        component = self.env["product.template"].create(
+            {"name": "Component", "default_code": "COMP-RULE"}
+        )
+        with self.assertRaises(ValidationError):
+            self.env["ml.product.component"].create(
+                {
+                    "product_tmpl_id": component.id,
+                    "component_product_tmpl_id": component.id,
+                    "quantity": 1,
+                }
+            )
+        with self.assertRaises(ValidationError):
+            self.env["ml.product.component"].create(
+                {
+                    "product_tmpl_id": self.product.id,
+                    "component_product_tmpl_id": component.id,
+                    "quantity": 0,
+                }
+            )
+
     def test_display_name(self):
         self.assertEqual(self.classic.display_name, "[TST001] Fake Shock Kit - Classic")
 

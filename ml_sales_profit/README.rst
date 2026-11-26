@@ -78,6 +78,11 @@ Usage
 2. Review the products in *Records > Products* and the listings in
    *Records > Listings*. Both can also be edited directly in Odoo.
 
+For a kit made from different products, open the kit product and add
+each physical product and quantity in the **Kit Components** tab.
+Registering or editing this composition does not change stock. New kit
+sales deduct the components and keep the kit's own stock unchanged.
+
 **Analyze your sales**
 
 1. In Mercado Livre, export the sales report of the period.
@@ -91,10 +96,12 @@ Usage
 
 When a sale has a registered listing, processing the report
 automatically deducts the listing units multiplied by its **Units per
-Sale** from the physical product stock. Reimporting the same sale does
-not deduct it again. If the sale is later imported as cancelled, its
-physical units are restored. Sales without a registered listing do not
-change stock.
+Sale** from the physical product stock. For kits, the components and
+quantities actually deducted are saved on the sale, so later composition
+changes do not rewrite history. Reimporting the same sale does not
+deduct it again. If the sale is later imported as cancelled, its
+original physical units are restored. Sales without a registered listing
+do not change stock.
 
 **Close the statement**
 

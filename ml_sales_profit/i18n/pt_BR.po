@@ -1687,9 +1687,8 @@ msgstr "As vendas desta importação serão removidas. Continuar?"
 
 #. module: ml_sales_profit
 #: model:ir.model.fields,help:ml_sales_profit.field_ml_sale_line__stock_deducted
-msgid ""
-"The units of this sale have already been deducted from the product stock."
-msgstr ""
+msgid "The stock consumption of this sale has already been deducted."
+msgstr "O consumo de estoque desta venda já foi deduzido."
 
 #. module: ml_sales_profit
 #. odoo-python
@@ -1986,3 +1985,66 @@ msgstr ""
 "lucro delas\n"
 "                        é zero. Cadastre os anúncios e processe a importação "
 "novamente."
+
+#. module: ml_sales_profit
+#: model:ir.model.constraint,message:ml_sales_profit.constraint_ml_product_component_product_component_uniq
+msgid "A component can only appear once in a kit."
+msgstr "Um componente só pode aparecer uma vez em um kit."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_product_component.py:0
+msgid "A kit cannot be used as a component."
+msgstr "Um kit não pode ser usado como componente."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_product_component.py:0
+msgid "A product cannot be a component of itself."
+msgstr "Um produto não pode ser componente dele mesmo."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_product_component.py:0
+msgid "A product used as a component cannot become a kit."
+msgstr "Um produto usado como componente não pode se tornar um kit."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_product_component.py:0
+msgid "Component quantity must be greater than zero."
+msgstr "A quantidade do componente deve ser maior que zero."
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_product_component__component_product_tmpl_id
+msgid "Component"
+msgstr "Componente"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_product_component__product_tmpl_id
+msgid "Kit"
+msgstr "Kit"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_component_ids
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_component_ids
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+msgid "Kit Components"
+msgstr "Componentes do kit"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_ml_sale_line__stock_line_ids
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.ml_sale_line_view_form
+msgid "Stock Consumption"
+msgstr "Consumo de estoque"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_parent_component_ids
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_parent_component_ids
+msgid "Used in Kits"
+msgstr "Usado em kits"
+
+#. module: ml_sales_profit
+#: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
+msgid "Sales of this kit deduct the quantities above from the component stocks. The kit's own stock is not changed."
+msgstr "As vendas deste kit deduzem as quantidades acima dos estoques dos componentes. O estoque próprio do kit não é alterado."

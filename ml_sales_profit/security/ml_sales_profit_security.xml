@@ -32,6 +32,13 @@
         <field name="model_id" ref="model_ml_sale_line" />
         <field name="domain_force">[('company_id', 'in', company_ids)]</field>
     </record>
+    <record id="ml_sale_stock_line_company_rule" model="ir.rule">
+        <field name="name">Mercado Livre sale stock: multi-company</field>
+        <field name="model_id" ref="model_ml_sale_stock_line" />
+        <field name="domain_force">
+            [('sale_line_id.company_id', 'in', company_ids)]
+        </field>
+    </record>
     <record id="ml_statement_import_company_rule" model="ir.rule">
         <field name="name">Mercado Livre statement import: multi-company</field>
         <field name="model_id" ref="model_ml_statement_import" />
