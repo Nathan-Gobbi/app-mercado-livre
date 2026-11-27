@@ -716,8 +716,14 @@ msgstr "As linhas só podem ser adicionadas enquanto o pedido estiver em rascunh
 #. module: ml_sales_profit
 #. odoo-python
 #: code:addons/ml_sales_profit/models/purchase_requirement_order.py:0
-msgid "Lines can only be changed while the order is draft."
-msgstr "As linhas só podem ser alteradas enquanto o pedido estiver em rascunho."
+msgid "Lines cannot be changed after the order is completed."
+msgstr "As linhas não podem ser alteradas após a conclusão do pedido."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/purchase_requirement_order.py:0
+msgid "Only quantity and unit cost can be changed while the order is in progress."
+msgstr "Somente a quantidade e o custo unitário podem ser alterados enquanto o pedido estiver em andamento."
 
 #. module: ml_sales_profit
 #. odoo-python

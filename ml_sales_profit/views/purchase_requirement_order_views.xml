@@ -80,7 +80,7 @@
                             <field
                                 name="line_ids"
                                 nolabel="1"
-                                readonly="state != 'draft'"
+                                invisible="state != 'draft'"
                             >
                                 <list editable="bottom">
                                     <field name="sequence" widget="handle" />
@@ -92,6 +92,29 @@
                                     <field name="minimum_stock_qty" readonly="True" />
                                     <field name="quantity" />
                                     <field name="unit_cost" readonly="True" />
+                                    <field
+                                        name="subtotal"
+                                        readonly="True"
+                                        sum="Total"
+                                    />
+                                </list>
+                            </field>
+                            <field
+                                name="line_ids"
+                                nolabel="1"
+                                invisible="state == 'draft'"
+                                readonly="state == 'done'"
+                            >
+                                <list editable="bottom" create="0" delete="0">
+                                    <field name="sequence" column_invisible="True" />
+                                    <field name="order_state" column_invisible="True" />
+                                    <field name="currency_id" column_invisible="True" />
+                                    <field name="product_id" readonly="True" />
+                                    <field name="sku" readonly="True" optional="show" />
+                                    <field name="current_stock_qty" readonly="True" />
+                                    <field name="minimum_stock_qty" readonly="True" />
+                                    <field name="quantity" />
+                                    <field name="unit_cost" />
                                     <field
                                         name="subtotal"
                                         readonly="True"
