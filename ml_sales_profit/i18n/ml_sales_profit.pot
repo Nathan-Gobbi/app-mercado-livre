@@ -695,7 +695,13 @@ msgstr ""
 #. module: ml_sales_profit
 #. odoo-python
 #: code:addons/ml_sales_profit/models/purchase_requirement_order.py:0
-msgid "Lines can only be changed while the order is draft."
+msgid "Lines cannot be changed after the order is completed."
+msgstr ""
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/purchase_requirement_order.py:0
+msgid "Only quantity and unit cost can be changed while the order is in progress."
 msgstr ""
 
 #. module: ml_sales_profit

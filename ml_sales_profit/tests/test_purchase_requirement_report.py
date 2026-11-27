@@ -79,7 +79,7 @@ class TestPurchaseRequirementOrder(MlSalesProfitCase):
         line.unlink()
         self.assertFalse(order.line_ids)
 
-    def test_progress_pdf_and_completion_update_stock_once(self):
+    def test_progress_allows_quantity_and_cost_and_updates_stock_once(self):
         order = self._create_order(self.supplier)
         order.line_ids.quantity = 2
         order.action_start()
@@ -90,16 +90,39 @@ class TestPurchaseRequirementOrder(MlSalesProfitCase):
         html, _report_type = report._render_qweb_html(report.report_name, order.ids)
         self.assertIn(b"Supplier A", html)
         self.assertIn(b"Fake Shock Kit", html)
+        order.line_ids.write({"quantity": 3, "unit_cost": 9})
+        self.assertEqual(order.amount_total, 27)
         with self.assertRaises(UserError):
-            order.line_ids.quantity = 3
+            order.line_ids.current_stock_qty = 4
         with self.assertRaises(UserError):
             order.line_ids.unlink()
         order.action_done()
         self.assertEqual(order.state, "done")
-        self.assertEqual(self.product.ml_stock_qty, 5)
+        self.assertEqual(self.product.ml_stock_qty, 6)
+        self.assertEqual(self.product.standard_price, 10.5)
+        with self.assertRaises(UserError):
+            order.line_ids.quantity = 4
         with self.assertRaises(UserError):
             order.action_done()
-        self.assertEqual(self.product.ml_stock_qty, 5)
+        self.assertEqual(self.product.ml_stock_qty, 6)
+        self.assertEqual(self.product.standard_price, 10.5)
+
+    def test_completion_uses_weighted_average_cost(self):
+        self.product.write(
+            {
+                "ml_stock_qty": 10,
+                "ml_min_stock_qty": 20,
+                "standard_price": 5,
+            }
+        )
+        order = self._create_order(self.supplier)
+        order.action_start()
+        order.line_ids.write({"quantity": 10, "unit_cost": 4.5})
+
+        order.action_done()
+
+        self.assertEqual(self.product.ml_stock_qty, 20)
+        self.assertEqual(self.product.standard_price, 4.75)
 
     def test_empty_order_cannot_start(self):
         order = self._create_order()

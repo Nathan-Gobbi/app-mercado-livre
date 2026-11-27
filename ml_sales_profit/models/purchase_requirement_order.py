@@ -98,7 +98,21 @@ class PurchaseRequirementOrder(models.Model):
             if order.state != "progress":
                 raise UserError(_("Only orders in progress can be completed."))
             for line in order.line_ids:
-                line.product_id.ml_stock_qty += line.quantity
+                product = line.product_id.with_company(order.company_id)
+                current_quantity = product.ml_stock_qty
+                new_quantity = current_quantity + line.quantity
+                average_cost = line.unit_cost
+                if current_quantity > 0:
+                    average_cost = (
+                        (current_quantity * product.standard_price)
+                        + (line.quantity * line.unit_cost)
+                    ) / new_quantity
+                product.write(
+                    {
+                        "ml_stock_qty": new_quantity,
+                        "standard_price": average_cost,
+                    }
+                )
             order.write(
                 {
                     "state": "done",
@@ -133,7 +147,7 @@ class PurchaseRequirementOrderLine(models.Model):
         string="Minimum Stock", digits=(16, 0), readonly=True
     )
     quantity = fields.Float(digits=(16, 0), required=True, default=1.0)
-    unit_cost = fields.Monetary(required=True, readonly=True)
+    unit_cost = fields.Monetary(required=True)
     currency_id = fields.Many2one(related="order_id.currency_id", readonly=True)
     subtotal = fields.Monetary(
         compute="_compute_subtotal",
@@ -191,11 +205,20 @@ class PurchaseRequirementOrderLine(models.Model):
                 raise ValidationError(_("A product can only appear once in an order."))
 
     def write(self, values):
-        if any(line.order_id.state != "draft" for line in self):
-            allowed = {"sequence"}
-            if set(values) - allowed:
+        for line in self:
+            if line.order_id.state == "done" and values:
                 raise UserError(
-                    _("Lines can only be changed while the order is draft.")
+                    _("Lines cannot be changed after the order is completed.")
+                )
+            if line.order_id.state == "progress" and set(values) - {
+                "quantity",
+                "unit_cost",
+            }:
+                raise UserError(
+                    _(
+                        "Only quantity and unit cost can be changed while the "
+                        "order is in progress."
+                    )
                 )
         return super().write(values)
 
