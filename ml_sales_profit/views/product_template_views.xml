@@ -10,28 +10,36 @@
         <field name="model">product.template</field>
         <field name="priority">100</field>
         <field name="arch" type="xml">
-            <list string="Products" default_order="default_code">
+            <list
+                string="Products"
+                default_order="default_code"
+                editable="bottom"
+                open_form_view="1"
+            >
                 <field name="currency_id" column_invisible="True" />
                 <field name="cost_currency_id" column_invisible="True" />
-                <field name="default_code" string="SKU" />
-                <field name="name" string="Product" />
-                <field name="ml_manufacturer_code" optional="show" />
+                <field name="id" column_invisible="True" />
+                <field name="default_code" string="SKU" readonly="id" />
+                <field name="name" string="Product" readonly="id" />
+                <field name="ml_manufacturer_code" optional="show" readonly="id" />
                 <field name="preferred_supplier_id" optional="show" />
                 <field
                     name="standard_price"
                     string="Cost"
                     widget="monetary"
                     options="{'currency_field': 'cost_currency_id'}"
+                    readonly="id"
                 />
-                <field name="ml_stock_qty" sum="Total" />
-                <field name="ml_min_stock_qty" optional="hide" />
-                <field name="purchase_requirement_qty" optional="hide" />
+                <field name="ml_stock_qty" sum="Total" readonly="id" />
+                <field name="ml_min_stock_qty" optional="hide" readonly="id" />
+                <field name="purchase_requirement_qty" optional="hide" readonly="1" />
                 <field
                     name="ml_stock_difference"
                     decoration-danger="ml_stock_difference &lt; 0"
                     decoration-success="ml_stock_difference &gt; 0"
+                    readonly="1"
                 />
-                <field name="ml_stock_value" sum="Total" />
+                <field name="ml_stock_value" sum="Total" readonly="1" />
             </list>
         </field>
     </record>
