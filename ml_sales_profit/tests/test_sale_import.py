@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from datetime import date
 
+from odoo import fields
 from odoo.exceptions import UserError
 
 from .common import MlSalesProfitCase, read_report, sale_row, sales_file, xlsx
@@ -254,22 +255,16 @@ class TestSaleImport(MlSalesProfitCase):
             }
         )
         kit = self.env["product.template"].create(
-            {"name": "Kit AB", "default_code": "KIT-AB", "ml_stock_qty": 0}
+            {
+                "name": "Kit AB",
+                "default_code": "KIT-AB",
+                "ml_stock_qty": 0,
+                "ml_is_kit": True,
+            }
         )
-        components = self.env["ml.product.component"].create(
-            [
-                {
-                    "product_tmpl_id": kit.id,
-                    "component_product_tmpl_id": component_a.id,
-                    "quantity": 1,
-                },
-                {
-                    "product_tmpl_id": kit.id,
-                    "component_product_tmpl_id": component_b.id,
-                    "quantity": 1,
-                },
-            ]
-        )
+        kit.ml_kit_component_product_ids = [
+            fields.Command.set([component_a.id, component_b.id])
+        ]
         listing = self.env["ml.listing"].create(
             {
                 "product_tmpl_id": kit.id,
@@ -305,9 +300,7 @@ class TestSaleImport(MlSalesProfitCase):
             ],
         )
 
-        components.filtered(
-            lambda component: component.component_product_tmpl_id == component_a
-        ).quantity = 2
+        kit.ml_kit_component_product_ids = [fields.Command.set([component_b.id])]
         second_import = self._import([row])
         self.assertEqual(component_a.ml_stock_qty, 9)
         self.assertEqual(component_b.ml_stock_qty, 19)

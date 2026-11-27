@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from psycopg2 import IntegrityError
 
+from odoo import fields
 from odoo.exceptions import ValidationError
 from odoo.tools import mute_logger
 
@@ -74,6 +75,7 @@ class TestListing(MlSalesProfitCase):
                 "default_code": "KIT-AB",
                 "standard_price": 999,
                 "ml_stock_qty": -3,
+                "ml_is_kit": True,
             }
         )
         listing = self.env["ml.listing"].create(
@@ -84,28 +86,19 @@ class TestListing(MlSalesProfitCase):
                 "net_amount": 100,
             }
         )
-        self.env["ml.product.component"].create(
-            [
-                {
-                    "product_tmpl_id": kit.id,
-                    "component_product_tmpl_id": component_a.id,
-                    "quantity": 1,
-                },
-                {
-                    "product_tmpl_id": kit.id,
-                    "component_product_tmpl_id": component_b.id,
-                    "quantity": 2,
-                },
-            ]
-        )
+        kit.ml_kit_component_product_ids = [
+            fields.Command.set([component_a.id, component_b.id])
+        ]
+        self.assertEqual(kit.ml_kit_component_product_ids, component_a | component_b)
         self.assertEqual(kit.ml_stock_qty, -3)
-        self.assertEqual(listing.listing_cost, 70)
-        self.assertAlmostEqual(listing.net_profit, 22.2)
+        self.assertEqual(listing.listing_cost, 50)
+        self.assertAlmostEqual(listing.net_profit, 42.2)
 
     def test_kit_component_rules(self):
         component = self.env["product.template"].create(
-            {"name": "Component", "default_code": "COMP-RULE"}
+            {"name": "Component", "default_code": "COMP-RULE", "ml_is_kit": True}
         )
+        self.product.ml_is_kit = True
         with self.assertRaises(ValidationError):
             self.env["ml.product.component"].create(
                 {
