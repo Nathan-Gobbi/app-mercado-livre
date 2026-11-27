@@ -191,7 +191,7 @@ class MlSaleImport(models.Model):
         if listing:
             product = listing.product_tmpl_id
             quantity_factor = units * listing.units_per_sale
-            components = product.ml_component_ids
+            components = product.ml_component_ids if product.ml_is_kit else False
             consumption = (
                 [
                     (

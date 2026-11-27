@@ -2048,3 +2048,45 @@ msgstr "Usado em kits"
 #: model_terms:ir.ui.view,arch_db:ml_sales_profit.product_template_view_form
 msgid "Sales of this kit deduct the quantities above from the component stocks. The kit's own stock is not changed."
 msgstr "As vendas deste kit deduzem as quantidades acima dos estoques dos componentes. O estoque próprio do kit não é alterado."
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_is_kit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_is_kit
+msgid "Is a Kit"
+msgstr "É um kit"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_product__ml_kit_component_product_ids
+#: model:ir.model.fields,field_description:ml_sales_profit.field_product_template__ml_kit_component_product_ids
+msgid "Kit Products"
+msgstr "Produtos do kit"
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_product_product__ml_kit_component_product_ids
+#: model:ir.model.fields,help:ml_sales_profit.field_product_template__ml_kit_component_product_ids
+msgid "Each selected product contributes one unit to the kit."
+msgstr "Cada produto selecionado contribui com uma unidade para o kit."
+
+#. module: ml_sales_profit
+#: model:ir.model.fields,help:ml_sales_profit.field_product_product__ml_is_kit
+#: model:ir.model.fields,help:ml_sales_profit.field_product_template__ml_is_kit
+msgid "Kit sales consume the selected component products instead of the kit's own stock."
+msgstr "As vendas do kit consomem os produtos selecionados em vez do estoque próprio do kit."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/ml_product_component.py:0
+msgid "Enable 'Is a Kit' before adding products."
+msgstr "Ative 'É um kit' antes de adicionar produtos."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/product_template.py:0
+msgid "Remove the kit products before disabling 'Is a Kit'."
+msgstr "Remova os produtos do kit antes de desativar 'É um kit'."
+
+#. module: ml_sales_profit
+#. odoo-python
+#: code:addons/ml_sales_profit/models/product_template.py:0
+msgid "A product used in a kit cannot become a kit."
+msgstr "Um produto usado em um kit não pode se tornar um kit."

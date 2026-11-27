@@ -78,10 +78,11 @@ Usage
 2. Review the products in *Records > Products* and the listings in
    *Records > Listings*. Both can also be edited directly in Odoo.
 
-For a kit made from different products, open the kit product and add
-each physical product and quantity in the **Kit Components** tab.
-Registering or editing this composition does not change stock. New kit
-sales deduct the components and keep the kit's own stock unchanged.
+For a kit made from different products, open the kit product, enable
+**Is a Kit** below NCM, and select the physical products in **Kit
+Products**. Each tag contributes one unit to the kit. Registering or
+editing this composition does not change stock. New kit sales deduct the
+selected products and keep the kit's own stock unchanged.
 
 **Analyze your sales**
 

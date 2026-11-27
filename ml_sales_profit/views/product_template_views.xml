@@ -64,6 +64,14 @@
                             <field name="ml_manufacturer_code" />
                             <field name="barcode" string="EAN" />
                             <field name="ml_ncm" />
+                            <field name="ml_is_kit" />
+                            <field
+                                name="ml_kit_component_product_ids"
+                                widget="many2many_tags"
+                                options="{'no_create': True}"
+                                domain="[('ml_is_kit', '=', False)]"
+                                invisible="not ml_is_kit"
+                            />
                         </group>
                         <group name="cost" string="Cost">
                             <field
@@ -71,11 +79,12 @@
                                 string="Cost"
                                 widget="monetary"
                                 options="{'currency_field': 'cost_currency_id'}"
+                                invisible="ml_is_kit"
                             />
                             <field name="ml_tax_rate" />
                         </group>
                     </group>
-                    <group name="stock" string="Stock">
+                    <group name="stock" string="Stock" invisible="ml_is_kit">
                         <field name="preferred_supplier_id" />
                         <field name="ml_stock_qty" />
                         <field name="ml_min_stock_qty" />
@@ -110,23 +119,6 @@
                                     <field name="profit_percent" />
                                 </list>
                             </field>
-                        </page>
-                        <page name="kit_components" string="Kit Components">
-                            <field
-                                name="ml_component_ids"
-                                context="{'default_product_tmpl_id': id}"
-                            >
-                                <list editable="bottom">
-                                    <field name="sequence" widget="handle" />
-                                    <field name="component_product_tmpl_id" />
-                                    <field name="quantity" />
-                                </list>
-                            </field>
-                            <div class="text-muted mt-2">
-                                Sales of this kit deduct the quantities above from
-                                the component stocks. The kit's own stock is not
-                                changed.
-                            </div>
                         </page>
                         <page name="description" string="Description">
                             <field
